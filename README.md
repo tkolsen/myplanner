@@ -1,2 +1,2 @@
-myplanner
+MyPlanner
 =========
