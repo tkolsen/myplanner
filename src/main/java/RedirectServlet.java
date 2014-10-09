@@ -9,13 +9,10 @@ import java.io.IOException;
  */
 public class RedirectServlet extends HttpServlet {
 
+    // Her kommer svaret fra canvas med parameteren code
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.getWriter().write("doGet()");
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().write("doPost()");
-    }
+    
 }

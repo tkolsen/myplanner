@@ -11,6 +11,8 @@ import java.io.IOException;
  * Created by TomKolse on 09-Oct-14.
  */
 public class TestOltu extends HttpServlet {
+
+    // Brukeren går inn på MyPlanner
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -22,7 +24,7 @@ public class TestOltu extends HttpServlet {
                     .setRedirectURI("http://localhost:8080/redirect")
                     .setResponseType("code")
                     .buildQueryMessage();
-            resp.sendRedirect(request.getLocationUri());
+            resp.sendRedirect(request.getLocationUri()); // Sender bruker videre til canvas for å spørr om tillatelse
         } catch (OAuthSystemException e) {
             e.printStackTrace();
         }
