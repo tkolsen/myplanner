@@ -19,12 +19,13 @@ public class TestOltu extends HttpServlet {
         OAuthClientRequest request = null;
         try {
             request = OAuthClientRequest
-                    .authorizationLocation("https://learn-lti.herokuapp.com/login/oauth2/auth")
-                    .setClientId("1105")
+                    .authorizationLocation("http://coop.apps.knpuniversity.com/authorize")
+                    .setClientId("OAuthTestForLMS")
                     .setRedirectURI("http://localhost:8080/redirect")
+                    .setScope("eggs-collect eggs-count")
                     .setResponseType("code")
                     .buildQueryMessage();
-            resp.sendRedirect(request.getLocationUri()); // Sender bruker videre til canvas for å spørr om tillatelse
+            resp.sendRedirect(request.getLocationUri()); // Sender bruker videre til canvas for å spørre om tillatelse
         } catch (OAuthSystemException e) {
             e.printStackTrace();
         }
