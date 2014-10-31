@@ -1,14 +1,17 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-        <p>This is the homepage!</p>
-    </body>
+<head>
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="" ng-init="names=['Kim', 'Tom', 'Dagfinn']">
+        <p>Search:<input ng-model="search"/></p>
+        <ul>
+            <li ng-repeat="x in names | filter:search">{{x}}</li>
+        </ul>
+
+        <a href="/oauth">Start oauth</a>
+    </div>
+</body>
 </html>
