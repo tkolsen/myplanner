@@ -47,17 +47,14 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     @Bean
     public RestTemplate restTemplate(){
         RestTemplate restTemplate = new RestTemplate();
-        /*TODO: Dette funker ikke med canvas
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-        messageConverters.add(new MappingJackson2HttpMessageConverter());
-        restTemplate.setMessageConverters(messageConverters);
-        */
+
         return restTemplate;
     }
 
     @Bean
     public CanvasApi canvasApi(){
         CanvasApi canvasApi = new CanvasApi();
+
         return canvasApi;
     }
 

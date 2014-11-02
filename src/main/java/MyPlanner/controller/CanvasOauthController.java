@@ -56,6 +56,7 @@ public class CanvasOauthController {
         response.sendRedirect("/MyPlanner/canvas/user");
     }
 
+    // TODO: Se på andre muligheter en cookie
     @RequestMapping("/user")
     public ModelAndView profile(@CookieValue(value="accessToken", required = true) String accessToken) {
 

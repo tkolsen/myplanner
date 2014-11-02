@@ -55,14 +55,6 @@ public class CanvasCourse {
     }
 
     public String toString(){
-        /*
-        names=[
-            {name:'Jani',country:'Norway'},
-            {name:'Hege',country:'Sweden'},
-            {name:'Kai',country:'Denmark'}
-        ]"
-         */
-
         return "{id:'"+id+"',name:'"+name+"',courseCode:'"+courseCode+"'}";
     }
 }
