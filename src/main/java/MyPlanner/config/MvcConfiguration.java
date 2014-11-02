@@ -1,5 +1,6 @@
 package MyPlanner.config;
 
+import MyPlanner.api.CanvasApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,12 +19,13 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
 @ComponentScan(basePackages="MyPlanner")
-@PropertySource("/resources/myplanner.properties")
+@PropertySource("/resources/mp.properties")
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
     @Autowired
@@ -45,11 +47,18 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     @Bean
     public RestTemplate restTemplate(){
         RestTemplate restTemplate = new RestTemplate();
+        /*TODO: Dette funker ikke med canvas
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
         messageConverters.add(new MappingJackson2HttpMessageConverter());
         restTemplate.setMessageConverters(messageConverters);
-
+        */
         return restTemplate;
+    }
+
+    @Bean
+    public CanvasApi canvasApi(){
+        CanvasApi canvasApi = new CanvasApi();
+        return canvasApi;
     }
 
     @Bean

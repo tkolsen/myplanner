@@ -53,3 +53,4 @@ com_crashlytics_export_strings.xml
 .settings
 /target
 src/main/webapp/resources/myplanner.properties
+src/main/webapp/resources/mp.properties
