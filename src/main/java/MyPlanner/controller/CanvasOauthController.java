@@ -70,9 +70,10 @@ public class CanvasOauthController {
         model.put("profile", user);
         */
         System.out.println(accessToken);
+        model.put("at", accessToken);
         return new ModelAndView("canvas-profile", model);
     }
-
+    /*
     @RequestMapping("/courses")
     public ModelAndView courses(){
         Map<String, Object> model = new HashMap<String, Object>();
@@ -87,5 +88,5 @@ public class CanvasOauthController {
 
         return new ModelAndView("courses", model);
     }
-
+    */
 }
