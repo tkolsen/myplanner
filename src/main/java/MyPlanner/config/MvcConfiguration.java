@@ -25,7 +25,7 @@ import java.util.List;
 
 @Configuration
 @ComponentScan(basePackages="MyPlanner")
-@PropertySource("/resources/mp.properties")
+@PropertySource("/WEB-INF/mp.properties")
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
     @Autowired

@@ -53,14 +53,14 @@ public class CanvasOauthController {
         AccessGrant accessGrant = oAuth2Template.exchangeForAccess(request.getParameter("code"), env.getProperty("client.redirect"), oAuth2Parameters);
 
         response.addCookie(new Cookie("accessToken", accessGrant.getAccessToken()));
-        response.sendRedirect("/canvas/user");
+        response.sendRedirect("/MyPlanner/canvas/user");
     }
 
     @RequestMapping("/user")
     public ModelAndView profile(@CookieValue(value="accessToken", required = true) String accessToken) {
 
         Map<String, Object> model = new HashMap<String, Object>();
-        /*
+
         CanvasUser user = null;
         try {
             user = canvasApi.getProfile(accessToken);
@@ -68,7 +68,7 @@ public class CanvasOauthController {
             e.printStackTrace();
         }
         model.put("profile", user);
-        */
+
         System.out.println(accessToken);
         model.put("at", accessToken);
         return new ModelAndView("canvas-profile", model);

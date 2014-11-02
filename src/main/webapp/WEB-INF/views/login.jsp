@@ -12,6 +12,6 @@
 </head>
 <body>
     <h1>Logg inn</h1>
-    <a href="/canvas/oauth/">Logg inn via Canvas</a>
+    <a href="/MyPlanner/canvas/oauth/">Logg inn via Canvas</a>
 </body>
 </html>
