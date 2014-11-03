@@ -1,6 +1,7 @@
 package MyPlanner.controller;
 
-import MyPlanner.api.CanvasApi;
+import MyPlanner.api.CanvasApiHIST;
+import MyPlanner.interfaces.CanvasApiInterface;
 import MyPlanner.model.CanvasCourse;
 import MyPlanner.model.CanvasUser;
 import MyPlanner.utils.AngularjsHelper;
@@ -25,7 +26,7 @@ import java.util.Map;
 @RequestMapping("/canvas")
 public class CanvasOauthController {
     @Autowired
-    private CanvasApi canvasApi;
+    private CanvasApiInterface canvasApi;
     @Autowired
     private OAuth2Template oAuth2Template;
     @Autowired
@@ -62,32 +63,24 @@ public class CanvasOauthController {
 
         Map<String, Object> model = new HashMap<String, Object>();
 
+        // Henter brukerprofil.
         CanvasUser user = null;
         try {
             user = canvasApi.getProfile(accessToken);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        model.put("profile", user);
-
-        System.out.println(accessToken);
-        model.put("at", accessToken);
-        return new ModelAndView("canvas-profile", model);
-    }
-    /*
-    @RequestMapping("/courses")
-    public ModelAndView courses(){
-        Map<String, Object> model = new HashMap<String, Object>();
+        // Henter kurs brukeren er medlem i.
         CanvasCourse[] courses = null;
-        try{
-            courses = canvasApi.getCourses(accessToken);
-        }catch (Exception e){
+        try {
+            courses = canvasApi.listCourses(accessToken);
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        model.put("profile", user);
+        model.put("courses", AngularjsHelper.printArray(courses, "cources"));
 
-        model.put("courses", AngularjsHelper.printArray(courses, "courses"));
-
-        return new ModelAndView("courses", model);
+        return new ModelAndView("canvas-profile", model);
     }
-    */
+
 }

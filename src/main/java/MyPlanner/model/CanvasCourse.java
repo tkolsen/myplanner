@@ -1,8 +1,9 @@
 package MyPlanner.model;
 
+import MyPlanner.interfaces.AngularjsPrintable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CanvasCourse {
+public class CanvasCourse implements AngularjsPrintable {
 
     @JsonProperty("id")
     private long id;
@@ -54,7 +55,9 @@ public class CanvasCourse {
         this.startAt = startAt;
     }
 
-    public String toString(){
+    @Override
+    public String angularPrint() {
         return "{id:'"+id+"',name:'"+name+"',courseCode:'"+courseCode+"'}";
     }
+
 }

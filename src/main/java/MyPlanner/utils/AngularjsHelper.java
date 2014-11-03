@@ -1,5 +1,7 @@
 package MyPlanner.utils;
 
+import MyPlanner.interfaces.AngularjsPrintable;
+
 /**
  * Util class.
  * Helps make it easy to use both spring and angularjs
@@ -12,16 +14,17 @@ public class AngularjsHelper {
      * @param arrayName - the array name to be used in ng-init
      * @return - ng-init array
      */
-    public static String printArray(Object[] array, String arrayName){
+    public static String printArray(AngularjsPrintable[] array, String arrayName){
         String result = arrayName + "=[";
         for(int i = 0; i < array.length; i++){
             if(i < array.length -1)
-                result += array[i].toString() + ",";
+                result += array[i].angularPrint() + ",";
             else
-                result += array[i].toString();
+                result += array[i].angularPrint();
         }
         result += "]";
 
         return result;
     }
+
 }
