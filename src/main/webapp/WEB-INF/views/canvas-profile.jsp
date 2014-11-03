@@ -4,7 +4,7 @@
 <head>
     <title>MyPlanner Home</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular.min.js"></script>
-    <link rel="stylesheet" href="/resources/style.css"/>
+    <link rel="stylesheet" href="<c:url value='/resources/style.css'/>"/>
 </head>
 <body ng-app>
     <div id="profile">
