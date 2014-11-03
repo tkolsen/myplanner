@@ -15,8 +15,9 @@
     </div>
 
     <div id="courses" ng-init="${courses}">
+		<h3>Courses</h3>
         <ul>
-            <li ng-repeat="c in courses | filter:search">
+            <li ng-repeat="c in courses">
                 Name: {{c.name}}
                 <ul>
                     <li>Id: {{c.id}}</li>

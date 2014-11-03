@@ -78,7 +78,7 @@ public class CanvasOauthController {
             e.printStackTrace();
         }
         model.put("profile", user);
-        model.put("courses", AngularjsHelper.printArray(courses, "cources"));
+        model.put("courses", AngularjsHelper.printArray(courses, "courses"));
 
         return new ModelAndView("canvas-profile", model);
     }
