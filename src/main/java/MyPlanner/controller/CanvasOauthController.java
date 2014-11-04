@@ -13,6 +13,7 @@ import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
@@ -81,6 +82,19 @@ public class CanvasOauthController {
         model.put("courses", AngularjsHelper.printArray(courses, "courses"));
 
         return new ModelAndView("canvas-profile", model);
+    }
+
+    // TODO: Dette er kunn en testmetode. Fjern etter testing.
+    @RequestMapping("/test")
+    public @ResponseBody CanvasUser testUser(@CookieValue(value="accessToken", required = true) String accessToken){
+        CanvasUser user = null;
+        try {
+            user = canvasApi.getProfile(accessToken);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return user;
     }
 
 }
