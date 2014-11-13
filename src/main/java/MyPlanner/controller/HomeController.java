@@ -14,7 +14,7 @@ public class HomeController {
     public ModelAndView home(){
         Map<String, Object> model = new HashMap<String, Object>();
 
-        return new ModelAndView("", model);
+        return new ModelAndView("home", model);
     }
 
 }
