@@ -15,6 +15,6 @@
     <h2>test</h2>
     <h2>test2</h2>
     <h2>test3</h2>
-    <h2>Test4</h2>
+    <h2>ENDELIG!</h2>
 </body>
 </html>
