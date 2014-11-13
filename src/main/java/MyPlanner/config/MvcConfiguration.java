@@ -1,7 +1,5 @@
 package MyPlanner.config;
 
-import MyPlanner.api.CanvasApiHIST;
-import MyPlanner.interfaces.CanvasApiInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -43,14 +41,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         RestTemplate restTemplate = new RestTemplate();
 
         return restTemplate;
-    }
-
-    @Bean
-    public CanvasApiInterface canvasApi(){
-        // TODO: Denne går kunn mot HIST.
-        CanvasApiInterface canvasApi = new CanvasApiHIST();
-
-        return canvasApi;
     }
 
     @Bean
