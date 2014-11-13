@@ -1,10 +1,7 @@
 package MyPlanner.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.social.oauth2.OAuth2Template;
@@ -19,6 +16,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages="MyPlanner")
 @PropertySource("/WEB-INF/mp.properties")
 @EnableWebMvc
+@Import({SecurityConfig.class})
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
     @Autowired
     Environment env;
