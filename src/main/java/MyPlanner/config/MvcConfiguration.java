@@ -44,7 +44,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     }
 
     @Bean
-    @Scope(value = "session", proxyMode = ScopedProxyMode.NO)
     public AccessGrant accessGrant(){
         AccessGrant accessGrant = null;
         return accessGrant;
