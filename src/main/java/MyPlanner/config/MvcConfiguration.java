@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @ComponentScan(basePackages="MyPlanner")
-//@PropertySource("/WEB-INF/mp.properties")
+@PropertySource("/WEB-INF/mp.properties")
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
     @Autowired
