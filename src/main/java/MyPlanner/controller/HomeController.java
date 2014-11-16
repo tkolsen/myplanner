@@ -20,7 +20,10 @@ public class HomeController {
 
     @RequestMapping("/profile")
     public ModelAndView profile(Model model){
-        model.addAttribute("test", accessGrant.getAccessToken());
+        if(accessGrant != null)
+            if(accessGrant.getAccessToken() != null)
+                if(!accessGrant.getAccessToken().isEmpty())
+                    model.addAttribute("test", accessGrant.getAccessToken());
 
         return new ModelAndView("profile");
     }
