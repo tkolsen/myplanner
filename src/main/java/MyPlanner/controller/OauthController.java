@@ -46,7 +46,7 @@ public class OauthController {
         if(error == null && code != null){
             try{
                 oAuth.exchangeCodeForToken(code);
-                response.sendRedirect("profile");
+                response.sendRedirect("/profile");
             } catch(IllegalStateException e){
                 response.sendRedirect("/oauth/error");
             }
