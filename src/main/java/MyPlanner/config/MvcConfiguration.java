@@ -43,7 +43,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         return new OAuthImpl();
     }
 
-    @Bean
+    @Bean()
+    @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public AccessGrant accessGrant(){
         AccessGrant accessGrant = null;
         return accessGrant;
