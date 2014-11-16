@@ -41,7 +41,7 @@ public class OAuthImpl implements OAuth {
     @Override
     public String getRedirectUrl() throws InstantiationException {
         String url = env.getProperty("client.redirect");
-        if(url != null || !url.isEmpty()){
+        if(url != null){
             return url;
         }else{
             throw new InstantiationException("Can't access client.redirect in properties file");
@@ -51,7 +51,7 @@ public class OAuthImpl implements OAuth {
     @Override
     public String getClientID() throws InstantiationException {
         String clientId = env.getProperty("client.id");
-        if(clientId != null || !clientId.isEmpty()){
+        if(clientId != null){
             return clientId;
         }else{
             throw new InstantiationException("Can't access client.id in properties file");
@@ -61,7 +61,7 @@ public class OAuthImpl implements OAuth {
     @Override
     public String getClientSecret() throws InstantiationException {
         String clientSecret = env.getProperty("client.secret");
-        if(clientSecret != null || !clientSecret.isEmpty()){
+        if(clientSecret != null){
             return clientSecret;
         }else{
             throw new InstantiationException("Can't access client.secret in properties file");
@@ -71,7 +71,7 @@ public class OAuthImpl implements OAuth {
     @Override
     public String getAuthorizeUrl() throws InstantiationException {
         String url = env.getProperty("provider.authorizeUrl");
-        if(url != null || !url.isEmpty()){
+        if(url != null){
             return url;
         }else{
             throw new InstantiationException("Can't access provider.authorizeUrl in properties file");
@@ -81,7 +81,7 @@ public class OAuthImpl implements OAuth {
     @Override
     public String getAccessTokenUrl() throws InstantiationException {
         String url = env.getProperty("provider.accessTokenUrl");
-        if(url != null || !url.isEmpty()){
+        if(url != null){
             return url;
         }else{
             throw new InstantiationException("Can't access provider.accessTokenUrl in properties file");
