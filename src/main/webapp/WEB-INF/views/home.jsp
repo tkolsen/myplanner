@@ -1,9 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>This is on top</title>
+    <title>Start</title>
 </head>
 <body>
-    <h1>This is a spring application with ${wisdom}</h1>
+    <h1>MyPlanner</h1>
+    <h2>For å bruke MyPlanner må du logge inn med Canvas under</h2>
+    <a href="#">Logg inn via Canvas</a>
 </body>
 </html>

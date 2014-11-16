@@ -1,9 +1,12 @@
 package MyPlanner.config;
 
+import MyPlanner.oauth.OAuth;
+import MyPlanner.oauth.OAuthImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
+import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -35,5 +38,16 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 
+    @Bean
+    public OAuth oAuth(){
+        return new OAuthImpl();
+    }
+
+    @Bean
+    @Scope(value = "session", proxyMode = ScopedProxyMode.NO)
+    public AccessGrant accessGrant(){
+        AccessGrant accessGrant = null;
+        return accessGrant;
+    }
 	
 }
