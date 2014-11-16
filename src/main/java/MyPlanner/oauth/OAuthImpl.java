@@ -32,9 +32,11 @@ public class OAuthImpl implements OAuth {
 
     @Override
     public void askForConfirmation(HttpServletResponse response) throws IOException, InstantiationException {
+        OAuth2Parameters oAuth2Parameters = new OAuth2Parameters();
+        oAuth2Parameters.setRedirectUri(getRedirectUrl());
         oAuth2Template =
                 new OAuth2Template(getClientID(), getClientSecret(), getAuthorizeUrl(), getAccessTokenUrl());
-        String url = oAuth2Template.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, new OAuth2Parameters());
+        String url = oAuth2Template.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
         response.sendRedirect(url);
     }
 
