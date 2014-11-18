@@ -20,10 +20,12 @@ public class TestController {
     @Autowired
     Environment env;
 
+    @RequestMapping("/start")
     public ModelAndView start(){
         return new ModelAndView("test/start");
     }
 
+    @RequestMapping("/login")
     public void login(HttpServletResponse response) throws IOException {
         // OAuth2Template(clientId, clientSecret, authorizeUrl, accessTokenUrl)
         OAuth2Template oAuth2Template = new OAuth2Template(env.getProperty("client.id"),
@@ -38,6 +40,7 @@ public class TestController {
         response.sendRedirect(url);
     }
 
+    @RequestMapping("/redirect")
     public ModelAndView redirect(HttpServletRequest request){
         ModelAndView model = new ModelAndView();
         List<String> list = Collections.list(request.getParameterNames());
