@@ -7,6 +7,7 @@ import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.social.oauth2.OAuth2Template;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -15,16 +16,15 @@ public class OAuthImpl implements OAuth {
 
     @Autowired
     Environment env;
-    @Autowired
-    AccessGrant accessGrant;
 
     OAuth2Template oAuth2Template;
 
     @Override
-    public void exchangeCodeForToken(String code) throws InstantiationException {
+    public void exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException {
         if(oAuth2Template != null){
-            accessGrant = oAuth2Template.exchangeForAccess(code, getRedirectUrl(), new OAuth2Parameters());
+            AccessGrant accessGrant = oAuth2Template.exchangeForAccess(code, getRedirectUrl(), new OAuth2Parameters());
             if(accessGrant.getAccessToken() == null) throw new IllegalStateException("access token not set");
+            else request.getSession().setAttribute("accessGrant", accessGrant);
         }else{
             throw new IllegalStateException("oAuthTemplate not set");
         }

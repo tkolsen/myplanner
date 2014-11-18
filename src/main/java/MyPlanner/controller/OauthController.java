@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -42,10 +43,11 @@ public class OauthController {
     @RequestMapping("/redirect")
     public void redirect(@RequestParam(value="code", required = false) String code,
                          @RequestParam(value="error", required = false) String error,
-                         HttpServletResponse response) throws IOException, InstantiationException {
+                         HttpServletResponse response,
+                         HttpServletRequest request) throws IOException, InstantiationException {
         if(error == null && code != null){
             try{
-                oAuth.exchangeCodeForToken(code);
+                oAuth.exchangeCodeForToken(code, request);
                 response.sendRedirect("/MyPlanner/profile");
             } catch(IllegalStateException e){
                 response.sendRedirect("/oauth/error");

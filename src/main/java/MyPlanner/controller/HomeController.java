@@ -7,10 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class HomeController {
-    @Autowired
-    AccessGrant accessGrant;
 
     @RequestMapping("/*")
     public ModelAndView home(Model model){
@@ -19,11 +19,9 @@ public class HomeController {
     }
 
     @RequestMapping("/profile")
-    public ModelAndView profile(Model model){
-        if(accessGrant != null)
-            if(accessGrant.getAccessToken() != null)
-                if(!accessGrant.getAccessToken().isEmpty())
-                    model.addAttribute("test", accessGrant.getAccessToken());
+    public ModelAndView profile(Model model, HttpServletRequest request){
+        AccessGrant accessGrant = (AccessGrant)(request.getSession().getAttribute("accessGrant"));
+        model.addAttribute("accessToken", accessGrant.getAccessToken());
 
         return new ModelAndView("profile");
     }
