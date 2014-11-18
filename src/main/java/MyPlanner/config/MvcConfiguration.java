@@ -2,6 +2,7 @@ package MyPlanner.config;
 
 import MyPlanner.oauth.OAuth;
 import MyPlanner.oauth.OAuthImpl;
+import MyPlanner.oauth.OAuthTestImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -40,7 +41,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
     @Bean
     public OAuth oAuth(){
-        return new OAuthImpl();
+        return new OAuthTestImpl();
     }
 
     @Bean()
