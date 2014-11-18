@@ -41,7 +41,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
     @Bean
     public OAuth oAuth(){
-        return new OAuthTestImpl();
+        return new OAuthImpl();
     }
 
     @Bean()
