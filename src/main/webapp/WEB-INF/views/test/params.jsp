@@ -11,5 +11,8 @@
             <li><c:out value="${param}"/></li>
         </c:forEach>
     </ul>
+
+    <h2>Body:</h2>
+    <c:out value="${body}"/>
 </body>
 </html>
