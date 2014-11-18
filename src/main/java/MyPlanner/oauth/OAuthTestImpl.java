@@ -2,6 +2,8 @@ package MyPlanner.oauth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Parameters;
@@ -24,6 +26,8 @@ public class OAuthTestImpl implements OAuth{
     public void exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException {
         String base = env.getProperty("provider.accessTokenUrl");
         RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("client_id", getClientID());
         parameters.put("redirect_uri", getRedirectUrl());
