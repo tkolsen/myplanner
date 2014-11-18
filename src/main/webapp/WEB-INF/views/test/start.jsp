@@ -12,6 +12,6 @@
 </head>
 <body>
     <h1>Start</h1>
-    <a href="/login">Start flow</a>
+    <a href="login">Start flow</a>
 </body>
 </html>
