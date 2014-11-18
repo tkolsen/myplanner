@@ -6,10 +6,13 @@ import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.social.oauth2.OAuth2Template;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OAuthTestImpl implements OAuth{
     @Autowired
@@ -19,14 +22,15 @@ public class OAuthTestImpl implements OAuth{
 
     @Override
     public void exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException {
-        if(oAuth2Template != null){
-            AccessGrant accessGrant = oAuth2Template.exchangeForAccess(code, getRedirectUrl(), new OAuth2Parameters());
-            if(accessGrant.getAccessToken() != null){
-                request.getSession().setAttribute("accessGrant", accessGrant);
-            }else{
-                throw new IllegalStateException("**** access token not set ****");
-            }
-        }
+        String base = env.getProperty("provider.accessTokenUrl");
+        RestTemplate restTemplate = new RestTemplate();
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("client_id", getClientID());
+        parameters.put("redirect_uri", getRedirectUrl());
+        parameters.put("client_secret", getClientSecret());
+        parameters.put("code", code);
+        String tokenResponse = restTemplate.postForObject(base, request, String.class, parameters);
+        request.getSession().setAttribute("tokenResponse", tokenResponse);
     }
 
     @Override

@@ -12,6 +12,6 @@
 </head>
 <body>
     <h1>Profile</h1>
-    <h2>Test: ${accessToken}</h2>
+    <h2>Test: ${tokenResponse}</h2>
 </body>
 </html>
