@@ -29,7 +29,7 @@ public class OAuthTestImpl implements OAuth{
 
     @Override
     public void exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException {
-        RestTemplate restTemplate = new RestTemplate();
+        /*RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         HttpEntity requestEntity = new HttpEntity(headers);
         Map<String, String> parameters = new HashMap<String, String>();
@@ -39,7 +39,10 @@ public class OAuthTestImpl implements OAuth{
         parameters.put("client_secret", getClientSecret());
         ResponseEntity<String> responseEntity = restTemplate.exchange(getAccessTokenUrl(), HttpMethod.POST, requestEntity, String.class, parameters);
         String body = (String) requestEntity.getBody();
-        System.out.println(body);
+        System.out.println(body);*/
+        OAuth2Parameters oAuth2Parameters = new OAuth2Parameters();
+        String accessGrant = oAuth2Template.exchangeForAccess(code, getRedirectUrl(), oAuth2Parameters).toString();
+        System.out.println(accessGrant);
     }
 
     @Override
