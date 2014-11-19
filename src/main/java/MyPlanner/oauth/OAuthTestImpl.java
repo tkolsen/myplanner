@@ -35,23 +35,11 @@ public class OAuthTestImpl implements OAuth{
 
     @Override
     public void exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException {
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("code", code);
-        headers.add("client_id", getClientID());
-        headers.add("redirect_uri", getRedirectUrl());
-        headers.add("client_secret", getClientSecret());
-        HttpEntity requestEntity = new HttpEntity(headers);
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(getAccessTokenUrl(), HttpMethod.POST, requestEntity, String.class);
-        String body = (String) requestEntity.getBody();
-        System.out.println(body);
-        /*
         OAuth2Parameters oAuth2Parameters = new OAuth2Parameters();
         AccessGrant accessGrant = oAuth2Template.exchangeForAccess(code, getRedirectUrl(), oAuth2Parameters);
 
         System.out.println(accessGrant.getAccessToken());
-        */
     }
 
     @Override
