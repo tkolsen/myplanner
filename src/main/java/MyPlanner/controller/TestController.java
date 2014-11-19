@@ -26,10 +26,15 @@ public class TestController {
     }
 
     @RequestMapping("/redirect")
-    public ModelAndView redirect(HttpServletRequest request) throws InstantiationException {
+    public void redirect(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IOException {
         String code = request.getParameter("code");
         oAuth.exchangeCodeForToken(code, request);
 
+        response.sendRedirect("/ok");
+    }
+
+    @RequestMapping("/ok")
+    public ModelAndView ok(){
         return new ModelAndView("test/params");
     }
 
