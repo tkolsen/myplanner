@@ -26,23 +26,32 @@ public class OAuthTestImpl implements OAuth{
 
     OAuth2Template oAuth2Template;
 
-
-    @Override
-    public void exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException {
-        /*RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        HttpEntity requestEntity = new HttpEntity(headers);
-        Map<String, String> parameters = new HashMap<String, String>();
+    /*
         parameters.put("code", code);
         parameters.put("client_id", getClientID());
         //parameters.put("redirect_uri", getRedirectUrl());
         parameters.put("client_secret", getClientSecret());
-        ResponseEntity<String> responseEntity = restTemplate.exchange(getAccessTokenUrl(), HttpMethod.POST, requestEntity, String.class, parameters);
+     */
+
+    @Override
+    public void exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("code", code);
+        headers.add("client_id", getClientID());
+        headers.add("redirect_uri", getRedirectUrl());
+        headers.add("client_secret", getClientSecret());
+        HttpEntity requestEntity = new HttpEntity(headers);
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(getAccessTokenUrl(), HttpMethod.POST, requestEntity, String.class);
         String body = (String) requestEntity.getBody();
-        System.out.println(body);*/
+        System.out.println(body);
+        /*
         OAuth2Parameters oAuth2Parameters = new OAuth2Parameters();
-        String accessGrant = oAuth2Template.exchangeForAccess(code, getRedirectUrl(), oAuth2Parameters).toString();
-        System.out.println(accessGrant);
+        AccessGrant accessGrant = oAuth2Template.exchangeForAccess(code, getRedirectUrl(), oAuth2Parameters);
+
+        System.out.println(accessGrant.getAccessToken());
+        */
     }
 
     @Override
