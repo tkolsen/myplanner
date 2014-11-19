@@ -2,6 +2,10 @@ package MyPlanner.oauth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth2.AccessGrant;
@@ -22,31 +26,28 @@ public class OAuthTestImpl implements OAuth{
 
     OAuth2Template oAuth2Template;
 
+
     @Override
     public void exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException {
-        String base = env.getProperty("provider.accessTokenUrl");
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity requestEntity = new HttpEntity(headers);
         Map<String, String> parameters = new HashMap<String, String>();
-        parameters.put("client_id", getClientID());
-        parameters.put("redirect_uri", getRedirectUrl());
-        parameters.put("client_secret", getClientSecret());
-        parameters.put("code", code);
-        String tokenResponse = restTemplate.postForObject(base, request, String.class, parameters);
-        request.getSession().setAttribute("tokenResponse", tokenResponse);
+        ResponseEntity<String> responseEntity = restTemplate.exchange("", HttpMethod.POST, requestEntity, String.class, parameters);
+        String body = (String) requestEntity.getBody();
+        System.out.println(body);
     }
 
     @Override
     public void askForConfirmation(HttpServletResponse response) throws IOException, InstantiationException {
-        OAuth2Parameters parameters = new OAuth2Parameters();
-        parameters.set("scopes", "/auth/userinfo");
-        parameters.setRedirectUri(getRedirectUrl());
+        OAuth2Parameters oAuth2Parameters = new OAuth2Parameters();
+        oAuth2Parameters.setRedirectUri(getRedirectUrl());
+        oAuth2Parameters.set("scopes", getScope());
 
-        oAuth2Template =
-                new OAuth2Template(getClientID(), getClientSecret(), getAuthorizeUrl(), getAccessTokenUrl());
-        String url = oAuth2Template.buildAuthenticateUrl(GrantType.AUTHORIZATION_CODE, parameters);
-        response.sendRedirect(url);
+        oAuth2Template = new OAuth2Template(getClientID(), getClientSecret(), getAuthorizeUrl(), getAccessTokenUrl());
+
+        String codeUrl = oAuth2Template.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
+        response.sendRedirect(codeUrl);
     }
 
     @Override
@@ -92,6 +93,15 @@ public class OAuthTestImpl implements OAuth{
     @Override
     public String getAccessTokenUrl() throws InstantiationException {
         String url = env.getProperty("provider.accessTokenUrl");
+        if(url != null){
+            return url;
+        }else{
+            throw new InstantiationException("Can't access provider.accessTokenUrl in properties file");
+        }
+    }
+
+    public String getScope() throws InstantiationException {
+        String url = env.getProperty("scope.userinfo");
         if(url != null){
             return url;
         }else{

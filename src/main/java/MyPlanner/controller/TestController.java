@@ -20,11 +20,6 @@ public class TestController {
     @Autowired
     OAuth oAuth;
 
-    @RequestMapping("/start")
-    public ModelAndView start(){
-        return new ModelAndView("test/start");
-    }
-
     @RequestMapping("/login")
     public void login(HttpServletResponse response) throws IOException, InstantiationException {
         oAuth.askForConfirmation(response);
@@ -32,11 +27,10 @@ public class TestController {
 
     @RequestMapping("/redirect")
     public ModelAndView redirect(HttpServletRequest request) throws InstantiationException {
-        oAuth.exchangeCodeForToken(request.getParameter("code"), request);
-        ModelAndView model = new ModelAndView();
-        model.addObject("tokenResponse", request.getSession().getAttribute("tokenResponse"));
-        model.setViewName("profile");
-        return model;
+        String code = request.getParameter("code");
+        oAuth.exchangeCodeForToken(code, request);
+
+        return new ModelAndView("test/params");
     }
 
 }
