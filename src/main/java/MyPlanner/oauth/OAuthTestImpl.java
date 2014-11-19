@@ -33,7 +33,7 @@ public class OAuthTestImpl implements OAuth{
         HttpHeaders headers = new HttpHeaders();
         HttpEntity requestEntity = new HttpEntity(headers);
         Map<String, String> parameters = new HashMap<String, String>();
-        ResponseEntity<String> responseEntity = restTemplate.exchange("", HttpMethod.POST, requestEntity, String.class, parameters);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(getAccessTokenUrl(), HttpMethod.POST, requestEntity, String.class, parameters);
         String body = (String) requestEntity.getBody();
         System.out.println(body);
     }
