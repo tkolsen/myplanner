@@ -3,10 +3,11 @@ package MyPlanner.controller;
 import MyPlanner.oauth.OAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
+import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/testing")
@@ -43,9 +41,12 @@ public class TestController {
 
         String code = request.getParameter("code");
         RestTemplate restTemplate = new RestTemplate();
+        final List<HttpMessageConverter<?>> converterList = new ArrayList<HttpMessageConverter<?>>();
+        converterList.add(new FormHttpMessageConverter());
+        converterList.add(new StringHttpMessageConverter());
+        converterList.add(new MappingJackson2HttpMessageConverter());
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<String> entity = new HttpEntity<String>(headers);
         Map<String, String> parameters = new HashMap<String, String>();
@@ -53,7 +54,7 @@ public class TestController {
         parameters.put("client_secret", env.getProperty("client.secret"));
         parameters.put("redirect_uri", env.getProperty("client.redirect"));
         parameters.put("code", code);
-        restTemplate.exchange(env.getProperty("provider.accessTokenUrl"), HttpMethod.POST, entity, String.class, parameters);
+        ResponseEntity<String> test = restTemplate.exchange(env.getProperty("provider.accessTokenUrl"), HttpMethod.POST, entity, String.class, parameters);
         String body = entity.getBody();
         System.out.println(body);
 
