@@ -52,7 +52,7 @@ public class OAuthTestImpl implements OAuth{
 
         String codeUrl = oAuth2Template.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
         System.out.println(codeUrl);
-        //response.sendRedirect(codeUrl);
+        response.sendRedirect(codeUrl);
     }
 
     @Override
