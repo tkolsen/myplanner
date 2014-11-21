@@ -34,12 +34,13 @@ public class OAuthTestImpl implements OAuth{
      */
 
     @Override
-    public void exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException {
+    public AccessGrant exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException {
 
         OAuth2Parameters oAuth2Parameters = new OAuth2Parameters();
         AccessGrant accessGrant = oAuth2Template.exchangeForAccess(code, getRedirectUrl(), oAuth2Parameters);
 
-        System.out.println(accessGrant.getAccessToken());
+        //System.out.println(accessGrant.getAccessToken());
+        return accessGrant;
     }
 
     @Override

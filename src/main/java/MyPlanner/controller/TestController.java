@@ -8,6 +8,7 @@ import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,7 @@ public class TestController {
         oAuth.exchangeCodeForToken(code, request);
 
         response.sendRedirect("/ok");*/
-
+        /*
         String code = request.getParameter("code");
         RestTemplate restTemplate = new RestTemplate();
         final List<HttpMessageConverter<?>> converterList = new ArrayList<HttpMessageConverter<?>>();
@@ -62,6 +63,9 @@ public class TestController {
         String svar = restTemplate.postForObject(env.getProperty("provider.accessTokenUrl"), null, String.class, parameters);
         System.out.println(svar);
         //response.sendRedirect("/testing/ok");
+        */
+        AccessGrant accessGrant = oAuth.exchangeCodeForToken(request.getParameter("code"), request);
+        System.out.println(accessGrant.getAccessToken());
     }
 
     @RequestMapping("/ok")
