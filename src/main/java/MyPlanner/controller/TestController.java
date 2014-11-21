@@ -45,17 +45,19 @@ public class TestController {
         converterList.add(new FormHttpMessageConverter());
         converterList.add(new StringHttpMessageConverter());
         converterList.add(new MappingJackson2HttpMessageConverter());
+
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         HttpEntity<String> entity = new HttpEntity<String>(headers);
+
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("client_id", env.getProperty("client.id"));
         parameters.put("client_secret", env.getProperty("client.secret"));
         parameters.put("redirect_uri", env.getProperty("client.redirect"));
         parameters.put("code", code);
-        ResponseEntity<String> test = restTemplate.exchange(env.getProperty("provider.accessTokenUrl"), HttpMethod.POST, entity, String.class, parameters);
-        String body = entity.getBody();
+        ResponseEntity test = restTemplate.exchange(env.getProperty("provider.accessTokenUrl"), HttpMethod.POST, entity, String.class, parameters);
+        String body = (String)test.getBody();
         System.out.println(body);
 
         //response.sendRedirect("/testing/ok");
