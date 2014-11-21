@@ -56,10 +56,11 @@ public class TestController {
         parameters.put("client_secret", env.getProperty("client.secret"));
         parameters.put("redirect_uri", env.getProperty("client.redirect"));
         parameters.put("code", code);
-        ResponseEntity test = restTemplate.exchange(env.getProperty("provider.accessTokenUrl"), HttpMethod.POST, entity, String.class, parameters);
-        String body = (String)test.getBody();
-        System.out.println(body);
-
+        //ResponseEntity test = restTemplate.exchange(env.getProperty("provider.accessTokenUrl"), HttpMethod.POST, entity, String.class, parameters);
+        //String body = (String)test.getBody();
+        //System.out.println(body);
+        String svar = restTemplate.postForObject(env.getProperty("provider.accessTokenUrl"), null, String.class, parameters);
+        System.out.println(svar);
         //response.sendRedirect("/testing/ok");
     }
 
