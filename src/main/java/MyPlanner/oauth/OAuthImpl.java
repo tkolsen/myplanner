@@ -20,7 +20,7 @@ public class OAuthImpl implements OAuth {
     OAuth2Template oAuth2Template;
 
     @Override
-    public void exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException {
+    public AccessGrant exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException {
         if(oAuth2Template != null){
             AccessGrant accessGrant = oAuth2Template.exchangeForAccess(code, getRedirectUrl(), new OAuth2Parameters());
             if(accessGrant.getAccessToken() == null) throw new IllegalStateException("access token not set");
@@ -28,6 +28,9 @@ public class OAuthImpl implements OAuth {
         }else{
             throw new IllegalStateException("oAuthTemplate not set");
         }
+
+        // TODO: change
+        return null;
     }
 
     @Override

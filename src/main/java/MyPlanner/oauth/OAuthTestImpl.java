@@ -39,7 +39,7 @@ public class OAuthTestImpl implements OAuth{
         OAuth2Parameters oAuth2Parameters = new OAuth2Parameters();
         AccessGrant accessGrant = oAuth2Template.exchangeForAccess(code, getRedirectUrl(), oAuth2Parameters);
 
-        //System.out.println(accessGrant.getAccessToken());
+        System.out.println(accessGrant.getAccessToken());
         return accessGrant;
     }
 
