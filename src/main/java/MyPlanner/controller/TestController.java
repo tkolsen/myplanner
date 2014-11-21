@@ -56,7 +56,7 @@ public class TestController {
         String body = entity.getBody();
         System.out.println(body);
 
-        response.sendRedirect("/testing/ok");
+        //response.sendRedirect("/testing/ok");
     }
 
     @RequestMapping("/ok")
