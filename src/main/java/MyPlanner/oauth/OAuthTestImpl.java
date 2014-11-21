@@ -51,7 +51,8 @@ public class OAuthTestImpl implements OAuth{
         oAuth2Template = new OAuth2Template(getClientID(), getClientSecret(), getAuthorizeUrl(), getAccessTokenUrl());
 
         String codeUrl = oAuth2Template.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
-        response.sendRedirect(codeUrl);
+        System.out.println(codeUrl);
+        //response.sendRedirect(codeUrl);
     }
 
     @Override
