@@ -1,5 +1,6 @@
 package MyPlanner.controller;
 
+import MyPlanner.model.User;
 import MyPlanner.model.UserInfo;
 import MyPlanner.oauth.OAuth;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,14 +54,14 @@ public class TestController {
 
         HttpEntity requestEntity = new HttpEntity(body, headers);
 
-        ResponseEntity<UserInfo> result = restTemplate.exchange(PROVIDER_ACCESS_TOKEN_URL, HttpMethod.POST, requestEntity, UserInfo.class);
+        ResponseEntity<String> result = restTemplate.exchange(PROVIDER_ACCESS_TOKEN_URL, HttpMethod.POST, requestEntity, String.class);
         userInfo = result.getBody();
         response.sendRedirect("ok");
     }
-    UserInfo userInfo;
+    String userInfo;
 
     @RequestMapping("/ok")
-    public @ResponseBody UserInfo ok(HttpServletRequest request){
+    public @ResponseBody String ok(HttpServletRequest request){
         return userInfo;
     }
 
