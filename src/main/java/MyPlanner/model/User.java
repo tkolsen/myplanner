@@ -3,32 +3,33 @@ package MyPlanner.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
-    @JsonProperty("access_token")
-    private String accessToken;
-    private UserInfo userInfo;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("id")
+    private String id;
 
-    public User() {
+    public User(){
+
     }
 
-    public User(String accessToken, UserInfo userInfo) {
-        this.accessToken = accessToken;
-        this.userInfo = userInfo;
+    public User(String name, String id) {
+        this.name = name;
+        this.id = id;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public String getName() {
+        return name;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
+    public String getId() {
+        return id;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public void setId(String id) {
+        this.id = id;
     }
-
 }
