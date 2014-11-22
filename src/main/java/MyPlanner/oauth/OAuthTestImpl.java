@@ -72,8 +72,7 @@ public class OAuthTestImpl implements OAuth{
 
         // Extracting and returning login info.
         LoginInfo loginInfo = result.getBody();
-        // TODO: This is a test:
-        request.getSession().setAttribute("loginInfo", loginInfo);
+
         return loginInfo;
     }
 

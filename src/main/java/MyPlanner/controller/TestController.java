@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -27,14 +29,19 @@ public class TestController {
     }
 
     @RequestMapping("/redirect")
-    public void redirect(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IOException {
+    public ModelAndView redirect(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IOException, Exception {
         LoginInfo userInfo = oAuth.exchangeCodeForToken(request.getParameter("code"), request);
 
         if(userInfo.hasValues()){
+            request.getSession().setAttribute("loginInfo", userInfo);
             loginInfoRepo.saveUser(userInfo);
-            System.out.println(((LoginInfo)request.getSession().getAttribute("loginInfo")).toString());
+            System.out.println(request.getSession().getAttribute("loginInfo").toString());
+
+            ModelAndView model = new ModelAndView("profile");
+            model.addObject("loginInfo", userInfo);
+            return model;
         }else {
-            // TODO: Do som exception handling.
+            throw new Exception("LoginInfo doesn't have some of its values.");
         }
     }
 
