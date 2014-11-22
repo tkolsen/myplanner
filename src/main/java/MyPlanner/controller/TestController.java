@@ -29,7 +29,7 @@ public class TestController {
     }
 
     @RequestMapping("/redirect")
-    public void redirect(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IOException, Exception {
+    public String redirect(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IOException, Exception {
         LoginInfo userInfo = oAuth.exchangeCodeForToken(request.getParameter("code"), request);
 
         if(userInfo.hasValues()){
@@ -38,7 +38,7 @@ public class TestController {
 
             ModelAndView model = new ModelAndView("profile");
             model.addObject("loginInfo", userInfo);
-            response.sendRedirect("user/profile");
+            return "forward:/user/profile";
         }else {
             throw new Exception("LoginInfo doesn't have some of its values.");
         }
