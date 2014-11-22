@@ -7,6 +7,7 @@
     <h1>Profile</h1>
     <h2>Name: ${loginInfo.user.name}</h2>
     <h2>Id: ${loginInfo.user.id}</h2>
+    <h2>Ny registrering: ${newUser}</h2>
 
     <a href="#">Show courses and modules</a>
 </body>

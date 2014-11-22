@@ -24,4 +24,14 @@ public class LoginInfoRepoImpl implements LoginInfoRepo {
         }
         return null;
     }
+
+    @Override
+    public boolean containsUser(int id) {
+        for(LoginInfo user : users){
+            if(Integer.parseInt(user.getUser().getId()) == id){
+                return true;
+            }
+        }
+        return false;
+    }
 }

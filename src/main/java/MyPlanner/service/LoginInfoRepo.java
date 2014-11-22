@@ -6,4 +6,6 @@ public interface LoginInfoRepo {
     public void saveUser(LoginInfo loginInfo);
 
     public LoginInfo getUser(int id);
+
+    public boolean containsUser(int id);
 }

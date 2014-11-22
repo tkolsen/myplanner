@@ -1,5 +1,6 @@
 package MyPlanner.controller;
 
+import MyPlanner.exceptions.NotAuthorizedException;
 import MyPlanner.model.LoginInfo;
 import MyPlanner.oauth.OAuth;
 import MyPlanner.service.LoginInfoRepo;
@@ -29,18 +30,16 @@ public class TestController {
     }
 
     @RequestMapping("/redirect")
-    public String redirect(HttpServletRequest request) throws InstantiationException, IOException, Exception {
+    public String redirect(HttpServletRequest request) throws NotAuthorizedException, InstantiationException {
         LoginInfo userInfo = oAuth.exchangeCodeForToken(request.getParameter("code"), request);
 
         if(userInfo.hasValues()){
             request.getSession().setAttribute("loginInfo", userInfo);
             loginInfoRepo.saveUser(userInfo);
 
-            ModelAndView model = new ModelAndView("profile");
-            model.addObject("loginInfo", userInfo);
             return "redirect:/user/profile";
         }else {
-            throw new Exception("LoginInfo doesn't have some of its values.");
+            throw new NotAuthorizedException("Some info values where not set");
         }
     }
 
