@@ -14,7 +14,7 @@ public interface OAuth {
      * @param code - Code parameter return from step 1 i oauth flow.
      * @return
      */
-    public void exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException;
+    public AccessGrant exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException;
 
     /**
      * Request Canvas accsess
