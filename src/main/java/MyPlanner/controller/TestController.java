@@ -54,8 +54,7 @@ public class TestController {
     }
 
     @RequestMapping("/ok")
-    @ResponseBody
-    public String ok(HttpServletRequest request){
+    public @ResponseBody String ok(HttpServletRequest request){
         return (String)request.getSession().getAttribute("resonse");
     }
 
