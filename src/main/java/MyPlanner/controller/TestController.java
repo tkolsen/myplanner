@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,12 +49,14 @@ public class TestController {
         HttpEntity requestEntity = new HttpEntity(body, headers);
 
         ResponseEntity<String> result = restTemplate.exchange(PROVIDER_ACCESS_TOKEN_URL, HttpMethod.POST, requestEntity, String.class);
-        System.out.println(result.getBody());
+        request.getSession().setAttribute("response", result.getBody());
+        response.sendRedirect("ok");
     }
 
     @RequestMapping("/ok")
-    public ModelAndView ok(){
-        return new ModelAndView("test/params");
+    @ResponseBody
+    public String ok(HttpServletRequest request){
+        return (String)request.getSession().getAttribute("resonse");
     }
 
 }
