@@ -36,7 +36,6 @@ public class OAuthTestImpl implements OAuth{
         oAuth2Template = new OAuth2Template(getClientID(), getClientSecret(), getAuthorizeUrl(), getAccessTokenUrl());
 
         String codeUrl = oAuth2Template.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
-        System.out.println(codeUrl);
         response.sendRedirect(codeUrl);
     }
 
@@ -72,7 +71,6 @@ public class OAuthTestImpl implements OAuth{
 
         // Extracting and returning login info.
         LoginInfo loginInfo = result.getBody();
-
         return loginInfo;
     }
 

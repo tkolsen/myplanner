@@ -29,17 +29,16 @@ public class TestController {
     }
 
     @RequestMapping("/redirect")
-    public ModelAndView redirect(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IOException, Exception {
+    public void redirect(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IOException, Exception {
         LoginInfo userInfo = oAuth.exchangeCodeForToken(request.getParameter("code"), request);
 
         if(userInfo.hasValues()){
             request.getSession().setAttribute("loginInfo", userInfo);
             loginInfoRepo.saveUser(userInfo);
-            System.out.println(request.getSession().getAttribute("loginInfo").toString());
 
             ModelAndView model = new ModelAndView("profile");
             model.addObject("loginInfo", userInfo);
-            return model;
+            response.sendRedirect("/user/profile");
         }else {
             throw new Exception("LoginInfo doesn't have some of its values.");
         }
