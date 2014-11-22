@@ -21,11 +21,6 @@ public class HomeController {
         if(checkLogin(request)){
             ModelAndView model = new ModelAndView("profile");
             model.addObject("loginInfo", getLoginInfo(request));
-            if(loginInfoRepo.containsUser(Integer.parseInt(getLoginInfo(request).getUser().getId()))){
-                model.addObject("newUser", "NEI");
-            }else{
-                model.addObject("newUser", "JA");
-            }
             return model;
         }else{
             throw new NotAuthorizedException();

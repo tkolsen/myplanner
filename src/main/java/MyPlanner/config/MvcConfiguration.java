@@ -11,7 +11,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import java.util.Properties;
 
 @Configuration
 @ComponentScan(basePackages="MyPlanner")
@@ -38,6 +41,19 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
+
+    @Bean(name="simpleMappingExceptionResolver")
+    public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver(){
+        SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
+
+        Properties mappings = new Properties();
+        mappings.setProperty("NotAuthorizedException", "not-authorized");
+
+        r.setExceptionMappings(mappings);
+        r.setDefaultErrorView("error");
+        r.setExceptionAttribute("ex");
+        return r;
+    }
 
     @Bean
     public OAuth oAuth(){
