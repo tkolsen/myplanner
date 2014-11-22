@@ -38,7 +38,7 @@ public class TestController {
 
             ModelAndView model = new ModelAndView("profile");
             model.addObject("loginInfo", userInfo);
-            response.sendRedirect("/user/profile");
+            response.sendRedirect("user/profile");
         }else {
             throw new Exception("LoginInfo doesn't have some of its values.");
         }
