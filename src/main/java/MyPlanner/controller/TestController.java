@@ -23,10 +23,6 @@ public class TestController {
     Environment env;
     @Autowired
     OAuth oAuth;
-    String CLIENT_ID = env.getProperty("client.id");
-    String CLIENT_SECRET = env.getProperty("client.secret");
-    String CLIENT_REDIRECT = env.getProperty("client.redirect");
-    String PROVIDER_ACCESS_TOKEN_URL = env.getProperty("provider.accessTokenUrl");
 
     @RequestMapping("/login")
     public void login(HttpServletResponse response) throws IOException, InstantiationException {
@@ -35,6 +31,11 @@ public class TestController {
 
     @RequestMapping("/redirect")
     public void redirect(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IOException {
+        String CLIENT_ID = env.getProperty("client.id");
+        String CLIENT_SECRET = env.getProperty("client.secret");
+        String CLIENT_REDIRECT = env.getProperty("client.redirect");
+        String PROVIDER_ACCESS_TOKEN_URL = env.getProperty("provider.accessTokenUrl");
+
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
