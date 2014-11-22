@@ -49,13 +49,14 @@ public class TestController {
         HttpEntity requestEntity = new HttpEntity(body, headers);
 
         ResponseEntity<String> result = restTemplate.exchange(PROVIDER_ACCESS_TOKEN_URL, HttpMethod.POST, requestEntity, String.class);
-        request.getSession().setAttribute("response", result.getBody());
+        resultPrint = result.getBody();
         response.sendRedirect("ok");
     }
+    String resultPrint;
 
     @RequestMapping("/ok")
     public @ResponseBody String ok(HttpServletRequest request){
-        return (String)request.getSession().getAttribute("resonse");
+        return resultPrint;
     }
 
 }
