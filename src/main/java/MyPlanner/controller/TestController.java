@@ -4,12 +4,9 @@ import MyPlanner.oauth.OAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.*;
-import org.springframework.http.converter.FormHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
 
 @Controller
 @RequestMapping("/testing")
@@ -26,6 +22,10 @@ public class TestController {
     Environment env;
     @Autowired
     OAuth oAuth;
+    String CLIENT_ID = env.getProperty("client.id");
+    String CLIENT_SECRET = env.getProperty("client.secret");
+    String CLIENT_REDIRECT = env.getProperty("client.redirect");
+    String PROVIDER_ACCESS_TOKEN_URL = env.getProperty("provider.accessTokenUrl");
 
     @RequestMapping("/login")
     public void login(HttpServletResponse response) throws IOException, InstantiationException {
@@ -34,31 +34,20 @@ public class TestController {
 
     @RequestMapping("/redirect")
     public void redirect(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IOException {
-        /*String code = request.getParameter("code");
-        oAuth.exchangeCodeForToken(code, request);
-
-        response.sendRedirect("/ok");*/
-
-        String code = request.getParameter("code");
         RestTemplate restTemplate = new RestTemplate();
-        final List<HttpMessageConverter<?>> converterList = new ArrayList<HttpMessageConverter<?>>();
-        converterList.add(new FormHttpMessageConverter());
-        converterList.add(new StringHttpMessageConverter());
-        converterList.add(new MappingJackson2HttpMessageConverter());
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
-        Map<String, String> parameters = new HashMap<String, String>();
-        parameters.put("client_id", env.getProperty("client.id"));
-        parameters.put("client_secret", env.getProperty("client.secret"));
-        parameters.put("redirect_uri", env.getProperty("client.redirect"));
-        parameters.put("code", code);
-        ResponseEntity<String> test = restTemplate.exchange(env.getProperty("provider.accessTokenUrl"), HttpMethod.POST, entity, String.class, parameters);
-        String body = entity.getBody();
-        System.out.println(body);
+        MultiValueMap<String,String> body = new LinkedMultiValueMap<String, String>();
+        body.add("client_id", CLIENT_ID);
+        body.add("client_secret", CLIENT_SECRET);
+        body.add("redirect_uri", CLIENT_REDIRECT);
+        body.add("code", request.getParameter("code"));
 
-        //response.sendRedirect("/testing/ok");
+        HttpEntity requestEntity = new HttpEntity(body, headers);
+
+        ResponseEntity<String> result = restTemplate.exchange(PROVIDER_ACCESS_TOKEN_URL, HttpMethod.POST, requestEntity, String.class);
+        System.out.println(result.getBody());
     }
 
     @RequestMapping("/ok")
