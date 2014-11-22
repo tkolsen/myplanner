@@ -32,4 +32,16 @@ public class LoginInfo {
         this.user = user;
     }
 
+    public boolean hasValues(){
+        if(user.getId() != null && user.getName() != null)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public String toString(){
+        return "User:{name: " + user.getName() + ", id: " + user.getId() + "}";
+    }
+
 }

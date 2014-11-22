@@ -1,5 +1,6 @@
 package MyPlanner.oauth;
 
+import MyPlanner.model.LoginInfo;
 import org.springframework.social.oauth2.AccessGrant;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ public interface OAuth {
      * @param code - Code parameter return from step 1 i oauth flow.
      * @return
      */
-    public AccessGrant exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException;
+    public LoginInfo exchangeCodeForToken(String code, HttpServletRequest request) throws InstantiationException;
 
     /**
      * Request Canvas accsess

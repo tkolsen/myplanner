@@ -1,14 +1,13 @@
 package MyPlanner.config;
 
 import MyPlanner.oauth.OAuth;
-import MyPlanner.oauth.OAuthImpl;
 import MyPlanner.oauth.OAuthTestImpl;
+import MyPlanner.service.LoginInfoRepo;
+import MyPlanner.service.LoginInfoRepoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
-import org.springframework.social.oauth2.AccessGrant;
-import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -45,12 +44,12 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         return new OAuthTestImpl();
     }
 
-    @Bean()
-    @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public AccessGrant accessGrant(){
-        AccessGrant accessGrant = new AccessGrant(null);
-        return accessGrant;
+    @Bean
+    public LoginInfoRepo loginInfoRepo(){
+        LoginInfoRepo loginInfoRepo = new LoginInfoRepoImpl();
+        return loginInfoRepo;
     }
+
 
 	
 }
