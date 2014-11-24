@@ -39,7 +39,7 @@ public class OAuthController {
             // TODO: dummy repo
             loginInfoRepo.saveUser(loginInfo);
 
-            return "redirect:/token";
+            return "redirect:token";
         }else{
             throw new UserInfoNotSetException("User info was not set in /redirect");
         }
