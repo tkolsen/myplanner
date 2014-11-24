@@ -1,7 +1,6 @@
 package MyPlanner.config;
 
-import MyPlanner.oauth.OAuth;
-import MyPlanner.oauth.OAuthTestImpl;
+import MyPlanner.oauth.*;
 import MyPlanner.service.LoginInfoRepo;
 import MyPlanner.service.LoginInfoRepoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +55,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     }
 
     @Bean
-    public OAuth oAuth(){
-        return new OAuthTestImpl();
+    public OAuth2 oAuth(){
+        return new OAuth2Impl();
     }
 
     @Bean
@@ -66,6 +65,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         return loginInfoRepo;
     }
 
-
+    @Bean
+    public CanvasProperties props(){
+        return new CanvasProperties();
+    }
 	
 }
