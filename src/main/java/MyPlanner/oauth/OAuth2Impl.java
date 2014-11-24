@@ -14,10 +14,13 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 
 public class OAuth2Impl implements OAuth2 {
-    //@Autowired
-    private CanvasProperties props = new CanvasProperties();
+    private CanvasProperties props;
 
     private OAuth2Template oAuth2Template;
+
+    public OAuth2Impl(CanvasProperties props){
+        this.props = props;
+    }
 
     @Override
     public String askForUserInfoConfirmation() throws IOException {

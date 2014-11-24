@@ -12,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
 import java.util.Properties;
 
 @Configuration
@@ -56,7 +55,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
     @Bean(name="oAuth")
     public OAuth2 oAuth(){
-        return new OAuth2Impl();
+        OAuth2 oAuth = new OAuth2Impl(props());
+        return oAuth;
     }
 
     @Bean
@@ -64,17 +64,11 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         LoginInfoRepo loginInfoRepo = new LoginInfoRepoImpl();
         return loginInfoRepo;
     }
-    /*
-    @Bean
+
+    @Bean(name = "props")
     public CanvasProperties props(){
-        try {
-            CanvasProperties props = new CanvasProperties();
-            return props;
-        }catch (Exception e){
-            System.out.println("************ Could not initialize properties class ************");
-            System.out.println(e.getMessage());
-            return null;
-        }
+        CanvasProperties props = new CanvasProperties(env);
+        return props;
     }
-	*/
+
 }
