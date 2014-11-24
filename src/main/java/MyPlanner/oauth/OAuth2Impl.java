@@ -1,7 +1,6 @@
 package MyPlanner.oauth;
 
 import MyPlanner.model.LoginInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
