@@ -67,7 +67,13 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
     @Bean
     public CanvasProperties props(){
-        return new CanvasProperties();
+        try {
+            CanvasProperties props = new CanvasProperties();
+            return props;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 	
 }
