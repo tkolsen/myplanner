@@ -68,7 +68,7 @@ public class TestController {
 
         LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
         loginInfo.setAccessToken(accessToken);
-        request.getSession().setAttribute("loginInfo", loginInfoRepo);
+        request.getSession().setAttribute("loginInfo", loginInfo);
 
         return "redirect:/user/profile";
     }
