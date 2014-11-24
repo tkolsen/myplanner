@@ -70,6 +70,8 @@ public class TestController {
         loginInfo.setAccessToken(accessToken);
         request.getSession().setAttribute("loginInfo", loginInfo);
 
+        System.out.println("test repo: " + loginInfoRepo.getUser(Integer.parseInt(loginInfo.getUser().getId())));
+
         return "redirect:/user/profile";
     }
 
