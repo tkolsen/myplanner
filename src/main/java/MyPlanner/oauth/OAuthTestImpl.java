@@ -30,7 +30,7 @@ public class OAuthTestImpl implements OAuth{
     public void askForConfirmation(HttpServletResponse response) throws IOException, InstantiationException {
         OAuth2Parameters oAuth2Parameters = new OAuth2Parameters();
         oAuth2Parameters.setRedirectUri(getRedirectUrl());
-        oAuth2Parameters.set("scopes", getScope());
+        oAuth2Parameters.set("scopes", getScope() + "  ");
         oAuth2Parameters.set("force_login", "1");
 
         oAuth2Template = new OAuth2Template(getClientID(), getClientSecret(), getAuthorizeUrl(), getAccessTokenUrl());
