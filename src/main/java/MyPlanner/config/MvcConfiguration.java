@@ -50,7 +50,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         mappings.setProperty("NotAuthorizedException", "not-authorized");
 
         r.setExceptionMappings(mappings);
-        r.setDefaultErrorView("error");
+        //r.setDefaultErrorView("error");
         r.setExceptionAttribute("ex");
         return r;
     }
