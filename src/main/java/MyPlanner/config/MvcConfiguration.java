@@ -64,16 +64,17 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         LoginInfoRepo loginInfoRepo = new LoginInfoRepoImpl();
         return loginInfoRepo;
     }
-
+    /*
     @Bean
     public CanvasProperties props(){
         try {
             CanvasProperties props = new CanvasProperties();
             return props;
         }catch (Exception e){
+            System.out.println("************ Could not initialize properties class ************");
             System.out.println(e.getMessage());
             return null;
         }
     }
-	
+	*/
 }

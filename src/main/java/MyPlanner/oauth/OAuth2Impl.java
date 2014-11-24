@@ -15,8 +15,8 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 
 public class OAuth2Impl implements OAuth2 {
-    @Autowired
-    private CanvasProperties props;
+    //@Autowired
+    private CanvasProperties props = new CanvasProperties();
 
     private OAuth2Template oAuth2Template;
 
