@@ -25,9 +25,14 @@ public class OAuthController {
     LoginInfoRepo loginInfoRepo;
 
     @RequestMapping("/userInfo")
-    public void login(HttpServletResponse response) throws IOException {
-        String confirmationUrl = oAuth.askForUserInfoConfirmation();
-        response.sendRedirect(confirmationUrl);
+    public void login(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
+        if(loginInfo == null || !loginInfo.hasValues()) {
+            String confirmationUrl = oAuth.askForUserInfoConfirmation();
+            response.sendRedirect(confirmationUrl);
+        }else{
+            response.sendRedirect("/user/profile");
+        }
     }
 
     @RequestMapping("/redirectUserInfo")
