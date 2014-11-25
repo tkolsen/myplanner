@@ -2,6 +2,7 @@ package MyPlanner.config;
 
 import MyPlanner.oauth.*;
 import MyPlanner.service.CanvasApi;
+import MyPlanner.service.CanvasApiImpl;
 import MyPlanner.service.LoginInfoRepo;
 import MyPlanner.service.LoginInfoRepoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import java.awt.*;
 import java.util.Properties;
 
 @Configuration
@@ -77,7 +77,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
     @Bean
     public CanvasApi canvasApi(){
-        CanvasApi canvasApi = new CanvasApi();
+        CanvasApi canvasApi = new CanvasApiImpl();
         return canvasApi;
     }
 

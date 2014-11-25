@@ -1,23 +1,16 @@
 package MyPlanner.controller;
 
 import MyPlanner.exceptions.NotAuthorizedException;
-import MyPlanner.exceptions.UserInfoNotSetException;
-import MyPlanner.model.Course;
 import MyPlanner.model.LoginInfo;
 import MyPlanner.service.CanvasApi;
+import MyPlanner.service.CanvasApiImpl;
 import MyPlanner.service.LoginInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
