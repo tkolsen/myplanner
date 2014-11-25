@@ -47,7 +47,7 @@ public class HomeController {
             restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Authorization", "Bearer: " + loginInfo.getAccessToken());
+            headers.add("Authorization", "Bearer " + loginInfo.getAccessToken());
 
             HttpEntity<Course[]> requestEntity = new HttpEntity<Course[]>(headers);
             String url = "https://canvas.instructure.com/api/v1/courses";
