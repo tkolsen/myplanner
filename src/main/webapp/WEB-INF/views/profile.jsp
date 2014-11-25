@@ -1,15 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>MyPlanner Profile</title>
 </head>
 <body>
-    <h1>Profile</h1>
-    <h2>Name: ${loginInfo.user.name}</h2>
-    <h2>Id: ${loginInfo.user.id}</h2>
-    <h2>Ny registrering: ${newUser}</h2>
-    <h2>access token: ${loginInfo.accessToken}</h2>
+    <div id="login-info">
+        <p>Innlogget som:</p>
+        <p>Navn: ${loginInfo.user.name}</p>
+    </div>
 
-    <a href="#">Show courses and modules</a>
+    <div id="course-list">
+        <ul>
+            <c:forEach var="course" items="${courses}">
+                <li><c:out value="${course.name}"/></li>
+            </c:forEach>
+        </ul>
+    </div>
 </body>
 </html>

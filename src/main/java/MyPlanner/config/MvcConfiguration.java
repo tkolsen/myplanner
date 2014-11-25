@@ -1,6 +1,7 @@
 package MyPlanner.config;
 
 import MyPlanner.oauth.*;
+import MyPlanner.service.CanvasApi;
 import MyPlanner.service.LoginInfoRepo;
 import MyPlanner.service.LoginInfoRepoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,12 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     public CanvasProperties props(){
         CanvasProperties props = new CanvasProperties(env);
         return props;
+    }
+
+    @Bean
+    public CanvasApi canvasApi(){
+        CanvasApi canvasApi = new CanvasApi();
+        return canvasApi;
     }
 
 }

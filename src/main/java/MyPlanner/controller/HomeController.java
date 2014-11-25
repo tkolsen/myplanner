@@ -1,8 +1,10 @@
 package MyPlanner.controller;
 
 import MyPlanner.exceptions.NotAuthorizedException;
+import MyPlanner.exceptions.UserInfoNotSetException;
 import MyPlanner.model.Course;
 import MyPlanner.model.LoginInfo;
+import MyPlanner.service.CanvasApi;
 import MyPlanner.service.LoginInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -15,46 +17,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
 public class HomeController {
     @Autowired
     LoginInfoRepo loginInfoRepo;
+    @Autowired
+    CanvasApi canvasApi;
 
     @RequestMapping("/profile")
-    public ModelAndView profilePage(HttpServletRequest request) throws Exception {
+    public ModelAndView profilePage(HttpServletRequest request) throws NotAuthorizedException {
         LoginInfo loginInfo = getLoginInfo(request);
 
         if(checkLogin(loginInfo)){
             ModelAndView model = new ModelAndView("profile");
             model.addObject("loginInfo", loginInfo);
-            return model;
-        }else{
-            throw new NotAuthorizedException();
-        }
-    }
+            model.addObject("courses", canvasApi.getCourses(request));
 
-    @RequestMapping("/courses")
-    public ModelAndView coursePage(HttpServletRequest request) throws NotAuthorizedException {
-        LoginInfo loginInfo = getLoginInfo(request);
-
-        if(checkLogin(loginInfo)){
-            ModelAndView model = new ModelAndView("courses");
-
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Authorization", "Bearer " + loginInfo.getAccessToken());
-
-            HttpEntity<Course[]> requestEntity = new HttpEntity<Course[]>(headers);
-            String url = "https://canvas.instructure.com/api/v1/courses";
-            ResponseEntity<Course[]> resp = restTemplate.exchange(url, HttpMethod.GET, requestEntity, Course[].class, new HashMap<String, String>());
-            Course[] courses = resp.getBody();
-
-            model.addObject("courses", courses);
             return model;
         }else{
             throw new NotAuthorizedException();
