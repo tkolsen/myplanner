@@ -25,15 +25,16 @@ public class OAuthController {
     LoginInfoRepo loginInfoRepo;
 
     @RequestMapping("/userInfo")
-    public void login(HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public String login(HttpServletResponse response, HttpServletRequest request) throws IOException {
         LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
         if(loginInfo == null || !loginInfo.hasValues()) {
             String confirmationUrl = oAuth.askForUserInfoConfirmation();
-            response.sendRedirect(confirmationUrl);
+            return "redirect:"+confirmationUrl;
         }else if(loginInfo.getAccessToken() == null || loginInfo.getAccessToken().isEmpty()){
-            response.sendRedirect("token");
+            return "redirect:token";
         }else{
             response.sendRedirect("/user/profile");
+            return "redirect:/user/profile";
         }
     }
 
