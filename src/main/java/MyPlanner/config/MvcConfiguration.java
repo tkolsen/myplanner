@@ -47,7 +47,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
 
         Properties mappings = new Properties();
-        mappings.setProperty("NotAuthorizedException", "not-authorized");
+        mappings.setProperty("NotAuthorizedException", "errors/not-authorized");
 
         r.setExceptionMappings(mappings);
         //r.setDefaultErrorView("error");

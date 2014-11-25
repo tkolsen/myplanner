@@ -34,10 +34,10 @@ public class OAuthController {
     public String redirectUserInfo(HttpServletRequest request,
                            @RequestParam(value="code", required = true)String code) throws UserInfoNotSetException {
         LoginInfo loginInfo = oAuth.exchangeCodeForUserInfo(code);
-        if(loginInfo.hasValues()){
+        if(loginInfo != null && loginInfo.hasValues()){
             request.getSession().setAttribute("loginInfo", loginInfo);
             // TODO: dummy repo
-            loginInfoRepo.saveUser(loginInfo);
+            boolean isRegistered = loginInfoRepo.saveUser(loginInfo);
 
             return "redirect:token";
         }else{
@@ -54,9 +54,13 @@ public class OAuthController {
     @RequestMapping("/redirectAccessToken")
     public String redirectAccessToken(HttpServletResponse response,
                                     HttpServletRequest request,
-                                    @RequestParam(value = "code", required = true)String code){
+                                    @RequestParam(value = "code", required = true)String code) throws UserInfoNotSetException {
         String accessToken = oAuth.exchangeCodeForAccessToken(code);
-        ((LoginInfo)request.getSession().getAttribute("loginInfo")).setAccessToken(accessToken);
+        if(accessToken != null && !accessToken.isEmpty()) {
+            ((LoginInfo) request.getSession().getAttribute("loginInfo")).setAccessToken(accessToken);
+        }else{
+            throw new UserInfoNotSetException("access token not set");
+        }
         return "redirect:/user/profile";
     }
 

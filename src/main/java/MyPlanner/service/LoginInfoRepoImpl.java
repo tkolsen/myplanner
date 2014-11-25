@@ -11,14 +11,19 @@ public class LoginInfoRepoImpl implements LoginInfoRepo {
     }
 
     @Override
-    public void saveUser(LoginInfo loginInfo) {
-        users.add(loginInfo);
+    public boolean saveUser(LoginInfo loginInfo) {
+        if(!containsUser(loginInfo.getUser().getId())) {
+            users.add(loginInfo);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
     public LoginInfo getUser(int id) {
         for(LoginInfo user : users){
-            if(Integer.parseInt(user.getUser().getId()) == id){
+            if(user.getUser().getId() == id){
                 return user;
             }
         }
@@ -28,7 +33,7 @@ public class LoginInfoRepoImpl implements LoginInfoRepo {
     @Override
     public boolean containsUser(int id) {
         for(LoginInfo user : users){
-            if(Integer.parseInt(user.getUser().getId()) == id){
+            if(user.getUser().getId() == id){
                 return true;
             }
         }

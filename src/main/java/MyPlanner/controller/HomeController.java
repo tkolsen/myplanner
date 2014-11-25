@@ -18,18 +18,18 @@ public class HomeController {
 
     @RequestMapping("/profile")
     public ModelAndView profilePage(HttpServletRequest request) throws Exception {
-        if(checkLogin(request)){
+        LoginInfo loginInfo = getLoginInfo(request);
+
+        if(checkLogin(loginInfo)){
             ModelAndView model = new ModelAndView("profile");
-            model.addObject("loginInfo", getLoginInfo(request));
+            model.addObject("loginInfo", loginInfo);
             return model;
         }else{
             throw new NotAuthorizedException();
         }
     }
 
-    private boolean checkLogin(HttpServletRequest request){
-        LoginInfo loginInfo = getLoginInfo(request);
-
+    private boolean checkLogin(LoginInfo loginInfo){
         if(loginInfo != null && loginInfo.hasValues()){
             return true;
         }else{

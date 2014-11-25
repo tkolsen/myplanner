@@ -33,7 +33,7 @@ public class LoginInfo {
     }
 
     public boolean hasValues(){
-        if(user.getId() != null && user.getName() != null)
+        if(user.getId() != 0 && user.getName() != null)
             return true;
         else
             return false;
