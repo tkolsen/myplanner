@@ -30,6 +30,8 @@ public class OAuthController {
         if(loginInfo == null || !loginInfo.hasValues()) {
             String confirmationUrl = oAuth.askForUserInfoConfirmation();
             response.sendRedirect(confirmationUrl);
+        }else if(loginInfo.getAccessToken() == null || loginInfo.getAccessToken().isEmpty()){
+            response.sendRedirect("token");
         }else{
             response.sendRedirect("/user/profile");
         }
