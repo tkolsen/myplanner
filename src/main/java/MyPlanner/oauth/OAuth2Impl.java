@@ -58,7 +58,6 @@ public class OAuth2Impl implements OAuth2 {
     @Override
     public String askForAccessTokenConfirmation() throws IOException {
         OAuth2Parameters oAuth2Parameters = new OAuth2Parameters();
-        // TODO: legg denne til i properties fila
         oAuth2Parameters.setRedirectUri(props.getClientRedirect2());
 
         oAuth2Template = new OAuth2Template(props.getClientID(), props.getClientSecret(),
@@ -71,7 +70,6 @@ public class OAuth2Impl implements OAuth2 {
 
     @Override
     public String exchangeCodeForAccessToken(String code){
-        // TODO: legg denne til i properties fila
         AccessGrant accessGrant = oAuth2Template.exchangeForAccess(code, props.getClientRedirect2(), null);
         String accessToken = accessGrant.getAccessToken();
 

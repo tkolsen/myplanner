@@ -1,9 +1,9 @@
 package MyPlanner.controller;
 
 import MyPlanner.exceptions.NotAuthorizedException;
+import MyPlanner.model.Course;
 import MyPlanner.model.LoginInfo;
 import MyPlanner.service.CanvasApi;
-import MyPlanner.service.CanvasApiImpl;
 import MyPlanner.service.LoginInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -26,8 +27,11 @@ public class HomeController {
 
         if(checkLogin(loginInfo)){
             ModelAndView model = new ModelAndView("profile");
+
             model.addObject("loginInfo", loginInfo);
-            model.addObject("courses", canvasApi.getCourses(request));
+
+            List<Course> courses = canvasApi.getCourses(request);
+            model.addObject("courses", courses);
 
             return model;
         }else{

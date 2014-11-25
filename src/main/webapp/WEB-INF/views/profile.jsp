@@ -14,7 +14,14 @@
             <c:forEach var="course" items="${courses}">
                 <li><c:out value="${course.name}"/></li>
                 <ul>
-                    <li>Her kommer moduler. (Ikke implementert)</li>
+                    <c:forEach var="module" items="${course.modules}">
+                        <li><c:out value=" ${module.name}"/></li>
+                        <ul>
+                            <c:forEach var="item" items="${module.items}">
+                                <li><c:out value="${item.title}"/></li>
+                            </c:forEach>
+                        </ul>
+                    </c:forEach>
                 </ul>
             </c:forEach>
         </ul>

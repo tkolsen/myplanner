@@ -2,6 +2,8 @@ package MyPlanner.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class Course {
     @JsonProperty("id")
     private int id;
@@ -9,6 +11,16 @@ public class Course {
     private String name;
     @JsonProperty("course_code")
     private String courseCode;
+
+    private List<Module> modules;
+
+    public List<Module> getModules() {
+        return modules;
+    }
+
+    public void setModules(List<Module> modules) {
+        this.modules = modules;
+    }
 
     public int getId() {
         return id;
