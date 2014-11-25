@@ -33,7 +33,6 @@ public class OAuthController {
         }else if(loginInfo.getAccessToken() == null || loginInfo.getAccessToken().isEmpty()){
             return "redirect:token";
         }else{
-            response.sendRedirect("/user/profile");
             return "redirect:/user/profile";
         }
     }
