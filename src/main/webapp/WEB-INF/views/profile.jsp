@@ -6,8 +6,7 @@
 </head>
 <body>
     <div id="login-info">
-        <p>Innlogget som:</p>
-        <p>Navn: ${loginInfo.user.name}</p>
+        <p>Innlogget som: ${loginInfo.user.name}</p>
     </div>
 
     <div id="course-list">

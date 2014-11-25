@@ -53,9 +53,9 @@ public class OAuthController {
     }
 
     @RequestMapping("/token")
-    public void getTokenConfirmation(HttpServletResponse response) throws IOException {
+    public String getTokenConfirmation(HttpServletResponse response) throws IOException {
         String confirmationUrl = oAuth.askForAccessTokenConfirmation();
-        response.sendRedirect(confirmationUrl);
+        return "redirect:"+confirmationUrl;
     }
 
     @RequestMapping("/redirectAccessToken")
