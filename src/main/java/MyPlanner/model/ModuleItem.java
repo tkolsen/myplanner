@@ -11,11 +11,9 @@ public class ModuleItem {
     private int position;
     @JsonProperty("title")
     private String title;
-    // TODO: Get this to work. Problem can be that user has to authenticate on a live app
-    /*
     @JsonProperty("completion_requirement")
-    private String completionRequirement;
-    */
+    private CompletionRequirement completionRequirement;
+
     public int getId() {
         return id;
     }
@@ -47,13 +45,13 @@ public class ModuleItem {
     public void setTitle(String title) {
         this.title = title;
     }
-    /*
-    public String getCompletionRequirement() {
+
+    public CompletionRequirement getCompletionRequirement() {
         return completionRequirement;
     }
 
-    public void setCompletionRequirement(String completionRequirement) {
+    public void setCompletionRequirement(CompletionRequirement completionRequirement) {
         this.completionRequirement = completionRequirement;
     }
-    */
+
 }

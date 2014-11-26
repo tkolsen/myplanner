@@ -56,7 +56,7 @@ public class CanvasApiImpl implements CanvasApi{
             Module[] modules = resp.getBody();
             for(Module m : modules){
                 if(m.getItems() == null || m.getItems().size() == 0){
-                    m.setItems(getItems(m.getId(), courseId, loginInfo.getAccessToken()));
+                    m.setItems(getItems(m.getId(), courseId, loginInfo.getUser().getId(), loginInfo.getAccessToken()));
                 }
             }
 
@@ -67,10 +67,12 @@ public class CanvasApiImpl implements CanvasApi{
     }
 
     // /api/v1/courses/:course_id/modules/:module_id/items
-    public List<ModuleItem> getItems(int moduleId, int courseId, String accessToken){
+    public List<ModuleItem> getItems(int moduleId, int courseId, int studentId, String accessToken){
         HttpEntity<ModuleItem[]> requestEntity = new HttpEntity<ModuleItem[]>(setAuthorizationHeader(accessToken));
         String url = "https://canvas.instructure.com/api/v1/courses/"+courseId+"/modules/"+moduleId+"/items";
-        ResponseEntity<ModuleItem[]> resp = getRestTemplate().exchange(url, HttpMethod.GET, requestEntity, ModuleItem[].class, new HashMap<String,String>());
+        Map<String,String> params = new HashMap<String, String>();
+        params.put("student_id", ""+studentId);
+        ResponseEntity<ModuleItem[]> resp = getRestTemplate().exchange(url, HttpMethod.GET, requestEntity, ModuleItem[].class, params);
         ModuleItem[] moduleItems = resp.getBody();
 
         return Arrays.asList(moduleItems);
