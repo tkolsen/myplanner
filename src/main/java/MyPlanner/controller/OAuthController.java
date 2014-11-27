@@ -9,6 +9,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,6 +70,13 @@ public class OAuthController {
             throw new UserInfoNotSetException("access token not set");
         }
         return "redirect:/user/profile";
+    }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpServletRequest request){
+        request.getSession().removeAttribute("loginInfo");
+        request.getSession().invalidate();
+        return new ModelAndView("logout");
     }
 
 }

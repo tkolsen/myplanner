@@ -39,9 +39,4 @@ public class LoginInfo {
             return false;
     }
 
-    @Override
-    public String toString(){
-        return "User:{name: " + user.getName() + ", id: " + user.getId() + "}";
-    }
-
 }

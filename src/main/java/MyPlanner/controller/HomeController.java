@@ -21,12 +21,17 @@ public class HomeController {
     @Autowired
     CanvasApi canvasApi;
 
+    @RequestMapping("/login")
+    public ModelAndView loginPage(){
+        return new ModelAndView("login");
+    }
+
     @RequestMapping("/profile")
     public ModelAndView profilePage(HttpServletRequest request) throws NotAuthorizedException {
         LoginInfo loginInfo = getLoginInfo(request);
 
         if(checkLogin(loginInfo)){
-            ModelAndView model = new ModelAndView("profile");
+            ModelAndView model = new ModelAndView("angularTest/profile");
 
             model.addObject("loginInfo", loginInfo);
 

@@ -5,5 +5,6 @@
 </head>
 <body>
     <h1>Not authorized!</h1>
+    <a href="/oauth/userInfo">Log inn</a>
 </body>
 </html>

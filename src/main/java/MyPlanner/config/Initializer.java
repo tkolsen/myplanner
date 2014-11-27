@@ -33,6 +33,7 @@ public class Initializer implements WebApplicationInitializer {
             @Override
             public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
                 System.out.println("Session destroyed.");
+                // TODO: Add this back in before deployment
                 /*LoginInfo loginInfo = (LoginInfo)httpSessionEvent.getSession().getAttribute("loginInfo");
                 if(loginInfo != null) {
                     RestTemplate restTemplate = new RestTemplate();
