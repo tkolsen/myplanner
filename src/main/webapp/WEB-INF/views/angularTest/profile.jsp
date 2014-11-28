@@ -10,42 +10,52 @@
     <script src="<c:url value="/resources/testController.js"/>"></script>
 </head>
 <body>
-    <div id="wrapper" ng-controller="CoursesCtrl">
-        <!-- Main Header TODO: Get this to work-->
-        <header id="header" class="box-spacing" onload="getResources()">
-            <h1 id="logo">MyPlanner</h1>
-            <h2 id="username">{{username}}</h2>
-            <p><a href="/oauth/logout">Log ut</a></p>
-        </header>
+<div id="wrapper" ng-controller="CoursesCtrl">
+    <!-- Main Header TODO: Get this to work-->
+    <header id="header" class="box" onload="getResources()">
+        <h1 id="logo">My<span>Planner</span></h1>
 
-        <!-- Main content -->
-        <section id="main-content" class="box-spacing">
-            <h3>Main Content</h3>
-            <div ng-repeat="course in courses">
-                <ul>
-                    <li ng-repeat="module in course.modules">
-                        {{module.name}}
-                        <ul>
-                            <li ng-repeat="item in module.items  | limitTo:quantity">
-                                {{item.title}}
-                                <ul ng-if="item.completion_requirement.completed != null">
-                                    <li>
-                                        Ferdig: {{item.completion_requirement.completed}}
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <span class="show-more" ng-click="showMore()">{{text}}</span>
-                    </li>
-                </ul>
+        <h2>Logget inn som:</h2>
+
+        <h3 id="username">{{username}}</h3>
+
+        <p><a href="/oauth/logout">Log ut</a></p>
+    </header>
+
+    <!-- Main content -->
+    <section id="main-content" class="box">
+        <aside id="navigation">
+            <h3>Velg kurs</h3>
+            <select ng-model="selectedCourse" ng-options="course.name for course in courses">
+                <option value="">Velg kurs</option>
+            </select>
+        </aside>
+        <div id="module-wrapper">
+            <h3>Moduler i {{selectedCourse.name}}</h3>
+
+            <div ng-repeat="course in courses | filter:selectedCourse.name" ng-if="selectedCourse">
+                <div class="module" ng-click="doSomething()" ng-repeat="module in course.modules">
+                    {{module.name}}
+                    <ul>
+                        <li ng-repeat="item in module.items  | limitTo:quantity">
+                            {{item.title}}
+                            <ul ng-if="item.completion_requirement.completed != null">
+                                <li>
+                                    Ferdig: {{item.completion_requirement.completed}}
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <span class="show-more" ng-click="showMore()">{{text}}</span>
+                </div>
             </div>
-            <div id="test-span"></div>
-        </section>
-
-        <!-- Main footer -->
-        <section id="extra" class="box-spacing">
-            <p>Ekstra boks for annen info</p>
-        </section>
-    </div>
+        </div>
+        <div class="clear-float"/>
+    </section>
+    <!-- Main footer -->
+    <section id="extra" class="box">
+        <p ng-click="test()">Ekstra boks for annen info</p>
+    </section>
+</div>
 </body>
 </html>

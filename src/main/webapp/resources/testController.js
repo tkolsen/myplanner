@@ -1,6 +1,7 @@
 app.controller("CoursesCtrl", function ($scope, $http, $q) {
     $scope.quantity = 5;
     $scope.text = 'Vis flere..';
+    $scope.selectedCourse;
 
     var courseList = $http.get("/rest/courses").success(function (response) {
         return response;
@@ -13,6 +14,7 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         $scope.username = arrayOfResult[1].data.user.name;
     });
 
+    // TODO: This expands all. Find a way to expand only the clicked module
     $scope.showMore = function () {
         var size = 0;
         if ($scope.quantity == 5) {
@@ -30,5 +32,13 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
             $scope.quantity = 5;
             $scope.text = 'Vis flere..'
         }
+    };
+
+    $scope.moduleClicked = function(){
+        // TODO: Do something when user click a module
+    };
+
+    $scope.test = function(){
+      alert($scope.selectedCourse);
     };
 });
