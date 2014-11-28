@@ -31,7 +31,8 @@
             </select>
         </aside>
         <div id="module-wrapper">
-            <h3>Moduler i {{selectedCourse.name}}</h3>
+            <h3 ng-if="selectedCourse">Moduler i {{selectedCourse.name}}</h3>
+            <h3 ng-if="!selectedCourse">Velg kurs i menyen til venstre</h3>
 
             <div ng-repeat="course in courses | filter:selectedCourse.name" ng-if="selectedCourse">
                 <div class="module" ng-click="doSomething()" ng-repeat="module in course.modules">
