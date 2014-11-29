@@ -1,7 +1,6 @@
 app.controller("CoursesCtrl", function ($scope, $http, $q) {
     $scope.quantity = 5;
     $scope.text = 'Vis flere..';
-    $scope.selectedCourse;
 
     var courseList = $http.get("/rest/courses").success(function (response) {
         return response;
@@ -11,6 +10,7 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
     });
     $q.all([courseList, username]).then(function (arrayOfResult) {
         $scope.courses = arrayOfResult[0].data;
+        $scope.selectedCourse = $scope.courses[0];
         $scope.username = arrayOfResult[1].data.user.name;
     });
 
@@ -36,9 +36,5 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
 
     $scope.moduleClicked = function(){
         // TODO: Do something when user click a module
-    };
-
-    $scope.test = function(){
-      alert($scope.selectedCourse);
     };
 });
