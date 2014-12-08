@@ -3,7 +3,7 @@
 <html ng-app="myPlanner">
 <head>
     <title>Home</title>
-    <link rel="stylesheet" href="<c:url value="/resources/myplanner.css"/>"/>
+    <!--<link rel="stylesheet" href="<c:url value="/resources/myplanner.css"/>"/>-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular-route.js"></script>
     <script src="<c:url value="/resources/app.js"/>"></script>
