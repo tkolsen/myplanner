@@ -2,10 +2,7 @@ package MyPlanner.service;
 
 import MyPlanner.exceptions.NotAuthorizedException;
 import MyPlanner.exceptions.UserInfoNotSetException;
-import MyPlanner.model.Course;
-import MyPlanner.model.LoginInfo;
-import MyPlanner.model.Module;
-import MyPlanner.model.ModuleItem;
+import MyPlanner.model.*;
 import org.springframework.http.*;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -64,6 +61,32 @@ public class CanvasApiImpl implements CanvasApi{
             return Arrays.asList(modules);
         }else{
             throw new NotAuthorizedException("Can't access modules without user info");
+        }
+    }
+
+    @Override
+    public List<CalendarEvent> getCalendarEvents(HttpServletRequest request, String startDate, String endDate) throws NotAuthorizedException {
+        LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
+
+        if(loginInfo != null && loginInfo.hasValues() && loginInfo.getAccessToken() != null){
+            HttpEntity<CalendarEvent[]> requestEntity = new HttpEntity<CalendarEvent[]>(setAuthorizationHeader(loginInfo.getAccessToken()));
+            String url = baseUrl + "/api/v1/calendar_events";
+            Map<String,String> parameters = new HashMap<String, String>();
+            // TODO: <String, Date> hashmap?
+            parameters.put("start_date", "start");
+            parameters.put("end_date", "end");
+            ResponseEntity<CalendarEvent[]> resp = getRestTemplate().exchange(url, HttpMethod.GET, requestEntity, CalendarEvent[].class, parameters);
+            CalendarEvent[] calendarEvents = resp.getBody();
+            // TODO: Filter by startDate -> endDate
+            /*for(CalendarEvent c : calendarEvents){
+                if(startDate >= c.getStartAt() && endDate <= c.getEndAt()){
+                    // add to list
+                }
+            }*/
+
+            return Arrays.asList(calendarEvents);
+        }else{
+            throw new NotAuthorizedException("Can't access calendar events without user info");
         }
     }
 
