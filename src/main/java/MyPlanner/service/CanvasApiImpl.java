@@ -35,7 +35,6 @@ public class CanvasApiImpl implements CanvasApi{
             Course[] courses = resp.getBody();
 
             for(Course c : courses){
-                System.out.println("ID: " + c.getId());
                 c.setModules(getModules(request, c.getId()));
             }
 
@@ -51,9 +50,8 @@ public class CanvasApiImpl implements CanvasApi{
 
         if(loginInfo != null && loginInfo.hasValues() && loginInfo.getAccessToken() != null){
             HttpEntity<Module[]> requestEntity = new HttpEntity<Module[]>(setAuthorizationHeader(loginInfo.getAccessToken()));
-            String url = baseUrl + "/api/v1/courses/" + courseId + "/modules";
-            Map<String,String> parameters = new HashMap<String, String>();
-            parameters.put("include[]", "items");
+            String url = baseUrl + "/api/v1/courses/" + courseId + "/modules?per_page=50";
+            Map<String,Integer> parameters = new HashMap<String, Integer>();
             ResponseEntity<Module[]> resp = getRestTemplate().exchange(url, HttpMethod.GET, requestEntity, Module[].class, parameters);
             Module[] modules = resp.getBody();
             // TODO: look at this

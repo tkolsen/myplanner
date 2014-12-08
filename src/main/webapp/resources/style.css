@@ -1,40 +1,8 @@
-*{
-    padding: 0px;
-    margin: 0px;
+#logo{
+    font-family: Rockwell, serif;
+    font-size: 3em;
 }
-#wrapper{
-    width: 1024px;
-    margin-left: auto;
-    margin-right: auto;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-}
-#header{
-    padding: 25px;
-    border-bottom: 1px solid black;
-}
-#header h1{
-    float:left;
-}
-#login-info{
-    display: inline-block;
-    float: right;
-}
-.module{
-    border: 1px solid darkgray;
-    padding: 10px;
-    margin: 20px;
-    display: inline-block;
-    background-color: lightgray;
-}
-.module-item{
-    margin-left: 20px;
-}
-.completed-status{
-    margin-left: 20px;
-    margin-bottom: 20px;
-    display: block;
-}
-.clear-float{
-    clear: both;
+#logo span{
+    font-size: 0.72em;
+    text-decoration: overline;
 }

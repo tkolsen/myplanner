@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -32,12 +33,6 @@ public class HomeController {
 
         if(checkLogin(loginInfo)){
             ModelAndView model = new ModelAndView("angularTest/profile");
-
-            model.addObject("loginInfo", loginInfo);
-
-            List<Course> courses = canvasApi.getCourses(request);
-            model.addObject("courses", courses);
-
             return model;
         }else{
             throw new NotAuthorizedException();

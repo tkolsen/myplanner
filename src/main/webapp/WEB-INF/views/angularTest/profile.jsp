@@ -3,7 +3,7 @@
 <html ng-app="myPlanner">
 <head>
     <title>Home</title>
-    <!--<link rel="stylesheet" href="<c:url value="/resources/myplanner.css"/>"/>-->
+    <link rel="stylesheet" href="<c:url value="/resources/style.css"/>"/>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular-route.js"></script>
     <script src="<c:url value="/resources/app.js"/>"></script>
@@ -13,7 +13,7 @@
 <div id="wrapper" data-ng-controller="CoursesCtrl">
     <!-- Main Header TODO: Get this to work-->
     <header id="header" class="box">
-        <h1 id="logo">My<span>Planner</span></h1>
+        <h1 id="logo"><span>My</span>Planner</h1>
 
         <h2>Logget inn som:</h2>
 

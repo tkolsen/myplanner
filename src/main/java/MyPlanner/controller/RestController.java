@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,8 +28,13 @@ public class RestController {
 
         if(loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
             throw new NotAuthorizedException();
-        List<Course> courseList = canvasApi.getCourses(request);
 
+        List<Course> courseList = (List<Course>)request.getSession().getAttribute("courses");
+        if(courseList == null) {
+            courseList = canvasApi.getCourses(request);
+            request.getSession().setAttribute("courses", courseList);
+            System.out.println("Fetching courses from instructure.");
+        }
         return courseList;
     }
 
@@ -40,7 +47,6 @@ public class RestController {
         LoginInfo returnInfo = new LoginInfo();
         User returnUser = new User(loginInfo.getUser().getName(), loginInfo.getUser().getId());
         returnInfo.setUser(returnUser);
-
         return returnInfo;
     }
 }
