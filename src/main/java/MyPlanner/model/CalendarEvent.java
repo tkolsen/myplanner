@@ -17,8 +17,8 @@ public class CalendarEvent {
     private String description;
     @JsonProperty("location_name")
     private String locationName;
-    @JsonProperty("location_adress")
-    private String locationAdress;
+    @JsonProperty("location_address")
+    private String locationAddress;
     @JsonProperty("context_code")
     private String contextCode;
     @JsonProperty("workflow_state")
@@ -28,7 +28,7 @@ public class CalendarEvent {
     @JsonProperty("all_day_date")
     private String allDayDate;
     @JsonProperty("all_day")
-    private String allDay;
+    private boolean allDay;
     @JsonProperty("created_at")
     private String createdAt;
     @JsonProperty("updated_at")
@@ -82,12 +82,12 @@ public class CalendarEvent {
         this.locationName = locationName;
     }
 
-    public String getLocationAdress() {
-        return locationAdress;
+    public String getLocationAddress() {
+        return locationAddress;
     }
 
-    public void setLocationAdress(String locationAdress) {
-        this.locationAdress = locationAdress;
+    public void setLocationAddress(String locationAddress) {
+        this.locationAddress = locationAddress;
     }
 
     public String getContextCode() {
@@ -122,11 +122,11 @@ public class CalendarEvent {
         this.allDayDate = allDayDate;
     }
 
-    public String getAllDay() {
+    public boolean isAllDay() {
         return allDay;
     }
 
-    public void setAllDay(String allDay) {
+    public void setAllDay(boolean allDay) {
         this.allDay = allDay;
     }
 
