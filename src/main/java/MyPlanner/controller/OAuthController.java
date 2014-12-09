@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -27,6 +26,7 @@ public class OAuthController {
 
     @RequestMapping("/userInfo")
     public String login(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        // TODO: Sjekk om bruker er registrert fra før.
         LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
         if(loginInfo == null || !loginInfo.hasValues()) {
             String confirmationUrl = oAuth.askForUserInfoConfirmation();

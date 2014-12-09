@@ -1,8 +1,98 @@
-#logo{
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#logo {
     font-family: Rockwell, serif;
     font-size: 3em;
 }
-#logo span{
+
+#logo span {
     font-size: 0.72em;
     text-decoration: overline;
+}
+
+#wrapper {
+    width: 920px;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+#header {
+    text-align: center;
+}
+
+#main-content {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+#navigation {
+    text-align: center;
+}
+
+#extra {
+    width: 760px;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid red;
+}
+
+#module-wrapper {
+}
+
+#module-wrapper h3 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.module {
+    width: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.module:nth-child(even) {
+    background-color: gray;
+}
+
+.module h4 {
+    float: left;
+    padding-bottom: 10px;
+}
+
+.module .time {
+    float: right;
+}
+
+.module .padding{
+    padding: 10px;
+}
+
+.clear-float {
+    clear: both;
+}
+
+.progressbar {
+    display: block;
+    height: 20px;
+    background-color: green;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.progressBackground{
+    display: block;
+    width: 100%;
+    background-color: black;
+    border-top: 1px solid black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-top: 10px;
 }
