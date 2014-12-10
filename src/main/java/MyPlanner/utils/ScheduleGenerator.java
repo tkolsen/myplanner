@@ -90,9 +90,7 @@ public class ScheduleGenerator {
         return recommendedSchedule;
     }
 
-    public List<Date> UpdateSchedule(List<UserModuleSchedule> schedule){
-        List<Date> newSchedule = new ArrayList<Date>();
-        //TODO: Implement me plz
-        return newSchedule;
+    public void UpdateSchedule(List<UserModuleSchedule> schedule){
+        //TODO: Implement me
     }
 }
