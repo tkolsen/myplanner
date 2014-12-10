@@ -19,6 +19,16 @@ public class Module {
     private String itemsUrl;
     @JsonProperty("items")
     private List<ModuleItem> items;
+    private double moduleTimeEstimation; // Must be manually set by the MyPlanner administrator, is not fetched through Canvas
+
+
+    public double getModuleTimeEstimation() {
+        return moduleTimeEstimation;
+    }
+
+    public void setModuleTimeEstimation(double moduleTimeEstimation) {
+        this.moduleTimeEstimation = moduleTimeEstimation;
+    }
 
     public List<ModuleItem> getItems() {
         return items;
