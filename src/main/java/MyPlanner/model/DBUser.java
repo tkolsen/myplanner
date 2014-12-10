@@ -23,6 +23,7 @@ public class DBUser {
         this.userId = userId;
     }
 
+    @Column(name="ROLE")
     public String getRole() {
         return role;
     }
@@ -31,6 +32,7 @@ public class DBUser {
         this.role = role;
     }
 
+    @Column(name="REGISTERED")
     public Date getRegistered() {
         return registered;
     }
@@ -39,6 +41,7 @@ public class DBUser {
         this.registered = registered;
     }
 
+    @Column(name="NAME")
     public String getName() {
         return name;
     }
