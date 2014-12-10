@@ -52,11 +52,12 @@
                             <label>
                                 Slutt: <input type="date"/>
                             </label>
+                            <span>Tid til frist: 5dager</span>
                         </span>
                     </div>
                     <span class="progressBackground">
                         <span class="progressbar" ng-style="{'width' : module.width}"
-                              ng-init="test(course, $index)"></span>
+                              ng-init="test(course, $index)"><p>{{module.width}}</p></span>
                     </span>
                 </div>
             </div>
