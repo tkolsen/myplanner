@@ -14,27 +14,33 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         $scope.username = arrayOfResult[1].data.user.name;
     });
 
-    // TODO: This expands all. Find a way to expand only the clicked module
-    $scope.showMore = function () {
-        var size = 0;
-        if ($scope.quantity == 5) {
-            $scope.courses.forEach(function (course) {
-                var modules = course.modules;
-                modules.forEach(function (module) {
-                    if (module.items_count > size) {
-                        size = module.items_count;
-                    }
-                });
-            });
-            $scope.quantity = size;
-            $scope.text = 'Vis færre..'
-        } else {
-            $scope.quantity = 5;
-            $scope.text = 'Vis flere..'
-        }
+    $scope.moduleClicked = function(){
+        console.log("module clicked");
     };
 
-    $scope.moduleClicked = function(){
-        // TODO: Do something when user click a module
-    };
+    $scope.test = function(course, index){
+        var module = course.modules[index];
+        var items = module.items;
+        var completionReq = new Array();
+        items.forEach(function(item){
+            if(item.completion_requirement != null){
+                completionReq.push(item.completion_requirement);
+            }
+        });
+        var count = completionReq.length;
+        var countCompleted = 0;
+        completionReq.forEach(function(req){
+            if(req.completed){
+                countCompleted++;
+            }
+        });
+
+        if(count != 0){
+            module.width = countCompleted / count * 100 + '%';
+        }else if(count == 0 || count == null){
+            module.width = 100+'%';
+        }
+
+        console.log(items);
+    }
 });

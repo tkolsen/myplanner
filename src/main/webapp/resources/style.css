@@ -1,8 +1,123 @@
-#logo{
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#logo {
     font-family: Rockwell, serif;
     font-size: 3em;
 }
-#logo span{
+
+#logo span {
     font-size: 0.72em;
     text-decoration: overline;
+}
+
+#wrapper {
+    width: 920px;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+#header {
+    text-align: center;
+}
+
+#main-content {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+#navigation {
+    text-align: center;
+}
+
+#extra {
+    width: 760px;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid red;
+}
+
+#module-wrapper {
+}
+
+#module-wrapper h3 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.module {
+    width: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    -webkit-transition: transform 0.5s;
+}
+
+.module:hover{
+    -webkit-transform: scale(1.1);
+}
+.module:active{
+}
+
+.module:nth-child(even) {
+}
+
+.module h4 {
+    float: left;
+    padding-bottom: 10px;
+}
+
+.module .time {
+    float: right;
+}
+
+.module .padding{
+    padding: 10px;
+}
+
+.clear-float {
+    clear: both;
+}
+
+.progressbar {
+    display: block;
+    height: 20px;
+    background: repeating-linear-gradient(
+        45deg,
+        #009900,
+        #009900 10px,
+        #00CC00 10px,
+        #00CC00 20px
+    );
+    /*
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    */
+    border-radius: 10px;
+    text-align: right;
+    color: white;
+    font-weight: bold;
+}
+.progressbar p{
+    padding-right: 5px;
+    text-shadow: 1px 1px 1px black;
+}
+.progressBackground{
+    display: block;
+    width: 100%;
+    background-color: lightgray;
+    box-shadow: inset 0 0 2px 2px gray;
+    border-top: 1px solid black;
+    /*
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    */
+    border-radius: 10px;
+    margin-top: 10px;
 }
