@@ -2,6 +2,13 @@ package MyPlanner.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="USER")
 public class User {
     @JsonProperty("name")
     private String name;
@@ -17,6 +24,7 @@ public class User {
         this.id = id;
     }
 
+    @Column(name="NAME")
     public String getName() {
         return name;
     }
@@ -25,6 +33,8 @@ public class User {
         this.name = name;
     }
 
+    @Id
+    @Column(name="USER_ID")
     public int getId() {
         return id;
     }
