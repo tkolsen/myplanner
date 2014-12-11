@@ -67,4 +67,20 @@ public class UserHasModule {
     public void setUserHasModulePK(UserHasModulePK userHasModulePK) {
         this.userHasModulePK = userHasModulePK;
     }
+
+    @Transient
+    public User getUser(){
+        return getUserHasModulePK().getUser();
+    }
+    public void setUser(User user){
+        getUserHasModulePK().setUser(user);
+    }
+
+    @Transient
+    public Module getModule(){
+        return getUserHasModulePK().getModule();
+    }
+    public void setModule(Module module){
+        getUserHasModulePK().setModule(module);
+    }
 }
