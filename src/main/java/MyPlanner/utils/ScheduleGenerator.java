@@ -12,7 +12,8 @@ public class ScheduleGenerator {
     /**
      * Generates a recommended schedule for completing each individual module in the given
      * course based on the modules preset estimated time in hours needed to complete, divided
-     * by the students expected hours available for work per day, rounded up.
+     * by the students expected hours available for work per day, rounded up. Modules where
+     * all moduleItems are completed and modules without are not added to the schedule.
      *
      * @param startDate the date from which to start the schedule
      * @param user the user for which to generate a schedule for
@@ -21,7 +22,7 @@ public class ScheduleGenerator {
      * @return an arraylist containing the recommended schedule based on the given parameters
      * and the courses module time-estimates
      */
-    // TODO: should workHoursDaily be moved to the user class?
+    // TODO: should workHoursDaily be moved to the user class? Probably not.
     public List<UserHasModule> GenerateSchedule(User user, Course course, double workHoursDaily, Date startDate){
 
         List<UserHasModule> recommendedSchedule = new ArrayList<UserHasModule>();
@@ -34,31 +35,42 @@ public class ScheduleGenerator {
             scheduleItem.setModule(module);
             scheduleItem.getModule().setCourse(course);
 
-            Calendar c = Calendar.getInstance();
-            if(recommendedSchedule.isEmpty()) {
-                scheduleItem.setStartDate(startDate);
-            }else{
-                startDate = new Date(recommendedSchedule.get(recommendedSchedule.size()-1).getEndDate().getTime()); // fetches the date the previous module ends
-                scheduleItem.setStartDate(startDate);
+            // Checks if the module is completed:
+            boolean moduleIsComplete = true;
+            for (int j = 0; j<module.getItems().size(); j++){
+                if (!module.getItems().get(j).getCompletionRequirement().isCompleted()){
+                    moduleIsComplete = false;
+                }
             }
 
-            if (module.getModuleTimeEstimation() != 0) {
-                Double daysNeededForCompletion = Math.ceil(module.getModuleTimeEstimation() / workHoursDaily);
-                c.setTime(startDate);
-                c.add(Calendar.DATE, daysNeededForCompletion.intValue());
-                Date endDate = new Date(c.getTime().getTime());
-                scheduleItem.setEndDate(endDate);
-            }else{
-                scheduleItem.setEndDate(startDate);
-            }
+            // If the module is not complete and has requirements, adds it to the schedule
+            if(!moduleIsComplete && module.getItemsCount() != 0) {
+                Calendar c = Calendar.getInstance();
+                if (recommendedSchedule.isEmpty()) {
+                    scheduleItem.setStartDate(startDate);
+                } else {
+                    startDate = new Date(recommendedSchedule.get(recommendedSchedule.size() - 1).getEndDate().getTime()); // fetches the date the previous module ends
+                    scheduleItem.setStartDate(startDate);
+                }
 
-            recommendedSchedule.add(scheduleItem);
+                if (module.getModuleTimeEstimation() != 0) {
+                    Double daysNeededForCompletion = Math.ceil(module.getModuleTimeEstimation() / workHoursDaily);
+                    c.setTime(startDate);
+                    c.add(Calendar.DATE, daysNeededForCompletion.intValue());
+                    Date endDate = new Date(c.getTime().getTime());
+                    scheduleItem.setEndDate(endDate);
+                } else {
+                    scheduleItem.setEndDate(startDate);
+                }
+
+                recommendedSchedule.add(scheduleItem);
+            }
         }
 
         return recommendedSchedule;
     }
 
     public void UpdateSchedule(List<UserModuleSchedule> schedule){
-        //TODO: Implement me
+        //TODO: Implement me?
     }
 }
