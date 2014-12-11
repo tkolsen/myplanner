@@ -1,6 +1,10 @@
 * {
     margin: 0;
     padding: 0;
+    color: #555555;
+}
+body{
+    background-color: #efefef;
 }
 
 #logo {
@@ -11,9 +15,12 @@
 #logo span {
     font-size: 0.72em;
     text-decoration: overline;
+    color: white;
+    text-shadow: 1px 1px 1px black;
 }
 
 #wrapper {
+    background-color: #e8ecef;
     width: 920px;
     margin-left: auto;
     margin-right: auto;
@@ -26,6 +33,12 @@
     text-align: center;
     border-bottom: 1px solid black;
     padding: 20px;
+    color: white;
+    background-color: #4b5662;
+}
+#header h1, #header h2, #header p, #header a{
+    color: white;
+    text-shadow: 1px 1px 1px black;
 }
 
 #main-content {
@@ -55,15 +68,17 @@
 }
 
 .module {
+    background-color: #ffffff;
     width: auto;
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-bottom: 10px;
     -webkit-transition: transform 0.5s;
 }
 
 .module:hover{
     -webkit-transform: scale(1.1);
+    background-color: #eef7ff;
 }
 .module:active{
 }
@@ -81,7 +96,9 @@
 }
 
 .module .padding{
-    padding: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .clear-float {
@@ -90,38 +107,24 @@
 
 .progressbar {
     display: block;
-    height: 20px;
-    background-color: #009900;
-    /*
-    background: repeating-linear-gradient(
-        45deg,
-        #009900,
-        #009900 10px,
-        #00CC00 10px,
-        #00CC00 20px
-    );
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    */
+    height: 10px;
+    background-color: limegreen;
     border-radius: 10px;
     text-align: right;
     color: white;
     font-weight: bold;
 }
-.progressbar p{
-    padding-right: 5px;
-    text-shadow: 1px 1px 1px black;
-}
 .progressBackground{
     display: block;
     width: 100%;
-    background-color: lightgray;
+    background-color: #4b5662;
     box-shadow: inset 0 0 2px 2px gray;
     border-top: 1px solid black;
-    /*
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    */
     border-radius: 10px;
-    margin-top: 10px;
+    margin-top: 5px;
+}
+.progressbar p{
+    padding-right: 5px;
+    text-shadow: 1px 1px 1px black;
+    color: white;
 }

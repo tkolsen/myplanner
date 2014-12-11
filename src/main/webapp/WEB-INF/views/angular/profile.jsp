@@ -53,7 +53,7 @@
                     </div>
                     <span class="progressBackground">
                         <span class="progressbar" ng-style="{'width' : module.width}"
-                              ng-init="test(course, $index)"><p>{{module.width}}</p></span>
+                              ng-init="test(course, $index)"></span>
                     </span>
                 </div>
             </div>
