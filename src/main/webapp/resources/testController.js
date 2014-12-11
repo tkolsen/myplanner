@@ -40,7 +40,5 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         }else if(count == 0 || count == null){
             module.width = 100+'%';
         }
-
-        console.log(items);
     }
 });

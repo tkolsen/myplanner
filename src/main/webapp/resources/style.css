@@ -56,7 +56,7 @@
     border: 1px solid black;
     border-radius: 10px;
     margin-bottom: 10px;
-    -webkit-transition: transform 0.5s;
+    -webkit-transition: transform 0.2s;
 }
 
 .module:hover{
@@ -88,13 +88,7 @@
 .progressbar {
     display: block;
     height: 20px;
-    background: repeating-linear-gradient(
-        45deg,
-        #009900,
-        #009900 10px,
-        #00CC00 10px,
-        #00CC00 20px
-    );
+    background-color: rgba(0,255,0,0.3);
     /*
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -111,8 +105,13 @@
 .progressBackground{
     display: block;
     width: 100%;
-    background-color: lightgray;
-    box-shadow: inset 0 0 2px 2px gray;
+    background: repeating-linear-gradient(
+            -55deg,
+            #222,
+            #222 10px,
+            #333 10px,
+            #333 20px
+    );
     border-top: 1px solid black;
     /*
     border-bottom-left-radius: 10px;
