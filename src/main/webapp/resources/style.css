@@ -24,14 +24,14 @@ body{
     width: 920px;
     margin-left: auto;
     margin-right: auto;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
+    border-left: 1px solid #909191;
+    border-right: 1px solid #909191;
+    border-bottom: 1px solid #909191;
 }
 
 #header {
     text-align: center;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #909191;
     padding: 20px;
     color: white;
     background-color: #4b5662;
@@ -46,7 +46,7 @@ body{
 
 #navigation {
     text-align: center;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #909191;
     padding: 10px;
 }
 
@@ -74,6 +74,7 @@ body{
     background-color: #ffffff;
     width: auto;
     border: 1px solid black;
+    box-shadow: 2px 2px 2px #686969;
     border-radius: 5px;
     margin-bottom: 10px;
     -webkit-transition: transform 0.5s;
