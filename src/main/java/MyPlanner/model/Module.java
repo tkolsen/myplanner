@@ -139,4 +139,9 @@ public class Module {
     public void setItemsUrl(String itemsUrl) {
         this.itemsUrl = itemsUrl;
     }
+
+    @Transient
+    public Course getCourse(){ return getModulePk().getCourse(); }
+
+    public void setCourse(Course course){this.getModulePk().course = course; }
 }
