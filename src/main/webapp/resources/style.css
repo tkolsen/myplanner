@@ -15,35 +15,38 @@
 
 #wrapper {
     width: 920px;
-    padding: 20px;
     margin-left: auto;
     margin-right: auto;
     border-left: 1px solid black;
     border-right: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 #header {
     text-align: center;
+    border-bottom: 1px solid black;
+    padding: 20px;
 }
 
 #main-content {
-    padding-left: 60px;
-    padding-right: 60px;
 }
 
 #navigation {
     text-align: center;
+    border-bottom: 1px solid black;
+    padding: 10px;
 }
 
 #extra {
     width: 760px;
     padding: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 10px auto;
     border: 1px solid red;
 }
 
 #module-wrapper {
+    padding-left: 60px;
+    padding-right: 60px;
 }
 
 #module-wrapper h3 {
@@ -88,6 +91,8 @@
 .progressbar {
     display: block;
     height: 20px;
+    background-color: #009900;
+    /*
     background: repeating-linear-gradient(
         45deg,
         #009900,
@@ -95,7 +100,6 @@
         #00CC00 10px,
         #00CC00 20px
     );
-    /*
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     */

@@ -32,7 +32,7 @@ public class HomeController {
         LoginInfo loginInfo = getLoginInfo(request);
 
         if(checkLogin(loginInfo)){
-            ModelAndView model = new ModelAndView("angularTest/profile");
+            ModelAndView model = new ModelAndView("angular/profile");
             return model;
         }else{
             throw new NotAuthorizedException();

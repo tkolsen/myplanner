@@ -2,10 +2,10 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
     $scope.quantity = 5;
     $scope.text = 'Vis flere..';
 
-    var courseList = $http.get("/rest/courses").success(function (response) {
+    var courseList = $http.get("../rest/courses").success(function (response) {
         return response;
     });
-    var username = $http.get("/rest/userName").success(function (response) {
+    var username = $http.get("../rest/userName").success(function (response) {
         return response;
     });
     $q.all([courseList, username]).then(function (arrayOfResult) {

@@ -13,11 +13,7 @@
 <div id="wrapper" data-ng-controller="CoursesCtrl">
     <header id="header" class="box">
         <h1 id="logo"><span>My</span>Planner</h1>
-
-        <h2>Logget inn som:</h2>
-
-        <h3 id="username">{{username}}</h3>
-
+        <h2>Logget inn som: {{username}}</h2>
         <p><a href="<c:url value="/oauth/logout"/>">Log ut</a></p>
     </header>
 
@@ -67,7 +63,7 @@
 
     <!-- Main footer -->
     <section id="extra" class="box">
-
+        <h3>Extra info</h3>
     </section>
 </div>
 </body>
