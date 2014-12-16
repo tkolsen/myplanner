@@ -2,11 +2,13 @@ package MyPlanner.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
+@Entity
+@Table(name="MODULE")
 public class Module {
-    @JsonProperty("id")
-    private int id;
     @JsonProperty("workflow_state")
     private String workflowState;
     @JsonProperty("position")
@@ -19,7 +21,61 @@ public class Module {
     private String itemsUrl;
     @JsonProperty("items")
     private List<ModuleItem> items;
+    private double moduleTimeEstimation; // Must be manually set by the MyPlanner administrator, is not fetched through Canvas
 
+
+    public double getModuleTimeEstimation() {
+        return moduleTimeEstimation;
+    }
+
+    public void setModuleTimeEstimation(double moduleTimeEstimation) {
+        this.moduleTimeEstimation = moduleTimeEstimation;
+    }
+
+    private ModulePk modulePk = new ModulePk();
+    @Embeddable
+    private static final class ModulePk implements Serializable{
+        private int id;
+        private Course course;
+
+        public ModulePk(){
+
+        }
+
+        public ModulePk(int id, Course course){
+            this.id = id;
+            this.course = course;
+        }
+
+        @Column(name="MODULE_ID")
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        @ManyToOne(fetch = FetchType.EAGER)
+        public Course getCourse() {
+            return course;
+        }
+
+        public void setCourse(Course course) {
+            this.course = course;
+        }
+    }
+
+    @EmbeddedId
+    public ModulePk getModulePk() {
+        return modulePk;
+    }
+
+    public void setModulePk(ModulePk modulePk) {
+        this.modulePk = modulePk;
+    }
+
+    @Transient
     public List<ModuleItem> getItems() {
         return items;
     }
@@ -28,14 +84,18 @@ public class Module {
         this.items = items;
     }
 
+    @Transient
+    @JsonProperty("id")
     public int getId() {
-        return id;
+        return modulePk.getId();
     }
 
+    @JsonProperty("id")
     public void setId(int id) {
-        this.id = id;
+        this.modulePk.setId(id);
     }
 
+    @Transient
     public String getWorkflowState() {
         return workflowState;
     }
@@ -44,6 +104,7 @@ public class Module {
         this.workflowState = workflowState;
     }
 
+    @Column(name="POSITION")
     public int getPosition() {
         return position;
     }
@@ -52,6 +113,7 @@ public class Module {
         this.position = position;
     }
 
+    @Column(name="NAME")
     public String getName() {
         return name;
     }
@@ -60,6 +122,7 @@ public class Module {
         this.name = name;
     }
 
+    @Transient
     public int getItemsCount() {
         return itemsCount;
     }
@@ -68,6 +131,7 @@ public class Module {
         this.itemsCount = itemsCount;
     }
 
+    @Transient
     public String getItemsUrl() {
         return itemsUrl;
     }
@@ -75,4 +139,9 @@ public class Module {
     public void setItemsUrl(String itemsUrl) {
         this.itemsUrl = itemsUrl;
     }
+
+    @Transient
+    public Course getCourse(){ return getModulePk().getCourse(); }
+
+    public void setCourse(Course course){this.getModulePk().course = course; }
 }

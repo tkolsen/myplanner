@@ -46,12 +46,17 @@ public class CanvasProperties {
     public String getClientRedirect2(){return CLIENT_REDIRECT_2;}
 
     private void setVariables(){
-        CLIENT_ID = env.getProperty("client.id");
-        CLIENT_SECRET = env.getProperty("client.secret");
-        CLIENT_REDIRECT = env.getProperty("client.redirect");
-        ACCESS_TOKEN_URL = env.getProperty("provider.accessTokenUrl");
-        AUTHORIZATION_URL = env.getProperty("provider.authorizeUrl");
-        SCOPE_USER_INFO = env.getProperty("scope.userinfo");
-        CLIENT_REDIRECT_2 = env.getProperty("client.redirect2");
+        try {
+            CLIENT_ID = env.getProperty("client.id");
+            CLIENT_SECRET = env.getProperty("client.secret");
+            CLIENT_REDIRECT = env.getProperty("client.redirect");
+            ACCESS_TOKEN_URL = env.getProperty("provider.accessTokenUrl");
+            AUTHORIZATION_URL = env.getProperty("provider.authorizeUrl");
+            SCOPE_USER_INFO = env.getProperty("scope.userinfo");
+            CLIENT_REDIRECT_2 = env.getProperty("client.redirect2");
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("***************** Error while reading mp.properties *****************");
+        }
     }
 }
