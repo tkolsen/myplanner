@@ -19,7 +19,7 @@ public class ScheduleGenerator {
      * @param user the user for which to generate a schedule for
      * @param course the selected course to generate a schedule for
      * @param workHoursDaily the amount of hours the user expects to work with the course per day
-     * @return an arraylist containing the recommended schedule based on the given parameters
+     * @return an ArrayList containing the recommended schedule based on the given parameters
      * and the courses module time-estimates
      */
     // TODO: should workHoursDaily be moved to the user class? Probably not.
@@ -70,7 +70,12 @@ public class ScheduleGenerator {
         return recommendedSchedule;
     }
 
-    public void UpdateSchedule(List<UserModuleSchedule> schedule){
-        //TODO: Implement me?
+    public void UpdateSchedule(){
+        /* TODO: To be added
+         * this function needs to be able to look at an existing schedule,
+         * let the user manually make changes to one or more dates, and automatically
+         * postpone the following dates to match the changed dates.
+         */
+
     }
 }

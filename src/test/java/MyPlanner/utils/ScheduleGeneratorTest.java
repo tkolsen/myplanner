@@ -172,6 +172,6 @@ public class ScheduleGeneratorTest {
 
     @Test
     public void testUpdateSchedule() throws Exception {
-
+        // TODO: To be implemented with the function
     }
 }
