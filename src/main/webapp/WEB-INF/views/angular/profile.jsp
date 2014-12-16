@@ -26,7 +26,7 @@
                 Velg kurs:
                 <select data-ng-model="selectedCourse" data-ng-options="course.name for course in courses"></select>
             </label>
-            <a href="#">Skjul ferdige moduler</a>
+            <a href="<c:url value="/user/profile/refresh"/>">Oppdater side</a>
         </aside>
 
         <!-- Wrapper for modules -->
