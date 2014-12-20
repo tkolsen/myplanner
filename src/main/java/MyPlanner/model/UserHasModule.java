@@ -9,12 +9,12 @@ import java.sql.Date;
 public class UserHasModule {
     private Date startDate;
     private Date endDate;
+    private Date completedAt;
 
     @Column(name="START_DATE")
     public Date getStartDate() {
         return startDate;
     }
-
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
@@ -23,10 +23,14 @@ public class UserHasModule {
     public Date getEndDate() {
         return endDate;
     }
-
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    @Column(name="COMPLETED_AT")
+    public Date getCompletedAt() { return completedAt; }
+    public void setCompletedAt(Date completedAt) { this.completedAt = completedAt; }
+
 
     private UserHasModulePK userHasModulePK = new UserHasModulePK();
     @Embeddable
@@ -44,7 +48,6 @@ public class UserHasModule {
         public Module getModule() {
             return module;
         }
-
         public void setModule(Module module) {
             this.module = module;
         }
@@ -53,7 +56,6 @@ public class UserHasModule {
         public User getUser() {
             return user;
         }
-
         public void setUser(User user) {
             this.user = user;
         }
@@ -63,7 +65,6 @@ public class UserHasModule {
     public UserHasModulePK getUserHasModulePK() {
         return userHasModulePK;
     }
-
     public void setUserHasModulePK(UserHasModulePK userHasModulePK) {
         this.userHasModulePK = userHasModulePK;
     }
