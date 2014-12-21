@@ -5,7 +5,6 @@ import MyPlanner.model.UserHasModule;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -17,6 +16,7 @@ import java.util.List;
  */
 public class DeadlineCheck {
 
+
     /**
      * Takes a list of deadlines in the form of UserHasModule objects, checks the
      * completion status of the module, and if it is incomplete, compares its scheduled
@@ -25,16 +25,15 @@ public class DeadlineCheck {
      * the oldest unmet deadline is kept in the list, and more recent, unmet deadlines are ignored.
      *
      * @param deadlines the list of UserHasModule objects for which to control all deadlines
+     * @param date the date today. Mainly implemented like this for testing.
      * @return list of users behind their schedule and the oldest unmet deadline
      */
-    public List<UserHasModule> ListOldestUnmetDeadlines(List<UserHasModule> deadlines){
+    public List<UserHasModule> ListOldestUnmetDeadlines(List<UserHasModule> deadlines, Date date){
         List<UserHasModule> UsersBehindSchedule = new ArrayList<UserHasModule>();
-        Calendar calendar = Calendar.getInstance();
-        Date today = new Date(calendar.getTimeInMillis());
 
         for (int i=0; i<deadlines.size(); i++){
-            if (deadlines.get(i).getCompletedAt() == null){                         // If the module is not completed
-                if(today.getTime() > deadlines.get(i).getEndDate().getTime()) {     // If the timestamp for today is after the deadline
+            if (deadlines.get(i).getCompletedAt() == null){                        // If the module is not completed
+                if(date.getTime() > deadlines.get(i).getEndDate().getTime()) {     // If the timestamp for today is after the deadline
 
                     int counter = 0;
                     while(counter < UsersBehindSchedule.size()) {                          // Loops through the list of users already added and checks if the current user is there
@@ -68,27 +67,19 @@ public class DeadlineCheck {
      * modules, will have all modules listed.
      *
      * @param deadlines the list of UserHasModule objects for which to control all deadlines
+     * @param date the date today. Mainly implemented like this for testing.
      * @return list of all users' modules behind schedule
      */
-    public List<UserHasModule> ListAllUnmetDeadlines(List<UserHasModule> deadlines){
+    public List<UserHasModule> ListAllUnmetDeadlines(List<UserHasModule> deadlines, Date date){
         List<UserHasModule> UsersBehindSchedule = new ArrayList<UserHasModule>();
-        Calendar calendar = Calendar.getInstance();
-        Date today = new Date(calendar.getTimeInMillis());
 
         for (int i=0; i<deadlines.size(); i++){
             if (deadlines.get(i).getCompletedAt() == null) {                         // If the module is not completed
-                if (today.getTime() > deadlines.get(i).getEndDate().getTime()) {     // If the timestamp for today is after the deadline
+                if (date.getTime() > deadlines.get(i).getEndDate().getTime()) {     // If the timestamp for today is after the deadline
                     UsersBehindSchedule.add(deadlines.get(i));
                 }
             }
         }
         return UsersBehindSchedule;
     }
-
-    public static void main(String[] args){
-        DeadlineCheck test = new DeadlineCheck();
-        ArrayList<UserHasModule> list = new ArrayList<UserHasModule>();
-        test.ListOldestUnmetDeadlines(list);
-    }
-
 }
