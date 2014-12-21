@@ -5,7 +5,7 @@ import MyPlanner.model.User;
 import MyPlanner.model.UserHasModule;
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
+
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class DeadlineCheckTest {
     private List<UserHasModule> deadlines;
 
     @Before
-    public void setUp() throws Exception {
+    public void createMockedDeadlines() throws Exception {
 
         deadlines = new ArrayList<UserHasModule>();
 
@@ -28,6 +28,8 @@ public class DeadlineCheckTest {
         User user2 = new User("Raphael", 102);
         User user3 = new User("Michelangelo", 103);
         User user4 = new User("Donatello", 104);
+        User user5 = new User("Splinter", 105);
+        user5.setStatus(false);
 
         Module module1 = new Module();
         module1.setName("TestModule 1");
@@ -104,22 +106,25 @@ public class DeadlineCheckTest {
         // Two completed modules
         deadlines.add(User4Deadline1);
         deadlines.add(User4Deadline2);
-    }
 
 
-    @Test
-    public void testGetExpiredUsers() throws Exception {
+        // UserHasModule-data for user5, identical to user1, but marked as inactive:
+        UserHasModule User5Deadline1 = new UserHasModule();
+        User5Deadline1.setUser(user5);
+        User5Deadline1.setModule(module1);
+        calendar.set(2013, calendar.NOVEMBER, 20);
+        User5Deadline1.setEndDate(new Date(calendar.getTime().getTime()));
+        User5Deadline1.setCompletedAt(new Date(calendar.getTime().getTime()));
 
-    }
+        UserHasModule User5Deadline2 = new UserHasModule();
+        User5Deadline2.setUser(user5);
+        User5Deadline2.setModule(module2);
+        calendar.set(2013, calendar.OCTOBER, 20);
+        User5Deadline2.setEndDate(new Date(calendar.getTime().getTime()));
 
-    @Test
-    public void testGetExpiredDates() throws Exception {
-
-    }
-
-    @Test
-    public void testGetExpiredUsersAsString() throws Exception {
-
+        // One completed module, one module behind schedule
+        deadlines.add(User5Deadline1);
+        deadlines.add(User5Deadline2);
     }
 
     @Test
@@ -130,11 +135,50 @@ public class DeadlineCheckTest {
         List<UserHasModule> checkedDeadlines = dc.ListOldestUnmetDeadlines(deadlines, todayMock);
 
         assertEquals(2, checkedDeadlines.size());
-        assertEquals()
+
+        assertEquals("Leonardo", checkedDeadlines.get(0).getUser().getName());
+        assertEquals("TestModule 2", checkedDeadlines.get(0).getModule().getName());
+        calendar.set(2013, calendar.OCTOBER, 20);
+        Date expected = new Date(calendar.getTime().getTime());
+        Date actual = checkedDeadlines.get(0).getEndDate();
+        assertEquals(expected, actual);
+
+        assertEquals("Raphael", checkedDeadlines.get(1).getUser().getName());
+        assertEquals("TestModule 2", checkedDeadlines.get(1).getModule().getName());
+        calendar.set(2013, calendar.JUNE, 20);
+        expected = new Date(calendar.getTime().getTime());
+        actual = checkedDeadlines.get(1).getEndDate();
+        assertEquals(expected, actual);
     }
 
     @Test
     public void ListAllUnmetDeadlines() throws Exception {
+        calendar.set(2013, calendar.NOVEMBER, 15);
+        Date todayMock = new Date(calendar.getTime().getTime());
+        DeadlineCheck dc = new DeadlineCheck();
+        List<UserHasModule> checkedDeadlines = dc.ListAllUnmetDeadlines(deadlines, todayMock);
 
+        assertEquals(3, checkedDeadlines.size());
+
+        assertEquals("Leonardo", checkedDeadlines.get(0).getUser().getName());
+        assertEquals("TestModule 2", checkedDeadlines.get(0).getModule().getName());
+        calendar.set(2013, calendar.OCTOBER, 20);
+        Date expected = new Date(calendar.getTime().getTime());
+        Date actual = checkedDeadlines.get(0).getEndDate();
+        assertEquals(expected, actual);
+
+        assertEquals("Raphael", checkedDeadlines.get(1).getUser().getName());
+        assertEquals("TestModule 1", checkedDeadlines.get(1).getModule().getName());
+        calendar.set(2013, calendar.JULY, 20);
+        expected = new Date(calendar.getTime().getTime());
+        actual = checkedDeadlines.get(1).getEndDate();
+        assertEquals(expected, actual);
+
+        assertEquals("Raphael", checkedDeadlines.get(2).getUser().getName());
+        assertEquals("TestModule 2", checkedDeadlines.get(2).getModule().getName());
+        calendar.set(2013, calendar.JUNE, 20);
+        expected = new Date(calendar.getTime().getTime());
+        actual = checkedDeadlines.get(2).getEndDate();
+        assertEquals(expected, actual);
     }
 }

@@ -32,7 +32,7 @@ public class DeadlineCheck {
         List<UserHasModule> UsersBehindSchedule = new ArrayList<UserHasModule>();
 
         for (int i=0; i<deadlines.size(); i++){
-            if (deadlines.get(i).getCompletedAt() == null){                        // If the module is not completed
+            if (deadlines.get(i).getCompletedAt() == null && deadlines.get(i).getUser().getStatus()){   // If the module is not completed and the user is active
                 if(date.getTime() > deadlines.get(i).getEndDate().getTime()) {     // If the timestamp for today is after the deadline
 
                     int counter = 0;
@@ -74,7 +74,7 @@ public class DeadlineCheck {
         List<UserHasModule> UsersBehindSchedule = new ArrayList<UserHasModule>();
 
         for (int i=0; i<deadlines.size(); i++){
-            if (deadlines.get(i).getCompletedAt() == null) {                         // If the module is not completed
+            if (deadlines.get(i).getCompletedAt() == null && deadlines.get(i).getUser().getStatus()) {   // If the module is not completed and the user is active
                 if (date.getTime() > deadlines.get(i).getEndDate().getTime()) {     // If the timestamp for today is after the deadline
                     UsersBehindSchedule.add(deadlines.get(i));
                 }
