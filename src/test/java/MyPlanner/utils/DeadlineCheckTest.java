@@ -32,12 +32,21 @@ public class DeadlineCheckTest {
         Module module2 = new Module();
 
         // UserHasModule-data for user1:
-        UserHasModule deadlineItem1 = new UserHasModule();
-        deadlineItem1.setUser(user1);
-        deadlineItem1.setModule(module1);
+        UserHasModule User1DeadlineItem1 = new UserHasModule();
+        User1DeadlineItem1.setUser(user1);
+        User1DeadlineItem1.setModule(module1);
+        calendar.set(2013, calendar.NOVEMBER, 20);
+        User1DeadlineItem1.setEndDate(new Date(calendar.getTime().getTime()));
+        User1DeadlineItem1.setCompletedAt(new Date(calendar.getTime().getTime()));
 
+        UserHasModule User1DeadlineItem2 = new UserHasModule();
+        User1DeadlineItem2.setUser(user1);
+        User1DeadlineItem2.setModule(module1);
+        calendar.set(2013, calendar.NOVEMBER, 20);
+        User1DeadlineItem1.setEndDate(new Date(calendar.getTime().getTime()));
+        User1DeadlineItem1.setCompletedAt(new Date(calendar.getTime().getTime()));
 
-        deadlines.add(deadlineItem1);
+        deadlines.add(User1DeadlineItem1);
     }
 
     @After
