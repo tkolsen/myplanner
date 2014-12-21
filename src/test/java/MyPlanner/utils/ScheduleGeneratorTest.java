@@ -3,6 +3,7 @@ package MyPlanner.utils;
 import MyPlanner.model.*;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.sql.Date;
@@ -171,6 +172,7 @@ public class ScheduleGeneratorTest {
     }
 
     @Test
+    @Ignore
     public void testUpdateSchedule() throws Exception {
         // TODO: To be implemented with the function
     }
