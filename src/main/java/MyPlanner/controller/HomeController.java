@@ -51,4 +51,10 @@ public class HomeController {
         LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
         return loginInfo;
     }
+
+    @RequestMapping("/profile/refresh")
+    public String refresh(HttpServletRequest request){
+        request.getSession().setAttribute("courses", null);
+        return "redirect:../profile";
+    }
 }

@@ -26,7 +26,7 @@
                 Velg kurs:
                 <select data-ng-model="selectedCourse" data-ng-options="course.name for course in courses"></select>
             </label>
-            <a href="#">Skjul ferdige moduler</a>
+            <a href="<c:url value="/user/profile/refresh"/>">Oppdater side</a>
         </aside>
 
         <!-- Wrapper for modules -->
@@ -41,7 +41,7 @@
                         <span class="time">(15 timer)</span>
 
                         <div class="clear-float"></div>
-                        <span>
+                        <form>
                             <label>
                                 Start: <input type="date"/>
                             </label>
@@ -49,7 +49,7 @@
                                 Slutt: <input type="date"/>
                             </label>
                             <span>Tid til frist: 5dager</span>
-                        </span>
+                        </form>
                     </div>
                     <span class="progressBackground">
                         <span class="progressbar" ng-style="{'width' : module.width}"
