@@ -21,6 +21,13 @@ public class Module {
     private String itemsUrl;
     @JsonProperty("items")
     private List<ModuleItem> items;
+    @JsonProperty("completed_at")
+    private String completedAt;
+    private double moduleTimeEstimation; // Must be manually set by the MyPlanner administrator, is not fetched through Canvas
+
+    @Column(name="TIME_ESTIMATION")
+    public double getModuleTimeEstimation() { return moduleTimeEstimation;}
+    public void setModuleTimeEstimation(double moduleTimeEstimation) { this.moduleTimeEstimation = moduleTimeEstimation; }
 
     private ModulePk modulePk = new ModulePk();
     @Embeddable
@@ -41,7 +48,6 @@ public class Module {
         public int getId() {
             return id;
         }
-
         public void setId(int id) {
             this.id = id;
         }
@@ -50,7 +56,6 @@ public class Module {
         public Course getCourse() {
             return course;
         }
-
         public void setCourse(Course course) {
             this.course = course;
         }
@@ -60,7 +65,6 @@ public class Module {
     public ModulePk getModulePk() {
         return modulePk;
     }
-
     public void setModulePk(ModulePk modulePk) {
         this.modulePk = modulePk;
     }
@@ -69,7 +73,6 @@ public class Module {
     public List<ModuleItem> getItems() {
         return items;
     }
-
     public void setItems(List<ModuleItem> items) {
         this.items = items;
     }
@@ -89,7 +92,6 @@ public class Module {
     public String getWorkflowState() {
         return workflowState;
     }
-
     public void setWorkflowState(String workflowState) {
         this.workflowState = workflowState;
     }
@@ -98,7 +100,6 @@ public class Module {
     public int getPosition() {
         return position;
     }
-
     public void setPosition(int position) {
         this.position = position;
     }
@@ -107,16 +108,12 @@ public class Module {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
     @Transient
-    public int getItemsCount() {
-        return itemsCount;
-    }
-
+    public int getItemsCount() { return itemsCount; }
     public void setItemsCount(int itemsCount) {
         this.itemsCount = itemsCount;
     }
@@ -125,8 +122,11 @@ public class Module {
     public String getItemsUrl() {
         return itemsUrl;
     }
-
     public void setItemsUrl(String itemsUrl) {
         this.itemsUrl = itemsUrl;
     }
+
+    @Transient
+    public Course getCourse(){ return getModulePk().getCourse(); }
+    public void setCourse(Course course){this.getModulePk().course = course; }
 }

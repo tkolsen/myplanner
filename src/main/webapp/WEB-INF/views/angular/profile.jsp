@@ -13,11 +13,7 @@
 <div id="wrapper" data-ng-controller="CoursesCtrl">
     <header id="header" class="box">
         <h1 id="logo"><span>My</span>Planner</h1>
-
-        <h2>Logget inn som:</h2>
-
-        <h3 id="username">{{username}}</h3>
-
+        <h2>Logget inn som: {{username}}</h2>
         <p><a href="<c:url value="/oauth/logout"/>">Log ut</a></p>
     </header>
 
@@ -30,7 +26,7 @@
                 Velg kurs:
                 <select data-ng-model="selectedCourse" data-ng-options="course.name for course in courses"></select>
             </label>
-            <a href="#">Skjul ferdige moduler</a>
+            <a href="<c:url value="/user/profile/refresh"/>">Hent data på nytt</a>
         </aside>
 
         <!-- Wrapper for modules -->
@@ -45,19 +41,22 @@
                         <span class="time">(15 timer)</span>
 
                         <div class="clear-float"></div>
-                        <span>
+                        <form data-ng-submit="submit(module)">
                             <label>
-                                Start: <input type="date"/>
+                                Start: <input ng-model="module.newStartDate" type="date"/>
                             </label>
                             <label>
-                                Slutt: <input type="date"/>
+                                Slutt: <input ng-model="module.newEndDate" type="date"/>
+                            </label>
+                            <label>
+                                <input type="submit" value="Lagre"/>
                             </label>
                             <span>Tid til frist: 5dager</span>
-                        </span>
+                        </form>
                     </div>
                     <span class="progressBackground">
                         <span class="progressbar" ng-style="{'width' : module.width}"
-                              ng-init="test(course, $index)"><p>{{module.width}}</p></span>
+                              ng-init="test(course, $index)"></span>
                     </span>
                 </div>
             </div>
@@ -67,7 +66,7 @@
 
     <!-- Main footer -->
     <section id="extra" class="box">
-
+        <h3>Made by Tom K. Olsen, Dagfinn Reitan and Kim André Kjelsberg <br/> For Høgskolen i Sør-Trøndelag</h3>
     </section>
 </div>
 </body>

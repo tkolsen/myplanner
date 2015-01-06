@@ -2,16 +2,18 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
     $scope.quantity = 5;
     $scope.text = 'Vis flere..';
 
-    var courseList = $http.get("/rest/courses").success(function (response) {
+    var courseList = $http.get("../rest/courses").success(function (response) {
         return response;
     });
-    var username = $http.get("/rest/userName").success(function (response) {
+    var username = $http.get("../rest/userName").success(function (response) {
         return response;
     });
     $q.all([courseList, username]).then(function (arrayOfResult) {
         $scope.courses = arrayOfResult[0].data;
         $scope.selectedCourse = $scope.courses[0];
         $scope.username = arrayOfResult[1].data.user.name;
+        $scope.user = arrayOfResult[1].data.user;
+        console.log($scope.user);
     });
 
     $scope.moduleClicked = function(){
@@ -41,4 +43,25 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
             module.width = 100+'%';
         }
     }
+
+    $scope.submit = function(module, userId){
+        var moduleId = module.id;
+        var newStartDate = module.newStartDate;
+        var newEndDate = module.newEndDate;
+        var userHasModule = {
+            "startDate": newStartDate,
+            "endDate": newEndDate,
+            "module":{
+                "id": moduleId
+            },
+            "user":{
+                "id": $scope.user.id
+            }
+        };
+        $http({
+            method: 'POST',
+            url: '../rest/updateDates',
+            data: userHasModule
+        }).success(function(){});
+    };
 });

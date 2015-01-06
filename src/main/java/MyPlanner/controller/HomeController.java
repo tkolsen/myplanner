@@ -32,7 +32,7 @@ public class HomeController {
         LoginInfo loginInfo = getLoginInfo(request);
 
         if(checkLogin(loginInfo)){
-            ModelAndView model = new ModelAndView("angularTest/profile");
+            ModelAndView model = new ModelAndView("angular/profile");
             return model;
         }else{
             throw new NotAuthorizedException();
@@ -50,5 +50,11 @@ public class HomeController {
     private LoginInfo getLoginInfo(HttpServletRequest request){
         LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
         return loginInfo;
+    }
+
+    @RequestMapping("/profile/refresh")
+    public String refresh(HttpServletRequest request){
+        request.getSession().setAttribute("courses", null);
+        return "redirect:../profile";
     }
 }

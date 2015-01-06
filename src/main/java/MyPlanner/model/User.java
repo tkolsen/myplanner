@@ -15,6 +15,8 @@ public class User {
     @JsonProperty("id")
     private int id;
 
+    private boolean status;
+
     public User(){
 
     }
@@ -22,13 +24,13 @@ public class User {
     public User(String name, int id) {
         this.name = name;
         this.id = id;
+        this.status = true;
     }
 
     @Column(name="NAME")
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -38,8 +40,12 @@ public class User {
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
+
+    @Column(name="USER_STATUS")
+    public boolean getStatus(){return status;}
+    public void setStatus(boolean status){this.status = status;}
+
 }
