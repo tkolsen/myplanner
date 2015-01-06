@@ -18,6 +18,31 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         console.log("module clicked");
     };
 
+    $scope.generateSchedule = function(){
+        var courseName = $scope.selectedCourse;
+        var courseObj;
+        $scope.courses.forEach(function(course){
+            if(course.name == courseName){
+                courseObj = course;
+            }
+        });
+
+        var details = {
+            "course": courseObj,
+            "workHoursDaily": 0,
+            "startDate": ''
+        };
+
+
+        $http({
+            method: 'POST',
+            url: '..rest/generateSchedule',
+            data: details
+        }).success(function(){
+            console.log('heilt ok');
+        });
+    };
+
     $scope.test = function(course, index){
         var module = course.modules[index];
         var items = module.items;

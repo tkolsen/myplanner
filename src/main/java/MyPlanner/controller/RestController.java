@@ -7,10 +7,13 @@ import MyPlanner.model.User;
 import MyPlanner.model.UserHasModule;
 import MyPlanner.service.CanvasApi;
 import MyPlanner.utils.DeadlineCheck;
+import MyPlanner.utils.ScheduleDetails;
 import MyPlanner.utils.ScheduleGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,16 +55,19 @@ public class RestController {
         return returnInfo;
     }
 
-    @RequestMapping("/generateSchedule")
-    public @ResponseBody List<UserHasModule> generateSchedule(HttpServletRequest request, User user, Course course, double workHoursDaily, Date startDate) throws NotAuthorizedException {
-        LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
+    @RequestMapping(value="/generateSchedule", method = RequestMethod.POST)
+    public @ResponseBody List<UserHasModule> generateSchedule(HttpServletRequest request, @RequestBody ScheduleDetails details) throws NotAuthorizedException {
+        /*LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
 
         if(loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
             throw new NotAuthorizedException();
 
         ScheduleGenerator sg = new ScheduleGenerator();
-        List<UserHasModule> schedule = sg.GenerateSchedule(user, course, workHoursDaily, startDate);
-        return schedule;
+        User user = loginInfo.getUser();
+        List<UserHasModule> schedule = sg.GenerateSchedule(user, details.getCourse(), details.getWorkHoursDaily(), details.getStartDate());
+        return schedule;*/
+        System.out.println("CourseName: " + details.getCourse().getName() + " WorkHours: " + details.getWorkHoursDaily());
+        return null;
     }
 
     @RequestMapping("/checkAllDeadlines")
