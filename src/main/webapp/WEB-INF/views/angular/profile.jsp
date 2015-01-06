@@ -26,7 +26,7 @@
                 Velg kurs:
                 <select data-ng-model="selectedCourse" data-ng-options="course.name for course in courses"></select>
             </label>
-            <a href="<c:url value="/user/profile/refresh"/>">Oppdater side</a>
+            <a href="<c:url value="/user/profile/refresh"/>">Hent data på nytt</a>
         </aside>
 
         <!-- Wrapper for modules -->
@@ -41,12 +41,15 @@
                         <span class="time">(15 timer)</span>
 
                         <div class="clear-float"></div>
-                        <form>
+                        <form data-ng-submit="submit(module)">
                             <label>
-                                Start: <input type="date"/>
+                                Start: <input ng-model="module.newStartDate" type="date"/>
                             </label>
                             <label>
-                                Slutt: <input type="date"/>
+                                Slutt: <input ng-model="module.newEndDate" type="date"/>
+                            </label>
+                            <label>
+                                <input type="submit" value="Lagre"/>
                             </label>
                             <span>Tid til frist: 5dager</span>
                         </form>

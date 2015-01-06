@@ -4,10 +4,14 @@ import MyPlanner.exceptions.NotAuthorizedException;
 import MyPlanner.model.Course;
 import MyPlanner.model.LoginInfo;
 import MyPlanner.model.User;
+import MyPlanner.model.UserHasModule;
 import MyPlanner.service.CanvasApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +25,13 @@ public class RestController {
 
     @Autowired
     CanvasApi canvasApi;
+    @RequestMapping(value = "/updateDates", method = RequestMethod.POST)
+    public void updateDates(@RequestBody UserHasModule userHasModule){
+        System.out.println("userID: " + userHasModule.getUser().getId() + ", moduleId: " + userHasModule.getModule().getId() + ", startDate: " + userHasModule.getStartDate() + ", endDate: " + userHasModule.getEndDate());
 
-    @RequestMapping("/courses")
+    }
+
+    @RequestMapping(value = "/courses")
     public @ResponseBody List<Course> getCourses(HttpServletRequest request) throws NotAuthorizedException {
         LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
 

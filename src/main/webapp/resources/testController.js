@@ -12,6 +12,8 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         $scope.courses = arrayOfResult[0].data;
         $scope.selectedCourse = $scope.courses[0];
         $scope.username = arrayOfResult[1].data.user.name;
+        $scope.user = arrayOfResult[1].data.user;
+        console.log($scope.user);
     });
 
     $scope.moduleClicked = function(){
@@ -41,4 +43,25 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
             module.width = 100+'%';
         }
     }
+
+    $scope.submit = function(module, userId){
+        var moduleId = module.id;
+        var newStartDate = module.newStartDate;
+        var newEndDate = module.newEndDate;
+        var userHasModule = {
+            "startDate": newStartDate,
+            "endDate": newEndDate,
+            "module":{
+                "id": moduleId
+            },
+            "user":{
+                "id": $scope.user.id
+            }
+        };
+        $http({
+            method: 'POST',
+            url: '../rest/updateDates',
+            data: userHasModule
+        }).success(function(){});
+    };
 });
