@@ -44,7 +44,7 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         }
     }
 
-    $scope.submit = function(module, userId){
+    $scope.submit = function(module){
         var moduleId = module.id;
         var newStartDate = module.newStartDate;
         var newEndDate = module.newEndDate;

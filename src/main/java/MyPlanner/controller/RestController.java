@@ -28,7 +28,6 @@ public class RestController {
     @RequestMapping(value = "/updateDates", method = RequestMethod.POST)
     public void updateDates(@RequestBody UserHasModule userHasModule){
         System.out.println("userID: " + userHasModule.getUser().getId() + ", moduleId: " + userHasModule.getModule().getId() + ", startDate: " + userHasModule.getStartDate() + ", endDate: " + userHasModule.getEndDate());
-
     }
 
     @RequestMapping(value = "/courses")
