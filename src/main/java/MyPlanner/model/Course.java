@@ -3,28 +3,18 @@ package MyPlanner.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="COURSE")
-public class Course {
+public class Course implements Serializable{
     @JsonProperty("id")
     private int id;
     @JsonProperty("name")
     private String name;
     @JsonProperty("course_code")
     private String courseCode;
-
-    //private List<Module> modules;
-
-    /*@Transient
-    public List<Module> getModules() {
-        return modules;
-    }
-
-    public void setModules(List<Module> modules) {
-        this.modules = modules;
-    }*/
 
     @Id
     @Column(name="COURSE_ID")

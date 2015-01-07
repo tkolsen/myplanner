@@ -101,4 +101,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         return moduleDao;
     }
 
+    @Bean
+    public UserHasModuleDao userHasModuleDao(){
+        UserHasModuleDao userHasModuleDao = new UserHasModuleDaoImpl();
+        return userHasModuleDao;
+    }
+
 }

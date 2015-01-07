@@ -2,10 +2,13 @@ package MyPlanner.controller;
 
 import MyPlanner.dao.CourseDao;
 import MyPlanner.dao.ModuleDao;
+import MyPlanner.dao.UserHasModuleDao;
 import MyPlanner.exceptions.NotAuthorizedException;
 import MyPlanner.model.*;
 import MyPlanner.service.CanvasApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,16 +24,18 @@ import java.util.List;
 public class RestController {
 
     @Autowired
-    CanvasApi canvasApi;
-
+    private CanvasApi canvasApi;
     @Autowired
     private CourseDao courseDao;
     @Autowired
     private ModuleDao moduleDao;
+    @Autowired
+    private UserHasModuleDao userHasModuleDao;
 
-    @RequestMapping(value = "/updateDates", method = RequestMethod.POST)
-    public void updateDates(@RequestBody UserHasModule userHasModule){
-        System.out.println("userID: " + userHasModule.getUser().getId() + ", moduleId: " + userHasModule.getModule().getId() + ", startDate: " + userHasModule.getStartDate() + ", endDate: " + userHasModule.getEndDate());
+    @RequestMapping(value = "/updateDates", method = RequestMethod.PUT)
+    public ResponseEntity<String> updateDates(@RequestBody UserHasModule userHasModule){
+        userHasModuleDao.update(userHasModule);
+        return new ResponseEntity<String>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/courses")
@@ -43,6 +48,9 @@ public class RestController {
         List<Course> courseList = canvasApi.getCourses(request);
         request.getSession().setAttribute("courses", courseList);
 
+        for(Course c : courseList){
+            courseDao.save(c);
+        }
         return courseList;
     }
 
@@ -63,7 +71,15 @@ public class RestController {
                 moduleList = temp;
             }
         }
+        for(Module m : moduleList){
+            moduleDao.save(m);
+        }
         return moduleList;
+    }
+
+    @RequestMapping("/userHasModule")
+    public @ResponseBody List<UserHasModule> getUserHasModuleList(){
+        return userHasModuleDao.list();
     }
 
     @RequestMapping("/userName")
