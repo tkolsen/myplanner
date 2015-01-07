@@ -15,7 +15,10 @@
         <h1 id="logo"><span>My</span>Planner</h1>
         <h2>Logget inn som: {{username}}</h2>
         <p><a href="<c:url value="/oauth/logout"/>">Log ut</a></p>
-        <a href="<c:url value="/generateSchedule"/>">Generer Timeplan for valgt fag</a>
+        <form>
+
+        </form>
+        <a href="<c:url value="/rest/generateSchedule"/>">Generer Timeplan for valgt fag</a>
     </header>
 
     <!-- Main content -->

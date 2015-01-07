@@ -55,7 +55,7 @@ public class RestController {
         return returnInfo;
     }
 
-    @RequestMapping(value="/generateSchedule", method = RequestMethod.POST)
+    @RequestMapping(value="/generateSchedule", method = RequestMethod.GET)
     public @ResponseBody List<UserHasModule> generateSchedule(HttpServletRequest request, @RequestBody ScheduleDetails details) throws NotAuthorizedException {
         /*LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
 

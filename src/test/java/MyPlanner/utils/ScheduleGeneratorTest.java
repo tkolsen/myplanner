@@ -41,6 +41,7 @@ public class ScheduleGeneratorTest {
         // Mocked module 1
         Module module1 = new Module();
         module1.setName("Module 1");
+        module1.setCourse(course);
         module1.setModuleTimeEstimation(20);
         ModuleItem module1Item1 = new ModuleItem();
         CompletionRequirement module1Item1Req = new CompletionRequirement(); module1Item1Req.setCompleted(true);
@@ -57,6 +58,7 @@ public class ScheduleGeneratorTest {
         // Mocked module 2
         Module module2 = new Module();
         module2.setName("Module 2");
+        module2.setCourse(course);
         module2.setModuleTimeEstimation(30);
         ModuleItem module2Item1 = new ModuleItem();
         CompletionRequirement module2Item1Req = new CompletionRequirement(); module2Item1Req.setCompleted(true);
@@ -73,6 +75,7 @@ public class ScheduleGeneratorTest {
         // Mocked module 3
         Module module3 = new Module();
         module3.setName("Module 3");
+        module3.setCourse(course);
         module3.setModuleTimeEstimation(5);
         ModuleItem module3Item1 = new ModuleItem();
         CompletionRequirement module3Item1Req = new CompletionRequirement(); module3Item1Req.setCompleted(true);
@@ -89,6 +92,7 @@ public class ScheduleGeneratorTest {
         // Mocked module 4 - module without requirements
         Module module4 = new Module();
         module4.setName("Module 4");
+        module4.setCourse(course);
         module4.setModuleTimeEstimation(0);
         List<ModuleItem> module4Items = new ArrayList<ModuleItem>();
         module4.setItems(module4Items);
@@ -97,6 +101,7 @@ public class ScheduleGeneratorTest {
         // Mocked Module 5 - module with all requirements completed
         Module module5 = new Module();
         module5.setName("Module 5");
+        module5.setCourse(course);
         module5.setModuleTimeEstimation(40);
         ModuleItem module5Item1 = new ModuleItem();
         CompletionRequirement module5Item1Req = new CompletionRequirement(); module5Item1Req.setCompleted(true);
@@ -113,6 +118,7 @@ public class ScheduleGeneratorTest {
         // Mocked module 6
         Module module6 = new Module();
         module6.setName("Module 6");
+        module6.setCourse(course);
         module6.setModuleTimeEstimation(40);
         ModuleItem module6Item1 = new ModuleItem();
         CompletionRequirement module6Item1Req = new CompletionRequirement(); module6Item1Req.setCompleted(true);
@@ -128,10 +134,10 @@ public class ScheduleGeneratorTest {
 
         modules.add(module1); modules.add(module2); modules.add(module3); modules.add(module4); modules.add(module5); modules.add(module6);
 
-        course.setModules(modules);
+
 
         ScheduleGenerator generator = new ScheduleGenerator();
-        List<UserHasModule> schedule = generator.GenerateSchedule(user, course, 10, date);
+        List<UserHasModule> schedule = generator.GenerateSchedule(user, modules, 10, date);
 
 
         System.out.println("Module 1 startDate: " + schedule.get(0).getStartDate() + ", endDate: " + schedule.get(0).getEndDate());

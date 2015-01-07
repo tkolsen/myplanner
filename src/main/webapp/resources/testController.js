@@ -33,10 +33,9 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
             "startDate": ''
         };
 
-
         $http({
             method: 'POST',
-            url: '..rest/generateSchedule',
+            url: '../rest/generateSchedule',
             data: details
         }).success(function(){
             console.log('heilt ok');
