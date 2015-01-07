@@ -8,11 +8,45 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
     var username = $http.get("../rest/userName").success(function (response) {
         return response;
     });
-    $q.all([courseList, username]).then(function (arrayOfResult) {
+    var modules = $http.get("../rest/modules").success(function(response) {
+        return response;
+    });
+    var userHasModule = $http.get("../rest/userHasModule").success(function(response){
+        return response;
+    });
+    $q.all([courseList, username, modules, userHasModule]).then(function (arrayOfResult) {
         $scope.courses = arrayOfResult[0].data;
         $scope.selectedCourse = $scope.courses[0];
         $scope.username = arrayOfResult[1].data.user.name;
+        $scope.user = arrayOfResult[1].data.user;
+        $scope.modules = arrayOfResult[2].data;
+        $scope.userHasModule = arrayOfResult[3].data;
+        $scope.courses.forEach(function(c){
+            c.modules = new Array();
+            $scope.modules.forEach(function(m){
+                if(m.course.id == c.id){
+                    c.modules.push(m);
+                }
+            });
+        });
+        console.log($scope.userHasModule);
+        compareDates();
     });
+    var compareDates = function(){
+        $scope.modules.forEach(function(m){
+            $scope.userHasModule.forEach(function(u){
+                if(u.userHasModulePK.module.id === m.id){
+                    m.newStartDate = formatDate(u.startDate);
+                    m.newEndDate = formatDate(u.endDate);
+                }
+            });
+        });
+    };
+
+    var formatDate = function(dateString){
+        var date = new Date(dateString);
+        return date;
+    };
 
     $scope.moduleClicked = function(){
         console.log("module clicked");
@@ -76,4 +110,25 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
             module.width = 100+'%';
         }
     }
+
+    $scope.submit = function(module){
+        var moduleId = module.id;
+        var newStartDate = module.newStartDate;
+        var newEndDate = module.newEndDate;
+        var userHasModule = {
+            "startDate": newStartDate,
+            "endDate": newEndDate,
+            "module": module,
+            "user":{
+                "id": $scope.user.id
+            }
+        };
+        $http({
+            method: 'PUT',
+            url: '../rest/updateDates',
+            data: userHasModule
+        }).success(function(response){
+            alert('Dato lagret');
+        });
+    };
 });

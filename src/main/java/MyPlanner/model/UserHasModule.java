@@ -59,6 +59,16 @@ public class UserHasModule {
         public void setUser(User user) {
             this.user = user;
         }
+
+        @Override
+        public boolean equals(Object obj){
+            if(obj == this) return true;
+            if(obj != null && obj instanceof UserHasModulePK){
+                UserHasModulePK other = (UserHasModulePK)obj;
+                if(other.getModule().equals(this.getModule()) && other.getUser().equals(this.getUser())) return true;
+            }
+            return false;
+        }
     }
 
     @EmbeddedId
@@ -83,5 +93,15 @@ public class UserHasModule {
     }
     public void setModule(Module module){
         getUserHasModulePK().setModule(module);
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj == this)return true;
+        if(obj != null && obj instanceof UserHasModule){
+            UserHasModule other = (UserHasModule)obj;
+            if(other.getUserHasModulePK().equals(this.getUserHasModulePK()))return true;
+        }
+        return false;
     }
 }

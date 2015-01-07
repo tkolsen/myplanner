@@ -1,5 +1,6 @@
 package MyPlanner.config;
 
+import MyPlanner.dao.*;
 import MyPlanner.oauth.*;
 import MyPlanner.service.CanvasApi;
 import MyPlanner.service.CanvasApiImpl;
@@ -58,6 +59,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
     @Bean(name="oAuth")
     public OAuth2 oAuth(){
+        // TODO: mock oauth
         //OAuth2 oAuth = new OAuth2Impl(props());
         OAuth2 oAuth = new OAuthMock();
         return oAuth;
@@ -79,6 +81,30 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     public CanvasApi canvasApi(){
         CanvasApi canvasApi = new CanvasApiImpl();
         return canvasApi;
+    }
+
+    @Bean
+    public UserDao userDao(){
+        UserDao userDao = new UserDaoImpl();
+        return userDao;
+    }
+
+    @Bean
+    public CourseDao courseDao(){
+        CourseDao courseDao = new CourseDaoImpl();
+        return courseDao;
+    }
+
+    @Bean
+    public ModuleDao moduleDao(){
+        ModuleDao moduleDao = new ModuleDaoImpl();
+        return moduleDao;
+    }
+
+    @Bean
+    public UserHasModuleDao userHasModuleDao(){
+        UserHasModuleDao userHasModuleDao = new UserHasModuleDaoImpl();
+        return userHasModuleDao;
     }
 
 }

@@ -33,9 +33,9 @@ public class CanvasApiImpl implements CanvasApi{
 
             ResponseEntity<Course[]> resp = getRestTemplate().exchange(url, HttpMethod.GET, requestEntity, Course[].class, new HashMap<String, String>());
             Course[] courses = resp.getBody();
-            for(Course c : courses){
+            /*for(Course c : courses){
                 c.setModules(getModules(request, c.getId()));
-            }
+            }*/
             return Arrays.asList(courses);
         }else{
             throw new NotAuthorizedException("Cant access api without user info");
@@ -65,6 +65,31 @@ public class CanvasApiImpl implements CanvasApi{
                 }
             }
             return Arrays.asList(modules);
+        }else{
+            throw new NotAuthorizedException("Can't access modules without user info");
+        }
+    }
+
+    public ArrayList<Module> getModulesAsArrayList(HttpServletRequest request, Course course) throws NotAuthorizedException{
+        LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
+
+        if(loginInfo != null && loginInfo.hasValues() && loginInfo.getAccessToken() != null){
+            HttpEntity<Module[]> requestEntity = new HttpEntity<Module[]>(setAuthorizationHeader(loginInfo.getAccessToken()));
+            String url = baseUrl + "/api/v1/courses/" + course.getId() + "/modules?per_page=50&include[]=items";
+            Map<String,Integer> parameters = new HashMap<String, Integer>();
+            ResponseEntity<Module[]> resp = getRestTemplate().exchange(url, HttpMethod.GET, requestEntity, Module[].class, parameters);
+            Module[] modules = resp.getBody();
+            for(Module m : modules){
+                if(m.getItems() == null || m.getItems().size() == 0){
+                    m.setItems(getItems(m.getId(), course.getId(), loginInfo.getUser().getId(), loginInfo.getAccessToken()));
+                }
+            }
+            ArrayList<Module> result = new ArrayList<Module>();
+            for(Module m : modules){
+                m.setCourse(course);
+                result.add(m);
+            }
+            return result;
         }else{
             throw new NotAuthorizedException("Can't access modules without user info");
         }

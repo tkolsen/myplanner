@@ -27,6 +27,7 @@
                 Velg kurs:
                 <select data-ng-model="selectedCourse" data-ng-options="course.name for course in courses"></select>
             </label>
+
             <a href="#">Skjul ferdige moduler</a>
             <p>
                 Opprett Timeplan:
@@ -36,6 +37,8 @@
                     <input type="submit" value="Generate Schedule"/>
                 </form>
             </p>
+            <a href="<c:url value="/user/profile/refresh"/>">Hent data på nytt</a>
+
         </aside>
 
         <!-- Wrapper for modules -->
@@ -50,15 +53,18 @@
                         <span class="time">(15 timer)</span>
 
                         <div class="clear-float"></div>
-                        <span>
+                        <form data-ng-submit="submit(module)">
                             <label>
-                                Start: <input type="date"/>
+                                Start: <input ng-model="module.newStartDate" type="date"/>
                             </label>
                             <label>
-                                Slutt: <input type="date"/>
+                                Slutt: <input ng-model="module.newEndDate" type="date"/>
+                            </label>
+                            <label>
+                                <input type="submit" value="Lagre"/>
                             </label>
                             <span>Tid til frist: 5dager</span>
-                        </span>
+                        </form>
                     </div>
                     <span class="progressBackground">
                         <span class="progressbar" ng-style="{'width' : module.width}"

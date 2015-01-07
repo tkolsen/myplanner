@@ -69,7 +69,7 @@ body{
     padding-top: 20px;
     padding-bottom: 20px;
 }
-
+/*
 .module {
     background-color: #ffffff;
     width: auto;
@@ -79,11 +79,26 @@ body{
     margin-bottom: 10px;
     -webkit-transition: transform 0.2s;
 }
-
-.module:hover{
-    -webkit-transform: scale(1.1);
-    background-color: #eef7ff;
+*/
+.module{
+    color: #333333;
+    width: auto;
+    margin-bottom: 20px;
+    background-color: #F8F8F8  ;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0px 1px 2px 1px grey;
+    font-weight:bold;
+    -moz-transition: transform 0.3s;
+    -ms-transition: transform 0.3s;
+    transition: transform 0.3s;
 }
+.module:hover{
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
 .module:active{
 }
 
@@ -91,24 +106,43 @@ body{
 }
 
 .module h4 {
-    float: left;
-    padding-bottom: 10px;
+    display: inline-block;
+    background-color: #4b5662  ;
+    padding: 8px;
+    margin-left: -10px;
+    margin-top: -10px;
+    margin-bottom: 5px;
+    border: 1px solid black;
+    float:left;
+    color: white;
+    max-width: 600px;
+}
+.module form{
+    display: block;
+    /*background-color: white;*/
+    padding: 5px;
+    margin-top: 2px;
+    margin-bottom: 7px;
+    /*border: 1px solid #A0A0A0;*/
+    /*border-left: none;*/
+    /*border-right: none;*/
 }
 
 .module .time {
     float: right;
+    padding: 5px;
 }
-
+/*
 .module .padding{
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
 }
-
+*/
 .clear-float {
     clear: both;
 }
-
+/*
 .progressbar {
     display: block;
     height: 10px;
@@ -127,8 +161,19 @@ body{
     border-radius: 10px;
     margin-top: 5px;
 }
-.progressbar p{
-    padding-right: 5px;
-    text-shadow: 1px 1px 1px black;
-    color: white;
+*/
+.progressbar{
+    display: block;
+    width: 74%;
+    height: 10px;
+    background-color: limegreen;
+    border-radius: 5px;
+    border-top: 1px solid #4b5662;
+}
+.progressBackground{
+    display: block;
+    width: 100%;
+    background-color: #282828 ;
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 8px 2px grey;
 }
