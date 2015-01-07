@@ -11,4 +11,5 @@ public interface UserHasModuleDao {
     public void update(UserHasModule userHasModule);
     public UserHasModule get(UserHasModule userHasModule);
     public List<UserHasModule> list();
+    public void updateList(List<UserHasModule> userHasModule);
 }

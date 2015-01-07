@@ -34,4 +34,8 @@ public class UserHasModuleDaoImpl implements UserHasModuleDao {
         return userHasModuleList;
     }
 
+    @Override
+    public void updateList(List<UserHasModule> userHasModule) {
+        for (UserHasModule u : userHasModule){ update(u); }
+    }
 }
