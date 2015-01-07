@@ -13,7 +13,7 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         $scope.selectedCourse = $scope.courses[0];
         $scope.username = arrayOfResult[1].data.user.name;
         $scope.user = arrayOfResult[1].data.user;
-        console.log($scope.user);
+        console.log($scope.courses);
     });
 
     $scope.moduleClicked = function(){

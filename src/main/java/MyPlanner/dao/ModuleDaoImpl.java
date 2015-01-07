@@ -1,26 +1,21 @@
 package MyPlanner.dao;
 
 import MyPlanner.model.Module;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModuleDaoImpl {
-    List<Module> moduleList;
-    public ModuleDaoImpl() {
-        moduleList = new ArrayList<Module>();
+public class ModuleDaoImpl implements ModuleDao{
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    @Override
+    @Transactional
+    public void save(Module module) {
+        sessionFactory.getCurrentSession().saveOrUpdate(module);
     }
 
-    public List<Module> getAllModules(){
-        return moduleList;
-    }
-    public Module getModule(int id){
-        return moduleList.get(id);
-    }
-    public void updateModule(Module module){
-        moduleList.get(module.getId()).setName(module.getName());
-    }
-    public void deleteModule(Module module){
-        moduleList.remove(module.getId());
-    }
 }

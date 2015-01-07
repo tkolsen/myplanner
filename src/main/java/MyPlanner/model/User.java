@@ -6,10 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name="USER")
-public class User {
+public class User{
     @JsonProperty("name")
     private String name;
     @JsonProperty("id")
@@ -47,5 +48,15 @@ public class User {
     @Column(name="USER_STATUS")
     public boolean getStatus(){return status;}
     public void setStatus(boolean status){this.status = status;}
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj == this) return true;
+        if(obj != null && obj instanceof User){
+            User other = (User) obj;
+            if(other.getId() == this.getId()) return true;
+        }
+        return false;
+    }
 
 }

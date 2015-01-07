@@ -1,28 +1,46 @@
 package MyPlanner.dao;
 
 import MyPlanner.model.Course;
+import MyPlanner.model.User;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDaoImpl implements CourseDao{
-    List<Course> courses;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-    public CourseDaoImpl(){
-        courses = new ArrayList<Course>();
-    }
-    public List<Course> getAllCourses(){
-        return courses;
-    }
-
-    public Course getCourse(int id){
-        return courses.get(id);
+    @Override
+    @Transactional
+    public void save(Course course) {
+        sessionFactory.getCurrentSession().saveOrUpdate(course);
     }
 
-    public void updateCourse(Course course){
-        courses.get(course.getId()).setName(course.getName());
+    @Override
+    @Transactional
+    public List<Course> list() {
+        @SuppressWarnings("unchecked")
+        List<Course> courseList = (List<Course>)sessionFactory.getCurrentSession()
+                .createCriteria(Course.class)
+                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+                .list();
+        return courseList;
     }
-    public void deleteCourse(Course course){
-        courses.remove(course.getId());
+
+    @Override
+    @Transactional
+    public Course get(Course course) {
+        String hql = "from Course where id=" + course.getId();
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        List<Course> courseList = (List<Course>)query.list();
+        if(courseList != null && !courseList.isEmpty()){
+            return courseList.get(0);
+        }
+        return null;
     }
 }
