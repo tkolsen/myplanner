@@ -25,7 +25,7 @@ public class ScheduleGenerator {
     // TODO: should workHoursDaily be moved to the user class? Probably not.
     public List<UserHasModule> GenerateSchedule(User user, Course course, double workHoursDaily, Date startDate){
 
-        List<UserHasModule> recommendedSchedule = new ArrayList<UserHasModule>();
+        /*List<UserHasModule> recommendedSchedule = new ArrayList<UserHasModule>();
 
         for (int i = 0; i<course.getModules().size(); i++){
             UserHasModule scheduleItem = new UserHasModule();
@@ -65,9 +65,9 @@ public class ScheduleGenerator {
 
                 recommendedSchedule.add(scheduleItem);
             }
-        }
+        }*/
 
-        return recommendedSchedule;
+        return null;
     }
 
     public void UpdateSchedule(){

@@ -8,12 +8,23 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
     var username = $http.get("../rest/userName").success(function (response) {
         return response;
     });
-    $q.all([courseList, username]).then(function (arrayOfResult) {
+    var modules = $http.get("../rest/modules").success(function(response) {
+        return response;
+    });
+    $q.all([courseList, username, modules]).then(function (arrayOfResult) {
         $scope.courses = arrayOfResult[0].data;
         $scope.selectedCourse = $scope.courses[0];
         $scope.username = arrayOfResult[1].data.user.name;
         $scope.user = arrayOfResult[1].data.user;
-        console.log($scope.courses);
+        $scope.modules = arrayOfResult[2].data;
+        $scope.courses.forEach(function(c){
+            c.modules = new Array();
+            $scope.modules.forEach(function(m){
+                if(m.course.id == c.id){
+                    c.modules.push(m);
+                }
+            });
+        });
     });
 
     $scope.moduleClicked = function(){

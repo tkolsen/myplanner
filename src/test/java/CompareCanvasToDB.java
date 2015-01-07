@@ -32,9 +32,9 @@ public class CompareCanvasToDB {
         modules.add(module1);
         modules.add(module2);
 
-        course.setModules(modules);
+        /*course.setModules(modules);
         courses = new ArrayList<Course>();
-        courses.add(course);
+        courses.add(course);*/
     }
 
     @Test

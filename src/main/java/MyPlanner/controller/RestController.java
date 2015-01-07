@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,13 +40,30 @@ public class RestController {
         if(loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
             throw new NotAuthorizedException();
 
-        List<Course> courseList = (List<Course>)request.getSession().getAttribute("courses");
-        if(courseList == null) {
-            courseList = canvasApi.getCourses(request);
-            request.getSession().setAttribute("courses", courseList);
+        List<Course> courseList = canvasApi.getCourses(request);
+        request.getSession().setAttribute("courses", courseList);
 
-        }
         return courseList;
+    }
+
+    @RequestMapping(value = "/modules")
+    public @ResponseBody List<Module> getModules(HttpServletRequest request)throws NotAuthorizedException{
+        LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
+
+        if(loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
+            throw new NotAuthorizedException();
+
+        List<Course> courseList = canvasApi.getCourses(request);
+        ArrayList<Module> moduleList = null;
+        for(Course c : courseList){
+            ArrayList<Module> temp = canvasApi.getModulesAsArrayList(request, c);
+            if(moduleList != null){
+                moduleList.addAll(temp);
+            }else{
+                moduleList = temp;
+            }
+        }
+        return moduleList;
     }
 
     @RequestMapping("/userName")
