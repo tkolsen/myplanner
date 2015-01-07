@@ -3,7 +3,6 @@ package MyPlanner.controller;
 import MyPlanner.dao.CourseDao;
 import MyPlanner.dao.ModuleDao;
 import MyPlanner.dao.UserHasModuleDao;
-import MyPlanner.dao.UserHasModuleDaoImpl;
 import MyPlanner.exceptions.NotAuthorizedException;
 import MyPlanner.model.*;
 import MyPlanner.service.CanvasApi;
@@ -112,8 +111,12 @@ public class RestController {
         ScheduleGenerator sg = new ScheduleGenerator();
         User user = loginInfo.getUser();
         List<UserHasModule> schedule = sg.GenerateSchedule(user, details.getModules(), details.getWorkHoursDaily(), details.getStartDate());
-
-        userHasModuleDao.updateList(schedule);
+        if(schedule!=null) {
+            System.out.println("Størrelse på liste: " + schedule.size());
+            userHasModuleDao.updateList(schedule);
+        }else {
+            System.out.println("Schedule er NULL");
+        }
         return schedule;
     }
 

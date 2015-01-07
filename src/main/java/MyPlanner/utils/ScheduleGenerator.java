@@ -24,7 +24,7 @@ public class ScheduleGenerator {
      */
     public List<UserHasModule> GenerateSchedule(User user, List<Module> modules, double workHoursDaily, Date startDate){
 
-        /*List<UserHasModule> recommendedSchedule = new ArrayList<UserHasModule>();
+        List<UserHasModule> recommendedSchedule = new ArrayList<UserHasModule>();
 
         for (int i = 0; i<modules.size(); i++){
             UserHasModule scheduleItem = new UserHasModule();
@@ -32,7 +32,6 @@ public class ScheduleGenerator {
             scheduleItem.setUser(user);
             Module module = modules.get(i);
             scheduleItem.setModule(module);
-            scheduleItem.getModule().setCourse(modules.get(i).getCourse());
 
             // Checks if the module is completed:
             boolean moduleIsComplete = true;
@@ -41,8 +40,6 @@ public class ScheduleGenerator {
                     if (!module.getItems().get(j).getCompletionRequirement().isCompleted()) {
                         moduleIsComplete = false;
                     }
-                }else{
-                    moduleIsComplete = true;
                 }
             }
 
@@ -68,9 +65,9 @@ public class ScheduleGenerator {
 
                 recommendedSchedule.add(scheduleItem);
             }
-        }*/
+        }
 
-        return null;
+        return recommendedSchedule;
     }
 
     public void UpdateSchedule(){

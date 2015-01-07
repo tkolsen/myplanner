@@ -35,6 +35,7 @@ public class UserHasModuleDaoImpl implements UserHasModuleDao {
     }
 
     @Override
+    @Transactional
     public void updateList(List<UserHasModule> userHasModule) {
         for (UserHasModule u : userHasModule){ update(u); }
     }
