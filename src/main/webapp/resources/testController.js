@@ -19,7 +19,7 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
     };
 
     $scope.checkAllDeadlines = function(deadlineDetails){
-        
+
     };
 
     $scope.checkOldestDeadlines = function(deadlineDetails){
