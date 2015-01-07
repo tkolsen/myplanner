@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name="MODULE")
-public class Module {
+public class Module implements Serializable{
     @JsonProperty("workflow_state")
     private String workflowState;
     @JsonProperty("position")

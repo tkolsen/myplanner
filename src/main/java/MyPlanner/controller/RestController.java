@@ -1,13 +1,9 @@
 package MyPlanner.controller;
 
 import MyPlanner.exceptions.NotAuthorizedException;
-import MyPlanner.model.Course;
-import MyPlanner.model.LoginInfo;
-import MyPlanner.model.User;
-import MyPlanner.model.UserHasModule;
+import MyPlanner.model.*;
 import MyPlanner.service.CanvasApi;
 import MyPlanner.utils.DeadlineCheck;
-import MyPlanner.model.ScheduleDetails;
 import MyPlanner.utils.ScheduleGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,45 +51,43 @@ public class RestController {
         return returnInfo;
     }
 
-    @RequestMapping(value="/generateSchedule", method = RequestMethod.GET)
+    @RequestMapping(value="/generateSchedule", method = RequestMethod.POST)
     public @ResponseBody List<UserHasModule> generateSchedule(HttpServletRequest request, @RequestBody ScheduleDetails details) throws NotAuthorizedException {
-        LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
+       LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
 
         if(loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
             throw new NotAuthorizedException();
-
-        // for testing:
-        System.out.println("CourseName: " + details.getModules().get(0).getCourse().getName() + " WorkHours: " + details.getWorkHoursDaily());
 
         ScheduleGenerator sg = new ScheduleGenerator();
         User user = loginInfo.getUser();
         List<UserHasModule> schedule = sg.GenerateSchedule(user, details.getModules(), details.getWorkHoursDaily(), details.getStartDate());
 
-        return schedule;
+        // TODO: DAO goes here
 
+        return schedule;
     }
 
-    @RequestMapping("/checkAllDeadlines")
-    public @ResponseBody List<UserHasModule> getAllDeadlines(HttpServletRequest request, List<UserHasModule> deadlines, Date date) throws NotAuthorizedException {
+    @RequestMapping(value="/checkAllDeadlines", method = RequestMethod.POST)
+    public @ResponseBody List<UserHasModule> getAllDeadlines(HttpServletRequest request, DeadlineDetails details) throws NotAuthorizedException {
         LoginInfo loginInfo = (LoginInfo) request.getSession().getAttribute("loginInfo");
 
         if (loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
             throw new NotAuthorizedException();
 
         DeadlineCheck dc = new DeadlineCheck();
-        List<UserHasModule> allDeadlines = dc.ListAllUnmetDeadlines(deadlines, date);
+        List<UserHasModule> allDeadlines = dc.ListAllUnmetDeadlines(details.getDeadlines(), details.getDate());
         return allDeadlines;
     }
 
-    @RequestMapping("/checkOldestDeadlines")
-    public @ResponseBody List<UserHasModule> getOldestDeadlines(HttpServletRequest request, List<UserHasModule> deadlines, Date date) throws NotAuthorizedException {
+    @RequestMapping(value="/checkOldestDeadlines", method = RequestMethod.POST)
+    public @ResponseBody List<UserHasModule> getOldestDeadlines(HttpServletRequest request, DeadlineDetails details) throws NotAuthorizedException {
         LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
 
         if(loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
             throw new NotAuthorizedException();
 
         DeadlineCheck dc = new DeadlineCheck();
-        List<UserHasModule> oldestDeadlines = dc.ListOldestUnmetDeadlines(deadlines, date);
+        List<UserHasModule> oldestDeadlines = dc.ListOldestUnmetDeadlines(details.getDeadlines(), details.getDate());
         return oldestDeadlines;
     }
 }

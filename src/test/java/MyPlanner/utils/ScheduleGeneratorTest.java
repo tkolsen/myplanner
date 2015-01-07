@@ -132,7 +132,21 @@ public class ScheduleGeneratorTest {
         module6.setItems(module6Items);
         module6.setItemsCount(module6Items.size());
 
-        modules.add(module1); modules.add(module2); modules.add(module3); modules.add(module4); modules.add(module5); modules.add(module6);
+        // Mocked module 7 - module with items without completionrequirements, module is "completed"
+        Module module7 = new Module();
+        module7.setName("Module 7");
+        module7.setCourse(course);
+        module7.setModuleTimeEstimation(40);
+        ModuleItem module7Item1 = new ModuleItem();
+        ModuleItem module7Item2 = new ModuleItem();
+        List<ModuleItem> module7Items = new ArrayList<ModuleItem>();
+        module7Items.add(module7Item1);
+        module7Items.add(module7Item2);
+        module7.setItems(module7Items);
+        module7.setItemsCount(module7Items.size());
+
+
+        modules.add(module1); modules.add(module2); modules.add(module3); modules.add(module4); modules.add(module5); modules.add(module6); modules.add(module7);
 
 
 

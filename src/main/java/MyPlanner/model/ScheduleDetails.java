@@ -1,18 +1,16 @@
 package MyPlanner.model;
 
-import MyPlanner.model.Module;
-
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
 /**
- * Help class for the RestController
+ * Help class for the RestController, for using the ScheduleGenerator
  */
-
-public class ScheduleDetails {
-    List<Module> modules;
-    double workHoursDaily;
-    Date startDate;
+public class ScheduleDetails implements Serializable{
+    private List<Module> modules;
+    private double workHoursDaily;
+    private Date startDate;
 
     public List<Module> getModules() {
         return modules;

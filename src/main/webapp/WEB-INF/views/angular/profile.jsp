@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html ng-app="myPlanner">
 <head>
     <title>Home</title>
@@ -15,10 +16,6 @@
         <h1 id="logo"><span>My</span>Planner</h1>
         <h2>Logget inn som: {{username}}</h2>
         <p><a href="<c:url value="/oauth/logout"/>">Log ut</a></p>
-        <form>
-
-        </form>
-        <a href="<c:url value="/rest/generateSchedule"/>">Generer Timeplan for valgt fag</a>
     </header>
 
     <!-- Main content -->
@@ -31,6 +28,14 @@
                 <select data-ng-model="selectedCourse" data-ng-options="course.name for course in courses"></select>
             </label>
             <a href="#">Skjul ferdige moduler</a>
+            <p>
+                Opprett Timeplan:
+                <form data-ng-submit="generateSchedule(scheduleDetails)">
+                    <input type="number" ng-model="scheduleDetails.workHoursDaily"/>
+                    <input type="date" ng-model="scheduleDetails.startDate"/>
+                    <input type="submit" value="Generate Schedule"/>
+                </form>
+            </p>
         </aside>
 
         <!-- Wrapper for modules -->

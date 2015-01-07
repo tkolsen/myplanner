@@ -18,28 +18,39 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         console.log("module clicked");
     };
 
-    $scope.generateSchedule = function(){
-        var courseName = $scope.selectedCourse;
-        var courseObj;
-        $scope.courses.forEach(function(course){
-            if(course.name == courseName){
-                courseObj = course;
-            }
-        });
+    $scope.checkAllDeadlines = function(deadlineDetails){
+        
+    };
 
-        var details = {
-            "course": courseObj,
-            "workHoursDaily": 0,
-            "startDate": ''
-        };
+    $scope.checkOldestDeadlines = function(deadlineDetails){
+        // TODO: implement me
+    };
 
-        $http({
-            method: 'POST',
-            url: '../rest/generateSchedule',
-            data: details
-        }).success(function(){
-            console.log('heilt ok');
-        });
+    $scope.generateSchedule = function(scheduleDetails){
+        if(confirm("Dette vil overskrive din nåværende fremdriftsplan om den allerede eksisterer og generere en ny fremdriftsplan, og kan ikke tilbakestilles. Vil du fortsette?")){
+
+            var courseName = $scope.selectedCourse.name;
+            var courseObj;
+            $scope.courses.forEach(function(course){
+                if(course.name === courseName){
+                    courseObj = course;
+                }
+            });
+
+            var details = {
+                "modules": courseObj.modules,
+                "workHoursDaily": scheduleDetails.workHoursDaily,
+                "startDate": scheduleDetails.startDate
+            };
+            console.log(details);
+            $http({
+                method: 'POST',
+                url: '../rest/generateSchedule',
+                data: details
+            }).success(function(){
+                console.log('heilt ok');
+            });
+        }
     };
 
     $scope.test = function(course, index){

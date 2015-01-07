@@ -22,7 +22,6 @@ public class ScheduleGenerator {
      * @return an ArrayList containing the recommended schedule based on the given parameters
      * and the courses module time-estimates
      */
-    // TODO: should workHoursDaily be moved to the user class? Probably not.
     public List<UserHasModule> GenerateSchedule(User user, List<Module> modules, double workHoursDaily, Date startDate){
 
         List<UserHasModule> recommendedSchedule = new ArrayList<UserHasModule>();
@@ -38,8 +37,12 @@ public class ScheduleGenerator {
             // Checks if the module is completed:
             boolean moduleIsComplete = true;
             for (int j = 0; j<module.getItems().size(); j++){
-                if (!module.getItems().get(j).getCompletionRequirement().isCompleted()){
-                    moduleIsComplete = false;
+                if(module.getItems().get(j).getCompletionRequirement() != null) {
+                    if (!module.getItems().get(j).getCompletionRequirement().isCompleted()) {
+                        moduleIsComplete = false;
+                    }
+                }else{
+                    moduleIsComplete = true;
                 }
             }
 

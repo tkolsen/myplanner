@@ -3,11 +3,12 @@ package MyPlanner.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="COURSE")
-public class Course {
+public class Course implements Serializable{
     @JsonProperty("id")
     private int id;
     @JsonProperty("name")
