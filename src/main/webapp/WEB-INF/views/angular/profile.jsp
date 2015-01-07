@@ -30,10 +30,9 @@
 
             <a href="#">Skjul ferdige moduler</a>
             <p>
-                Opprett Timeplan:
-                <form data-ng-submit="generateSchedule(scheduleDetails)">
-                    <input type="number" ng-model="scheduleDetails.workHoursDaily"/>
-                    <input type="date" ng-model="scheduleDetails.startDate"/>
+                Opprett Timeplan:<form data-ng-submit="generateSchedule(scheduleDetails)">
+                    <input title="Antall arbeidstimer du regner med du i gjennomsnitt kan jobbe med faget hver dag." label="Timer:" type="number" ng-model="scheduleDetails.workHoursDaily"/>
+                    <input title="Datoen du vil begynne med faget." label="Startdato" type="date" ng-model="scheduleDetails.startDate"/>
                     <input type="submit" value="Generate Schedule"/>
                 </form>
             </p>
@@ -50,20 +49,20 @@
                 <div class="module" data-ng-click="moduleClicked()" data-ng-repeat="module in course.modules">
                     <div class="padding">
                         <h4 class="module-name">{{module.name}}</h4>
-                        <span class="time">(15 timer)</span>
+                        <span class="time">Estimert arbeidsmengde i timer: {{module.moduleTimeEstimation}}</span>
 
                         <div class="clear-float"></div>
                         <form data-ng-submit="submit(module)">
                             <label>
-                                Start: <input ng-model="module.newStartDate" type="date"/>
+                                Start: <input title="Anbefalt dato for når du bør begynne på modulen." ng-model="module.newStartDate" type="date"/>
                             </label>
                             <label>
-                                Slutt: <input ng-model="module.newEndDate" type="date"/>
+                                Slutt: <input title="Anbefalt dato for når du bør være ferdig med modulen." ng-model="module.newEndDate" type="date"/>
                             </label>
                             <label>
                                 <input type="submit" value="Lagre"/>
                             </label>
-                            <span>Tid til frist: 5dager</span>
+                            <span>Tid til frist: ?</span>
                         </form>
                     </div>
                     <span class="progressBackground">
