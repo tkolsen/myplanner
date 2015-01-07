@@ -1,21 +1,25 @@
-package MyPlanner.utils;
+package MyPlanner.model;
 
-import MyPlanner.model.Course;
+import MyPlanner.model.Module;
 
 import java.sql.Date;
+import java.util.List;
 
+/**
+ * Help class for the RestController
+ */
 
 public class ScheduleDetails {
-    Course course;
+    List<Module> modules;
     double workHoursDaily;
     Date startDate;
 
-    public Course getCourse() {
-        return course;
+    public List<Module> getModules() {
+        return modules;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setModules(List<Module> modules) {
+        this.modules = modules;
     }
 
     public double getWorkHoursDaily() {

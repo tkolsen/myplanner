@@ -7,7 +7,7 @@ import MyPlanner.model.User;
 import MyPlanner.model.UserHasModule;
 import MyPlanner.service.CanvasApi;
 import MyPlanner.utils.DeadlineCheck;
-import MyPlanner.utils.ScheduleDetails;
+import MyPlanner.model.ScheduleDetails;
 import MyPlanner.utils.ScheduleGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,17 +57,20 @@ public class RestController {
 
     @RequestMapping(value="/generateSchedule", method = RequestMethod.GET)
     public @ResponseBody List<UserHasModule> generateSchedule(HttpServletRequest request, @RequestBody ScheduleDetails details) throws NotAuthorizedException {
-        /*LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
+        LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
 
         if(loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
             throw new NotAuthorizedException();
 
+        // for testing:
+        System.out.println("CourseName: " + details.getModules().get(0).getCourse().getName() + " WorkHours: " + details.getWorkHoursDaily());
+
         ScheduleGenerator sg = new ScheduleGenerator();
         User user = loginInfo.getUser();
-        List<UserHasModule> schedule = sg.GenerateSchedule(user, details.getCourse(), details.getWorkHoursDaily(), details.getStartDate());
-        return schedule;*/
-        System.out.println("CourseName: " + details.getCourse().getName() + " WorkHours: " + details.getWorkHoursDaily());
-        return null;
+        List<UserHasModule> schedule = sg.GenerateSchedule(user, details.getModules(), details.getWorkHoursDaily(), details.getStartDate());
+
+        return schedule;
+
     }
 
     @RequestMapping("/checkAllDeadlines")
