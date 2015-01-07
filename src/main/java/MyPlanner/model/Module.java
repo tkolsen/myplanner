@@ -23,7 +23,7 @@ public class Module implements Serializable{
     private List<ModuleItem> items;
     @JsonProperty("completed_at")
     private String completedAt;
-    private double moduleTimeEstimation; // Must be manually set by the MyPlanner administrator, is not fetched through Canvas
+    private double moduleTimeEstimation = 30; // Must be manually set by the MyPlanner administrator, is not fetched through Canvas
 
     @Column(name="TIME_ESTIMATION")
     public double getModuleTimeEstimation() { return moduleTimeEstimation;}
