@@ -24,7 +24,7 @@ public class ScheduleGenerator {
      */
     public List<UserHasModule> GenerateSchedule(User user, List<Module> modules, double workHoursDaily, Date startDate){
 
-        List<UserHasModule> recommendedSchedule = new ArrayList<UserHasModule>();
+        /*List<UserHasModule> recommendedSchedule = new ArrayList<UserHasModule>();
 
         for (int i = 0; i<modules.size(); i++){
             UserHasModule scheduleItem = new UserHasModule();
@@ -68,9 +68,9 @@ public class ScheduleGenerator {
 
                 recommendedSchedule.add(scheduleItem);
             }
-        }
+        }*/
 
-        return recommendedSchedule;
+        return null;
     }
 
     public void UpdateSchedule(){

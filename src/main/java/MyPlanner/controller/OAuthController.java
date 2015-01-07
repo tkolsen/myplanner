@@ -1,7 +1,10 @@
 package MyPlanner.controller;
 
+import MyPlanner.dao.UserDao;
+import MyPlanner.dao.UserDaoImpl;
 import MyPlanner.exceptions.UserInfoNotSetException;
 import MyPlanner.model.LoginInfo;
+import MyPlanner.model.User;
 import MyPlanner.oauth.OAuth2;
 import MyPlanner.service.LoginInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,15 +41,18 @@ public class OAuthController {
         }
     }
 
+    @Autowired
+    private UserDao userDao;
+
     @RequestMapping("/redirectUserInfo")
     public String redirectUserInfo(HttpServletRequest request,
                            @RequestParam(value="code", required = true)String code) throws UserInfoNotSetException {
         LoginInfo loginInfo = oAuth.exchangeCodeForUserInfo(code);
         if(loginInfo != null && loginInfo.hasValues()){
             request.getSession().setAttribute("loginInfo", loginInfo);
-            // TODO: dummy repo
-            boolean isRegistered = loginInfoRepo.saveUser(loginInfo);
-
+            User user = loginInfo.getUser();
+            if(userDao.get(user) == null)
+                userDao.save(user);
             return "redirect:token";
         }else{
             throw new UserInfoNotSetException("User info was not set in /redirect");
@@ -65,7 +71,8 @@ public class OAuthController {
                                     @RequestParam(value = "code", required = true)String code) throws UserInfoNotSetException {
         String accessToken = oAuth.exchangeCodeForAccessToken(code);
         if(accessToken != null && !accessToken.isEmpty()) {
-            ((LoginInfo) request.getSession().getAttribute("loginInfo")).setAccessToken(accessToken);
+            LoginInfo loginInfo = ((LoginInfo) request.getSession().getAttribute("loginInfo"));
+            loginInfo.setAccessToken(accessToken);
         }else{
             throw new UserInfoNotSetException("access token not set");
         }

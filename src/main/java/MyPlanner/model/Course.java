@@ -16,17 +16,6 @@ public class Course implements Serializable{
     @JsonProperty("course_code")
     private String courseCode;
 
-    private List<Module> modules;
-
-    @Transient
-    public List<Module> getModules() {
-        return modules;
-    }
-
-    public void setModules(List<Module> modules) {
-        this.modules = modules;
-    }
-
     @Id
     @Column(name="COURSE_ID")
     public int getId() {
