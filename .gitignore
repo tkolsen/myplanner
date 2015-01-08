@@ -54,4 +54,4 @@ com_crashlytics_export_strings.xml
 /target
 src/main/webapp/resources/myplanner.properties
 src/main/webapp/WEB-INF/mp.properties
-#src/main/webapp/WEB-INF/persistence-mysql.properties
+src/main/webapp/WEB-INF/persistence-mysql.properties
