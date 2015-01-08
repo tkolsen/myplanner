@@ -1,5 +1,6 @@
 package MyPlanner.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -8,7 +9,8 @@ import java.util.List;
 
 @Entity
 @Table(name="MODULE")
-public class Module {
+public class Module implements Serializable{
+
     @JsonProperty("workflow_state")
     private String workflowState;
     @JsonProperty("position")
@@ -23,7 +25,7 @@ public class Module {
     private List<ModuleItem> items;
     @JsonProperty("completed_at")
     private String completedAt;
-    private double moduleTimeEstimation; // Must be manually set by the MyPlanner administrator, is not fetched through Canvas
+    private double moduleTimeEstimation = 30; // Must be manually set by the MyPlanner administrator, is not fetched through Canvas
 
     @Column(name="TIME_ESTIMATION")
     public double getModuleTimeEstimation() { return moduleTimeEstimation;}
@@ -58,6 +60,18 @@ public class Module {
         }
         public void setCourse(Course course) {
             this.course = course;
+        }
+
+        @Override
+        public boolean equals(Object obj){
+            if(this == obj) return true;
+            if(obj != null && obj instanceof ModulePk){
+                ModulePk other = (ModulePk) obj;
+                if(other.getId() == this.getId() && other.getCourse().equals(this.getCourse())){
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
@@ -129,4 +143,14 @@ public class Module {
     @Transient
     public Course getCourse(){ return getModulePk().getCourse(); }
     public void setCourse(Course course){this.getModulePk().course = course; }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj == this) return true;
+        if(obj != null && obj instanceof Module){
+            Module other = (Module)obj;
+            if(other.getModulePk().equals(this.getModulePk()))return true;
+        }
+        return false;
+    }
 }

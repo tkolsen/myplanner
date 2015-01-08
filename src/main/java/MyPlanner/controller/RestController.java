@@ -1,18 +1,28 @@
 package MyPlanner.controller;
 
+import MyPlanner.dao.CourseDao;
+import MyPlanner.dao.ModuleDao;
+import MyPlanner.dao.UserHasModuleDao;
 import MyPlanner.exceptions.NotAuthorizedException;
-import MyPlanner.model.Course;
-import MyPlanner.model.LoginInfo;
-import MyPlanner.model.User;
+import MyPlanner.model.*;
 import MyPlanner.service.CanvasApi;
+import MyPlanner.utils.DeadlineCheck;
+import MyPlanner.utils.ScheduleGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.sql.Date;
+
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 @Controller
@@ -20,22 +30,62 @@ import java.util.List;
 public class RestController {
 
     @Autowired
-    CanvasApi canvasApi;
+    private CanvasApi canvasApi;
+    @Autowired
+    private CourseDao courseDao;
+    @Autowired
+    private ModuleDao moduleDao;
+    @Autowired
+    private UserHasModuleDao userHasModuleDao;
 
-    @RequestMapping("/courses")
+    @RequestMapping(value = "/updateDates", method = RequestMethod.PUT)
+    public ResponseEntity<String> updateDates(@RequestBody UserHasModule userHasModule){
+        userHasModuleDao.update(userHasModule);
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/courses")
     public @ResponseBody List<Course> getCourses(HttpServletRequest request) throws NotAuthorizedException {
         LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
 
         if(loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
             throw new NotAuthorizedException();
 
-        List<Course> courseList = (List<Course>)request.getSession().getAttribute("courses");
-        if(courseList == null) {
-            courseList = canvasApi.getCourses(request);
-            request.getSession().setAttribute("courses", courseList);
-            System.out.println("Fetching courses from instructure.");
+        List<Course> courseList = canvasApi.getCourses(request);
+        request.getSession().setAttribute("courses", courseList);
+
+        for(Course c : courseList){
+            courseDao.save(c);
         }
         return courseList;
+    }
+
+    @RequestMapping(value = "/modules")
+    public @ResponseBody List<Module> getModules(HttpServletRequest request)throws NotAuthorizedException{
+        LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
+
+        if(loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
+            throw new NotAuthorizedException();
+
+        List<Course> courseList = canvasApi.getCourses(request);
+        ArrayList<Module> moduleList = null;
+        for(Course c : courseList){
+            ArrayList<Module> temp = canvasApi.getModulesAsArrayList(request, c);
+            if(moduleList != null){
+                moduleList.addAll(temp);
+            }else{
+                moduleList = temp;
+            }
+        }
+        for(Module m : moduleList){
+            moduleDao.save(m);
+        }
+        return moduleList;
+    }
+
+    @RequestMapping("/userHasModule")
+    public @ResponseBody List<UserHasModule> getUserHasModuleList(){
+        return userHasModuleDao.list();
     }
 
     @RequestMapping("/userName")
@@ -48,5 +98,54 @@ public class RestController {
         User returnUser = new User(loginInfo.getUser().getName(), loginInfo.getUser().getId());
         returnInfo.setUser(returnUser);
         return returnInfo;
+    }
+
+
+    @RequestMapping(value="/generateSchedule", method = RequestMethod.POST)
+    public @ResponseBody List<UserHasModule> generateSchedule(HttpServletRequest request, @RequestBody ScheduleDetails details) throws NotAuthorizedException {
+       LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
+
+        if(loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
+            throw new NotAuthorizedException();
+
+        ScheduleGenerator sg = new ScheduleGenerator();
+        User user = loginInfo.getUser();
+        List<UserHasModule> schedule = sg.GenerateSchedule(user, details.getModules(), details.getWorkHoursDaily(), details.getStartDate());
+        if(schedule!=null) {
+            userHasModuleDao.updateList(schedule);
+        }else {
+            System.out.println("Schedule er NULL");
+        }
+        return schedule;
+    }
+
+    @RequestMapping(value="/checkAllDeadlines", method = RequestMethod.POST)
+    public @ResponseBody List<UserHasModule> getAllDeadlines(HttpServletRequest request, DeadlineDetails details) throws NotAuthorizedException {
+        LoginInfo loginInfo = (LoginInfo) request.getSession().getAttribute("loginInfo");
+
+        if (loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
+            throw new NotAuthorizedException();
+
+        DeadlineCheck dc = new DeadlineCheck();
+        List<UserHasModule> allDeadlines = dc.ListAllUnmetDeadlines(details.getDeadlines(), details.getDate());
+        return allDeadlines;
+    }
+
+    @RequestMapping(value="/checkOldestDeadlines", method = RequestMethod.POST)
+    public @ResponseBody List<UserHasModule> getOldestDeadlines(HttpServletRequest request, DeadlineDetails details) throws NotAuthorizedException {
+        LoginInfo loginInfo = (LoginInfo) request.getSession().getAttribute("loginInfo");
+
+        if (loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
+            throw new NotAuthorizedException();
+
+        DeadlineCheck dc = new DeadlineCheck();
+        List<UserHasModule> oldestDeadlines = dc.ListOldestUnmetDeadlines(details.getDeadlines(), details.getDate());
+        return oldestDeadlines;
+    }
+    
+    private void updateCoursesAndModules(@RequestBody List<Course> courses){
+        for(Course c : courses){
+            courseDao.save(c);
+        }
     }
 }

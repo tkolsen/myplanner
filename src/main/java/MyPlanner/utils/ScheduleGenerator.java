@@ -17,29 +17,29 @@ public class ScheduleGenerator {
      *
      * @param startDate the date from which to start the schedule
      * @param user the user for which to generate a schedule for
-     * @param course the selected course to generate a schedule for
+     * @param modules the list of modules in the selected course to generate a schedule for
      * @param workHoursDaily the amount of hours the user expects to work with the course per day
      * @return an ArrayList containing the recommended schedule based on the given parameters
      * and the courses module time-estimates
      */
-    // TODO: should workHoursDaily be moved to the user class? Probably not.
-    public List<UserHasModule> GenerateSchedule(User user, Course course, double workHoursDaily, Date startDate){
+    public List<UserHasModule> GenerateSchedule(User user, List<Module> modules, double workHoursDaily, Date startDate){
 
         List<UserHasModule> recommendedSchedule = new ArrayList<UserHasModule>();
 
-        for (int i = 0; i<course.getModules().size(); i++){
+        for (int i = 0; i<modules.size(); i++){
             UserHasModule scheduleItem = new UserHasModule();
 
             scheduleItem.setUser(user);
-            Module module = course.getModules().get(i);
+            Module module = modules.get(i);
             scheduleItem.setModule(module);
-            scheduleItem.getModule().setCourse(course);
 
             // Checks if the module is completed:
             boolean moduleIsComplete = true;
             for (int j = 0; j<module.getItems().size(); j++){
-                if (!module.getItems().get(j).getCompletionRequirement().isCompleted()){
-                    moduleIsComplete = false;
+                if(module.getItems().get(j).getCompletionRequirement() != null) {
+                    if (!module.getItems().get(j).getCompletionRequirement().isCompleted()) {
+                        moduleIsComplete = false;
+                    }
                 }
             }
 

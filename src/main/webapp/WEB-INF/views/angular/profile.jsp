@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html ng-app="myPlanner">
 <head>
     <title>Home</title>
@@ -25,30 +26,68 @@
             <label>
                 Velg kurs:
                 <select data-ng-model="selectedCourse" data-ng-options="course.name for course in courses"></select>
-            </label>
-            <a href="<c:url value="/user/profile/refresh"/>">Oppdater side</a>
+            </label> | <a href="<c:url value="/user/profile/refresh"/>">Hent data på nytt</a>
+            <br/>
         </aside>
+
+        <div id="schedule-generator">
+            <a ng-click="showGenerator()">
+                <span ng-hide="!show">&nabla;</span>
+                <span ng-hide="show">&Delta;</span>
+                Generer timeplan
+                <span ng-hide="!show">&nabla;</span>
+                <span ng-hide="show">&Delta;</span>
+            </a>
+            <form data-ng-submit="generateSchedule(scheduleDetails)" ng-hide="show" action="/user/profile/refresh">
+                <label for="hours-pr-day-input">
+                    Timer du jobber per dag:
+                </label>
+                <input name="hours-pr-day" id="hours-pr-day-input" type="number"
+                       ng-model="scheduleDetails.workHoursDaily" min="0" max="24"
+                       title="Omtrentlig antall arbeidstimer du regner med å i gjennomsnitt ville jobbe med faget hver dag."/>
+                <br class="clear-float"/>
+
+                <label for="start-date-input">
+                    Datoen du skal starte:
+                </label>
+                <input title="Datoen du vil begynne å jobbe med faget." name="start-date" id="start-date-input" type="date" ng-model="scheduleDetails.startDate"/>
+                <br class="clear-float"/>
+
+                <input id="schedule-submit-button" type="submit" value="Generer Timeplan"/>
+                <br class="clear-float"/>
+            </form>
+        </div>
 
         <!-- Wrapper for modules -->
         <div id="module-wrapper">
             <h3 data-ng-if="selectedCourse">Moduler i {{selectedCourse.name}}:</h3>
-
+            <h1 id="loading-text" ng-show="!courses">
+                Venligst vent. Henter data fra din Canvas konto.<br/>
+                <img id="loading-gif" src="../resources/ajax-loader-alt.gif"/>
+            </h1>
             <!-- Module. Repeats for each module in selected course -->
             <div data-ng-repeat="course in courses | filter:selectedCourse.name" data-ng-if="selectedCourse">
                 <div class="module" data-ng-click="moduleClicked()" data-ng-repeat="module in course.modules">
                     <div class="padding">
                         <h4 class="module-name">{{module.name}}</h4>
-                        <span class="time">(15 timer)</span>
+                        <span class="time">Estimert arbeidsmengde i timer: {{module.moduleTimeEstimation}}</span>
 
                         <div class="clear-float"></div>
-                        <form>
+                        <form data-ng-submit="submit(module)">
                             <label>
-                                Start: <input type="date"/>
+                                Start: <input title="Anbefalt dato for når du bør begynne på modulen." ng-model="module.newStartDate" type="date"/>
                             </label>
                             <label>
-                                Slutt: <input type="date"/>
+                                Slutt: <input title="Anbefalt dato for når du bør være ferdig med modulen." ng-model="module.newEndDate" type="date"/>
                             </label>
-                            <span>Tid til frist: 5dager</span>
+                            <label>
+                                <input type="submit" value="Lagre"/>
+                            </label>
+                            <span>
+                                Tid til frist:
+                                <span ng-show="module.newEndDate">{{testDateCalc(module.newEndDate)}}</span>
+                                <span ng-show="!module.newEndDate">Dato ikke satt</span>
+                            </span>
                         </form>
                     </div>
                     <span class="progressBackground">
@@ -68,3 +107,4 @@
 </div>
 </body>
 </html>
+<!-- test -->
