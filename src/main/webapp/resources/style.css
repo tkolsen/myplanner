@@ -167,3 +167,6 @@ body{
 #schedule-generator a{
     text-decoration: underline;
 }
+#schedule-generator #schedule-submit-button{
+    padding: 3px;
+}
