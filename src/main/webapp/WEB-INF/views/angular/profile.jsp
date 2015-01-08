@@ -34,11 +34,12 @@
             <a ng-click="showGenerator()">
                 <span ng-hide="!show">&nabla;</span>
                 <span ng-hide="show">&Delta;</span>
-                Generer timeplan
+                Handlingsmeny
                 <span ng-hide="!show">&nabla;</span>
                 <span ng-hide="show">&Delta;</span>
             </a>
             <form data-ng-submit="generateSchedule(scheduleDetails)" ng-hide="show" action="/user/profile/refresh">
+                <h4>Generer Fremdriftsplan:</h4>
                 <label for="hours-pr-day-input">
                     Timer du jobber per dag:
                 </label>
@@ -54,6 +55,17 @@
                 <br class="clear-float"/>
 
                 <input id="schedule-submit-button" type="submit" value="Generer Timeplan"/>
+                <br class="clear-float"/>
+            </form>
+            <form data-ng-submit="checkDeadlines(onlyOldestDates)" ng-hide="show"> <%-- add action on submit, load page with users--%>
+                <h4>Hent elever bak sin fremdriftsplan:</h4>
+                <label for="oldest-dates">
+                    Hent kun eldste uoppnådde frist:
+                </label>
+                <input type="checkbox" data-ng-model="onlyOldestDates" id="oldest-dates" checked>
+                <br class="clear-float"/>
+
+                <input type="submit" value="Sjekk Deadlines">
                 <br class="clear-float"/>
             </form>
         </div>

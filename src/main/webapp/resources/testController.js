@@ -50,12 +50,26 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
     $scope.moduleClicked = function(){
     };
 
-    $scope.checkAllDeadlines = function(deadlineDetails){
+    $scope.checkDeadlines = function(onlyOldestDates){
+        var details = {
+            "date": new Date(),
+            "deadlines": $scope.userHasModule
+        }
 
-    };
+        if(onlyOldestDates){
+            $http({
+                method: 'POST',
+                url: '../rest/checkOldestDeadlines',
+                data: details
+            });
 
-    $scope.checkOldestDeadlines = function(deadlineDetails){
-        // TODO: implement me
+        }else{
+            $http({
+                method: 'POST',
+                url: '../rest/checkAllDeadlines',
+                data: details
+            });
+        }
     };
 
     $scope.generateSchedule = function(scheduleDetails){
