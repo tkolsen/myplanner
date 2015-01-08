@@ -120,7 +120,7 @@ public class RestController {
     }
 
     @RequestMapping(value="/checkAllDeadlines", method = RequestMethod.POST)
-    public @ResponseBody List<UserHasModule> getAllDeadlines(HttpServletRequest request, DeadlineDetails details) throws NotAuthorizedException {
+    public @ResponseBody List<UserHasModule> getAllDeadlines(HttpServletRequest request, @RequestBody DeadlineDetails details) throws NotAuthorizedException {
         LoginInfo loginInfo = (LoginInfo) request.getSession().getAttribute("loginInfo");
 
         if (loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
@@ -132,7 +132,7 @@ public class RestController {
     }
 
     @RequestMapping(value="/checkOldestDeadlines", method = RequestMethod.POST)
-    public @ResponseBody List<UserHasModule> getOldestDeadlines(HttpServletRequest request, DeadlineDetails details) throws NotAuthorizedException {
+    public @ResponseBody List<UserHasModule> getOldestDeadlines(HttpServletRequest request, @RequestBody DeadlineDetails details) throws NotAuthorizedException {
         LoginInfo loginInfo = (LoginInfo) request.getSession().getAttribute("loginInfo");
 
         if (loginInfo == null || !loginInfo.hasValues() || loginInfo.getAccessToken() == null)
