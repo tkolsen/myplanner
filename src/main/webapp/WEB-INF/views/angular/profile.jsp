@@ -28,14 +28,22 @@
                 <select data-ng-model="selectedCourse" data-ng-options="course.name for course in courses"></select>
             </label>
 
-            <a href="#">Skjul ferdige moduler</a>
-            <p>
-                Opprett Timeplan:<form data-ng-submit="generateSchedule(scheduleDetails)">
-                    <input title="Antall arbeidstimer du regner med du i gjennomsnitt kan jobbe med faget hver dag." label="Timer:" type="number" ng-model="scheduleDetails.workHoursDaily"/>
-                    <input title="Datoen du vil begynne med faget." label="Startdato" type="date" ng-model="scheduleDetails.startDate"/>
-                    <input type="submit" value="Generate Schedule"/>
-                </form>
-            </p>
+            <%--<a href="#">Skjul ferdige moduler</a>--%>
+
+            <form data-ng-submit="generateSchedule(scheduleDetails)" action="/user/profile/refresh">
+                <label>
+                    Startdato:
+                    <input title="Datoen du vil begynne å jobbe med faget." label="Startdato" type="date" ng-model="scheduleDetails.startDate"/>
+                </label>
+                <label>
+                    Arbeidstimer:
+                    <input title="Omtrentlig antall arbeidstimer du regner med å i gjennomsnitt ville jobbe med faget hver dag." label="Timer:" type="number" ng-model="scheduleDetails.workHoursDaily"/>
+                </label>
+                <label>
+                    <input type="submit" value="Generer Fremdriftsplan"/>
+                </label>
+            </form>
+
             <a href="<c:url value="/user/profile/refresh"/>">Hent data på nytt</a>
 
         </aside>
