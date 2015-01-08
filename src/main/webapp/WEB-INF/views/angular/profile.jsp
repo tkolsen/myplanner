@@ -32,6 +32,8 @@
 
         <div id="schedule-generator">
             <a ng-click="showGenerator()">
+                <span ng-hide="!show">&nabla;</span>
+                <span ng-hide="show">&Delta;</span>
                 Generer timeplan
                 <span ng-hide="!show">&nabla;</span>
                 <span ng-hide="show">&Delta;</span>
