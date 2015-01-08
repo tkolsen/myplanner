@@ -29,7 +29,6 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
                 }
             });
         });
-        console.log($scope.userHasModule);
         compareDates();
     });
     var compareDates = function(){
@@ -49,7 +48,6 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
     };
 
     $scope.moduleClicked = function(){
-        console.log("module clicked");
     };
 
     $scope.checkAllDeadlines = function(deadlineDetails){
@@ -76,13 +74,11 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
                 "workHoursDaily": scheduleDetails.workHoursDaily,
                 "startDate": scheduleDetails.startDate
             };
-            console.log(details);
             $http({
                 method: 'POST',
                 url: '../rest/generateSchedule',
                 data: details
             }).success(function(){
-                console.log('heilt ok');
             });
         }
     };
