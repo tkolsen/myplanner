@@ -26,20 +26,29 @@
             <label>
                 Velg kurs:
                 <select data-ng-model="selectedCourse" data-ng-options="course.name for course in courses"></select>
-            </label>
-
-            <a href="#">Skjul ferdige moduler</a>
-            <p>
-                Opprett Timeplan:
-                <form data-ng-submit="generateSchedule(scheduleDetails)">
-                    <input type="number" ng-model="scheduleDetails.workHoursDaily"/>
-                    <input type="date" ng-model="scheduleDetails.startDate"/>
-                    <input type="submit" value="Generate Schedule"/>
-                </form>
-            </p>
-            <a href="<c:url value="/user/profile/refresh"/>">Hent data på nytt</a>
-
+            </label> | <a href="<c:url value="/user/profile/refresh"/>">Hent data på nytt</a>
+            <br/>
         </aside>
+
+        <div id="schedule-generator">
+            <a ng-click="showGenerator()">Generer timeplan&nabla;</a>
+            <form data-ng-submit="generateSchedule(scheduleDetails)" ng-hide="show">
+                <label for="hours-pr-day-input">
+                    Timer du jobber per dag:
+                </label>
+                <input name="hours-pr-day" id="hours-pr-day-input" type="number" ng-model="scheduleDetails.workHoursDaily" min="0" max="24"/>
+                <br class="clear-float"/>
+
+                <label for="start-date-input">
+                    Datoen du skal starte:
+                </label>
+                <input name="start-date" id="start-date-input" type="date" ng-model="scheduleDetails.startDate"/>
+                <br class="clear-float"/>
+
+                <input id="schedule-submit-button" type="submit" value="Generer Timeplan"/>
+                <br class="clear-float"/>
+            </form>
+        </div>
 
         <!-- Wrapper for modules -->
         <div id="module-wrapper">

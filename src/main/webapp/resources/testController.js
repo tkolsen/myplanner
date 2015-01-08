@@ -111,6 +111,11 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         }
     }
 
+    $scope.show = true;
+    $scope.showGenerator = function(){
+        $scope.show = !$scope.show;
+    };
+
     $scope.submit = function(module){
         var moduleId = module.id;
         var newStartDate = module.newStartDate;
