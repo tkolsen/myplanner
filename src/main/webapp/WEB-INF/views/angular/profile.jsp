@@ -38,7 +38,7 @@
                 <span ng-hide="!show">&nabla;</span>
                 <span ng-hide="show">&Delta;</span>
             </a>
-            <form data-ng-submit="generateSchedule(scheduleDetails)" ng-hide="show" action="/user/profile/refresh">
+            <form data-ng-submit="generateSchedule(scheduleDetails)" ng-hide="show" action="<c:url value="/user/profile/refresh"/>">
                 <label for="hours-pr-day-input">
                     Timer du jobber per dag:
                 </label>
