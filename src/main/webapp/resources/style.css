@@ -170,3 +170,13 @@ body{
 #schedule-generator #schedule-submit-button{
     padding: 3px;
 }
+#loading-text{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+}
+#loading-gif{
+    width: 200px;
+    height: 200px;
+}
