@@ -31,7 +31,11 @@
         </aside>
 
         <div id="schedule-generator">
-            <a ng-click="showGenerator()">Generer timeplan&nabla;</a>
+            <a ng-click="showGenerator()">
+                Generer timeplan
+                <span ng-hide="!show">&nabla;</span>
+                <span ng-hide="show">&Delta;</span>
+            </a>
             <form data-ng-submit="generateSchedule(scheduleDetails)" ng-hide="show" action="/user/profile/refresh">
                 <label for="hours-pr-day-input">
                     Timer du jobber per dag:

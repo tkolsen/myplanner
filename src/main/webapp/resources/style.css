@@ -143,7 +143,6 @@ body{
     text-align: center;
     border-bottom: 1px solid #909191;
     padding: 5px 0px;
-    cursor: hand;
 }
 #schedule-generator label{
     padding: 5px 0px;
@@ -166,6 +165,7 @@ body{
 }
 #schedule-generator a{
     text-decoration: underline;
+    cursor: hand;
 }
 #schedule-generator #schedule-submit-button{
     padding: 3px;
