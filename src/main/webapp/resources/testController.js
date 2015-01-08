@@ -136,4 +136,15 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
             alert('Dato lagret');
         });
     };
+
+    $scope.testDateCalc = function(moduleEndDate){
+        var todaysDate = new Date();
+
+        var delta = Math.abs(todaysDate - moduleEndDate)/1000;
+        var days = Math.floor(delta/86400);
+        delta -= days * 86400;
+        var hours = Math.floor(delta/3600) % 24;
+
+        return days + ' dager, ' + hours + ' timer.'
+    };
 });

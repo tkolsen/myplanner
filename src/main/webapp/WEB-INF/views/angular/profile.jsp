@@ -83,7 +83,11 @@
                             <label>
                                 <input type="submit" value="Lagre"/>
                             </label>
-                            <span>Tid til frist: ?</span>
+                            <span>
+                                Tid til frist:
+                                <span ng-show="module.newEndDate">{{testDateCalc(module.newEndDate)}}</span>
+                                <span ng-show="!module.newEndDate">Dato ikke satt</span>
+                            </span>
                         </form>
                     </div>
                     <span class="progressBackground">

@@ -112,7 +112,6 @@ public class RestController {
         User user = loginInfo.getUser();
         List<UserHasModule> schedule = sg.GenerateSchedule(user, details.getModules(), details.getWorkHoursDaily(), details.getStartDate());
         if(schedule!=null) {
-            System.out.println("Størrelse på liste: " + schedule.size());
             userHasModuleDao.updateList(schedule);
         }else {
             System.out.println("Schedule er NULL");
