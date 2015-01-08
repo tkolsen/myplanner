@@ -63,7 +63,7 @@
             <h3 data-ng-if="selectedCourse">Moduler i {{selectedCourse.name}}:</h3>
             <h1 id="loading-text" ng-show="!courses">
                 Venligst vent. Henter data fra din Canvas konto.<br/>
-                <img id="loading-gif" src="../resources/ajax-loader.gif"/>
+                <img id="loading-gif" src="../resources/ajax-loader-alt.gif"/>
             </h1>
             <!-- Module. Repeats for each module in selected course -->
             <div data-ng-repeat="course in courses | filter:selectedCourse.name" data-ng-if="selectedCourse">
