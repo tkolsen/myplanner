@@ -44,7 +44,7 @@
                     Timer du jobber per dag:
                 </label>
                 <input name="hours-pr-day" id="hours-pr-day-input" type="number"
-                       ng-model="scheduleDetails.workHoursDaily" min="0" max="24"
+                       ng-model="scheduleDetails.workHoursDaily" min="0" max="24" <%-- TODO: Should be possible to set this to a decimal --%>
                        title="Omtrentlig antall arbeidstimer du regner med å i gjennomsnitt ville jobbe med faget hver dag."/>
                 <br class="clear-float"/>
 
