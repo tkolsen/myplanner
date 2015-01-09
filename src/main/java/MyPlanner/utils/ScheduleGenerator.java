@@ -34,6 +34,7 @@ public class ScheduleGenerator {
             scheduleItem.setModule(module);
 
             // Checks if the module is completed:
+            // TODO; Check if this can be replaced by looking at the module state variable from canvas instead
             boolean moduleIsComplete = true;
             for (int j = 0; j<module.getItems().size(); j++){
                 if(module.getItems().get(j).getCompletionRequirement() != null) {

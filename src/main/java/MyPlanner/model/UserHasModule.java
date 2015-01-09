@@ -9,7 +9,7 @@ import java.sql.Date;
 public class UserHasModule {
     private Date startDate;
     private Date endDate;
-    private Date completedAt = null;
+    private String completedAt = null;
 
     @Column(name="START_DATE")
     public Date getStartDate() {
@@ -28,8 +28,8 @@ public class UserHasModule {
     }
 
     @Column(name="COMPLETED_AT")
-    public Date getCompletedAt() { return completedAt; }
-    public void setCompletedAt(Date completedAt) { this.completedAt = completedAt; }
+    public String getCompletedAt() { return completedAt; }
+    public void setCompletedAt(String completedAt) { this.completedAt = completedAt; }
 
 
     private UserHasModulePK userHasModulePK = new UserHasModulePK();
