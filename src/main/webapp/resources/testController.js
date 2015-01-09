@@ -156,7 +156,7 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         var hours = Math.floor(delta/3600) % 24;
 
         if(todaysDate < moduleEndDate){
-            return days + ' dager, ' + hours + ' timer.'
+            return 'Tid til frist: ' + days + ' dager, ' + hours + ' timer.'
         }else{
             return 'Fristen gikk ut for ' + days + ' dager og ' + hours + ' timer siden.'
         }
