@@ -92,7 +92,8 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
                 method: 'POST',
                 url: '../rest/generateSchedule',
                 data: details
-            }).success(function(){
+            }).success(function(response){
+                $scope.testVar = response;
             });
         }
     };
