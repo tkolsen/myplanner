@@ -84,7 +84,7 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
                     courseObj = course;
                 }
             });
-            console.log(scheduleDetails.workHoursDaily + scheduleDetails.startDate);
+            console.log(scheduleDetails.workHoursDaily + " " + scheduleDetails.startDate);
             var details = {
                 "modules": courseObj.modules,
                 "workHoursDaily": scheduleDetails.workHoursDaily,
