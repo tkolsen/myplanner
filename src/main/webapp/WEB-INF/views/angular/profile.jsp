@@ -43,41 +43,37 @@
                 <span ng-hide="show">&Delta;</span>
             </a>
             <br ng-hide="show"/> <%-- lol hax --%>
-            <div id="schedule-generator-input">
-                <form data-ng-submit="generateSchedule(scheduleDetails)" ng-hide="show" action="<c:url value="/user/profile/refresh"/>">
-                    <h4>Generer Fremdriftsplan:</h4>
-                    <label for="hours-pr-day-input">
-                        Timer du jobber per dag:
-                    </label>
-                    <input name="hours-pr-day" id="hours-pr-day-input" type="number"
-                           ng-model="scheduleDetails.workHoursDaily" min="0" max="24" <%-- TODO: Should be possible to set this to a decimal --%>
-                           title="Omtrentlig antall arbeidstimer du regner med å i gjennomsnitt ville jobbe med faget hver dag."/>
-                    <br class="clear-float"/>
+            <form id="schedule-generator-input" data-ng-submit="generateSchedule(scheduleDetails)" ng-hide="show" action="<c:url value="/user/profile/refresh"/>">
+                <h4>Generer Fremdriftsplan:</h4>
+                <label for="hours-pr-day-input">
+                    Timer du jobber per dag:
+                </label>
+                <input name="hours-pr-day" id="hours-pr-day-input" type="number"
+                       ng-model="scheduleDetails.workHoursDaily" min="0" max="24" <%-- TODO: Should be possible to set this to a decimal --%>
+                       title="Omtrentlig antall arbeidstimer du regner med å i gjennomsnitt ville jobbe med faget hver dag."/>
+                <br class="clear-float"/>
 
-                    <label for="start-date-input">
-                        Datoen du vil starte:
-                    </label>
-                    <input title="Datoen du vil begynne å jobbe med faget." name="start-date" id="start-date-input" type="date" ng-model="scheduleDetails.startDate"/>
-                    <br class="clear-float"/>
+                <label for="start-date-input">
+                    Datoen du vil starte:
+                </label>
+                <input title="Datoen du vil begynne å jobbe med faget." name="start-date" id="start-date-input" type="date" ng-model="scheduleDetails.startDate"/>
+                <br class="clear-float"/>
 
-                    <input id="schedule-submit-button" type="submit" value="Generer Timeplan"/>
-                    <br class="clear-float"/>
-                </form>
-            </div>
-            <div id="deadline-generator-input">
-                <%-- TODO add action on submit, load page with users, and make it display only for teachers --%>
-                <form data-ng-submit="checkDeadlines(onlyOldestDates)" ng-hide="show">
-                    <h4>Hent elever bak sin fremdriftsplan:</h4>
-                    <label for="oldest-dates">
-                        Hent kun eldste uoppnådde frist:
-                    </label>
-                    <input type="checkbox" data-ng-model="onlyOldestDates" id="oldest-dates" checked>
-                    <br class="clear-float"/>
+                <input id="schedule-submit-button" type="submit" value="Generer Timeplan"/>
+                <br class="clear-float"/>
+            </form>
+            <%-- TODO add action on submit, load page with users --%>
+            <form id="deadline-generator-input" data-ng-submit="checkDeadlines(onlyOldestDates)" ng-hide="showTeacherOptions">
+                <h4>Hent elever bak sin fremdriftsplan:</h4>
+                <label for="oldest-dates">
+                    Hent kun eldste uoppnådde frist:
+                </label>
+                <input type="checkbox" data-ng-model="onlyOldestDates" id="oldest-dates" checked>
+                <br class="clear-float"/>
 
-                    <input id="deadline-submit-button" type="submit" value="Sjekk Deadlines"/>
-                    <br class="clear-float"/>
-                </form>
-            </div>
+                <input id="deadline-submit-button" type="submit" value="Sjekk Deadlines"/>
+                <br class="clear-float"/>
+            </form>
         </div>
 
         <!-- Wrapper for modules -->
@@ -103,7 +99,7 @@
                                 Slutt: <input title="Anbefalt dato for når du bør være ferdig med modulen." ng-model="module.newEndDate" type="date"/>
                             </label>
                             <label>
-                                <input type="submit" value="Lagre"/>
+                                <input id="module-submit-button" type="submit" value="Lagre"/>
                             </label>
                             <span>
                                 Tid til frist:

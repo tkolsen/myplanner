@@ -122,8 +122,13 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
     }
 
     $scope.show = true;
+    $scope.showTeacherOptions = true;
     $scope.showGenerator = function(){
         $scope.show = !$scope.show;
+        if(true){ // TODO: Add check if the logged in user is a teacher in the selected course
+            $scope.showTeacherOptions = !$scope.showTeacherOptions;
+        }
+
     };
 
     $scope.submit = function(module){

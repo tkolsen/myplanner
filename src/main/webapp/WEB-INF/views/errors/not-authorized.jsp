@@ -5,7 +5,7 @@
     <title>Error</title>
 </head>
 <body>
-    <h1>Not authorized!</h1>
-    <a href="<c:url value="/oauth/userInfo"/>">Log inn</a>
+    <h1>Du er ikke logget inn.</h1>
+    <a href="<c:url value="/oauth/userInfo"/>">Logg inn</a>
 </body>
 </html>
