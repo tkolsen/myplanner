@@ -8,15 +8,27 @@ body{
 }
 
 #logo {
-    font-family: Rockwell, serif;
-    font-size: 3em;
+    /*font-family: Rockwell, serif;*/
+    /*font-size: 3em;*/
+    float: left;
+    width: 75%
 }
 
-#logo span {
-    font-size: 0.72em;
-    text-decoration: overline;
-    color: white;
-    text-shadow: 1px 1px 1px black;
+#logo img{
+    width: 35%;
+}
+
+/*#logo span {*/
+    /*font-size: 0.72em;*/
+    /*text-decoration: overline;*/
+    /*color: white;*/
+    /*text-shadow: 1px 1px 1px black;*/
+/*}*/
+
+#logged-user-details{
+    float: left;
+    width: 25%;
+    text-align: right;
 }
 
 #wrapper {
@@ -30,13 +42,13 @@ body{
 }
 
 #header {
-    text-align: center;
     border-bottom: 1px solid #909191;
-    padding: 20px;
+    padding: 15px;
     color: white;
     background-color: #4b5662;
+    overflow: hidden;
 }
-#header h1, #header h2, #header p, #header a{
+#header h3, #header p, #header a{
     color: white;
     text-shadow: 1px 1px 1px black;
 }
@@ -170,6 +182,19 @@ body{
 #schedule-generator #schedule-submit-button{
     padding: 3px;
 }
+
+#deadline-submit-button{
+    padding: 3px;
+}
+
+#schedule-generator-input{
+    display: inline-block;
+}
+
+#deadline-generator-input{
+    display: inline-block;
+}
+
 #loading-text{
     display: inline-block;
     width: 100%;
