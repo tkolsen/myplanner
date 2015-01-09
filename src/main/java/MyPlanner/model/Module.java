@@ -23,6 +23,7 @@ public class Module implements Serializable{
     private String itemsUrl;
     @JsonProperty("items")
     private List<ModuleItem> items;
+
     @JsonProperty("completed_at")
     private String completedAt;
     private double moduleTimeEstimation = 30; // Must be manually set by the MyPlanner administrator, is not fetched through Canvas
@@ -90,6 +91,10 @@ public class Module implements Serializable{
     public void setItems(List<ModuleItem> items) {
         this.items = items;
     }
+
+    @Transient
+    public String getCompletedAt() {return completedAt;}
+    public void setCompletedAt(String completedAt) { this.completedAt = completedAt;}
 
     @Transient
     @JsonProperty("id")
