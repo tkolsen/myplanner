@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 public class CanvasApiImpl implements CanvasApi{
-    private String baseUrl = "https://canvas.instructure.com";
+    private String baseUrl = "https://hist.instructure.com";
 
     /**
      *
