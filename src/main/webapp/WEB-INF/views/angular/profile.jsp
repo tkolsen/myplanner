@@ -115,8 +115,6 @@
     <section id="extra" class="box">
         <h3>Made by Tom K. Olsen, Dagfinn Reitan and Kim André Kjelsberg <br/> For Høgskolen i Sør-Trøndelag</h3>
     </section>
-    {{testVar}}
 </div>
 </body>
 </html>
-<!-- test -->

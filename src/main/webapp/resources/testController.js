@@ -68,12 +68,12 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
                 method: 'POST',
                 url: '../rest/checkAllDeadlines',
                 data: details
+            }).success(function(data, status, headers, config){
+                console.log("Success:\n" + data + "\n" + status + "\n" + headers + "\n" + config);
             });
         }
     };
 
-    $scope.testVar = "ingenting";
-    
     $scope.generateSchedule = function(scheduleDetails){
         if(confirm("Dette vil overskrive din nåværende fremdriftsplan om den allerede eksisterer og generere en ny fremdriftsplan, og kan ikke tilbakestilles. Vil du fortsette?")){
 
@@ -94,8 +94,7 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
                 method: 'POST',
                 url: '../rest/generateSchedule',
                 data: details
-            }).success(function(response){
-                $scope.testVar = response;
+            }).success(function(){
             });
         }
     };
