@@ -72,6 +72,8 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         }
     };
 
+    $scope.testVar = "ingenting";
+    
     $scope.generateSchedule = function(scheduleDetails){
         if(confirm("Dette vil overskrive din nåværende fremdriftsplan om den allerede eksisterer og generere en ny fremdriftsplan, og kan ikke tilbakestilles. Vil du fortsette?")){
 
