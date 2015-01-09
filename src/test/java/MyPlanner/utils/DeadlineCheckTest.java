@@ -42,7 +42,7 @@ public class DeadlineCheckTest {
         User1Deadline1.setModule(module1);
         calendar.set(2013, calendar.NOVEMBER, 20);
         User1Deadline1.setEndDate(new Date(calendar.getTime().getTime()));
-        User1Deadline1.setCompletedAt(new Date(calendar.getTime().getTime()));
+        User1Deadline1.setCompletedAt(calendar.getTime().getTime() + "");
 
         UserHasModule User1Deadline2 = new UserHasModule();
         User1Deadline2.setUser(user1);
@@ -94,14 +94,14 @@ public class DeadlineCheckTest {
         User4Deadline1.setModule(module1);
         calendar.set(2014, calendar.JANUARY, 20);
         User4Deadline1.setEndDate(new Date(calendar.getTime().getTime()));
-        User4Deadline1.setCompletedAt(new Date(calendar.getTime().getTime()));
+        User4Deadline1.setCompletedAt(calendar.getTime().getTime() + "");
 
         UserHasModule User4Deadline2 = new UserHasModule();
         User4Deadline2.setUser(user4);
         User4Deadline2.setModule(module2);
         calendar.set(2014, calendar.JUNE, 20);
         User4Deadline2.setEndDate(new Date(calendar.getTime().getTime()));
-        User4Deadline1.setCompletedAt(new Date(calendar.getTime().getTime()));
+        User4Deadline1.setCompletedAt(calendar.getTime().getTime() + "");
 
         // Two completed modules
         deadlines.add(User4Deadline1);
@@ -114,7 +114,7 @@ public class DeadlineCheckTest {
         User5Deadline1.setModule(module1);
         calendar.set(2013, calendar.NOVEMBER, 20);
         User5Deadline1.setEndDate(new Date(calendar.getTime().getTime()));
-        User5Deadline1.setCompletedAt(new Date(calendar.getTime().getTime()));
+        User5Deadline1.setCompletedAt(calendar.getTime().getTime() + "");
 
         UserHasModule User5Deadline2 = new UserHasModule();
         User5Deadline2.setUser(user5);
