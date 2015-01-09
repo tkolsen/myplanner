@@ -84,8 +84,17 @@ public class RestController {
     }
 
     @RequestMapping("/userHasModule")
-    public @ResponseBody List<UserHasModule> getUserHasModuleList(){
-        return userHasModuleDao.list();
+    public @ResponseBody List<UserHasModule> getUserHasModuleList(HttpServletRequest request){
+        // TODO: fix this. Is returning all userHasModules.
+        LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
+        List<UserHasModule> list = userHasModuleDao.list();
+        List<UserHasModule> result = new ArrayList<UserHasModule>();
+        for(UserHasModule u : list){
+            if(u.getUser().getId()==loginInfo.getUser().getId()){
+                result.add(u);
+            }
+        }
+        return result;
     }
 
     @RequestMapping("/userName")
