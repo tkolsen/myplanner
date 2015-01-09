@@ -27,7 +27,7 @@ public class UserHasModule {
         this.endDate = endDate;
     }
 
-    @Column(name="COMPLETED_AT")
+    //@Column(name="COMPLETED_AT")
     public String getCompletedAt() { return completedAt; }
     public void setCompletedAt(String completedAt) { this.completedAt = completedAt; }
 
