@@ -155,6 +155,11 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         delta -= days * 86400;
         var hours = Math.floor(delta/3600) % 24;
 
-        return days + ' dager, ' + hours + ' timer.'
+        if(todaysDate > moduleEndDate){
+            return days + ' dager, ' + hours + ' timer.'
+        }else{
+            return 'Fristen gikk ut for ' + days + ' dager og ' + hours + ' timer siden.'
+        }
+
     };
 });
