@@ -13,9 +13,9 @@
 <body>
 <div id="wrapper" data-ng-controller="CoursesCtrl">
     <header id="header" class="box">
-        <h1 id="logo"><span>My</span>Planner</h1>
+        <img src="/resources/logo9.png" style="width:35%">
         <h2>Logget inn som: {{username}}</h2>
-        <p><a href="<c:url value="/oauth/logout"/>">Log ut</a></p>
+        <p><a href="<c:url value="/oauth/logout"/>">Logg ut</a></p>
     </header>
 
     <!-- Main content -->
@@ -74,7 +74,7 @@
         <div id="module-wrapper">
             <h3 data-ng-if="selectedCourse">Moduler i {{selectedCourse.name}}:</h3>
             <h1 id="loading-text" ng-show="!courses">
-                Venligst vent. Henter data fra din Canvas konto.<br/>
+                Vennligst vent. Henter data fra Canvas.<br/>
                 <img id="loading-gif" src="../resources/ajax-loader-alt.gif"/>
             </h1>
             <!-- Module. Repeats for each module in selected course -->
@@ -114,7 +114,8 @@
 
     <!-- Main footer -->
     <section id="extra" class="box">
-        <h3>Made by Tom K. Olsen, Dagfinn Reitan and Kim André Kjelsberg <br/> For Høgskolen i Sør-Trøndelag</h3>
+        <h4>Beta developed by Tom K. Olsen, Dagfinn Reitan and Kim André Kjelsberg <br/> For Høgskolen i Sør-Trøndelag</h4>
+        <h4>MyPlanner logo developed by <a href="http://rareformnewmedia.com/">Rare Form New Media</a></h4>
     </section>
 </div>
 </body>
