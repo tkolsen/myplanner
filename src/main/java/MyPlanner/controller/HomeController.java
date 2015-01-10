@@ -3,11 +3,13 @@ package MyPlanner.controller;
 import MyPlanner.exceptions.NotAuthorizedException;
 import MyPlanner.model.Course;
 import MyPlanner.model.LoginInfo;
+import MyPlanner.model.UserHasModule;
 import MyPlanner.service.CanvasApi;
 import MyPlanner.service.LoginInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServlet;
@@ -41,8 +43,10 @@ public class HomeController {
     }
 
     @RequestMapping("/teacher")
-    public ModelAndView teacherPage(HttpServletRequest request){
+    public ModelAndView teacherPage(@RequestParam List<UserHasModule> userHasModuleList, @RequestParam boolean onlyOldestDate){
         ModelAndView model = new ModelAndView("angular/teacher");
+        model.addObject("userHasModuleList", userHasModuleList);
+        model.addObject("oldestDate", onlyOldestDate);
         return model;
     }
 

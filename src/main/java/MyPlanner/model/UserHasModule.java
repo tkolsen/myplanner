@@ -104,4 +104,14 @@ public class UserHasModule {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "UserHasModule{" +
+                "startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", completedAt='" + completedAt + '\'' +
+                ", userHasModulePK=" + userHasModulePK +
+                '}';
+    }
 }
