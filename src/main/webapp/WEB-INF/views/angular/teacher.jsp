@@ -2,7 +2,9 @@
 <html>
 <body>
     <c:forEach var="module" items="${list}">
-        <c:out value="${module}"/>
+        <p>
+            Navn: <c:out value="${module.user.name}"/>, Modul: <c:out value="${module.module.name}"/>, Startdato: <c:out value="${module.StartDate}"/>, Sluttdato: <c:out value="${module.endDate}"/>
+        </p>
     </c:forEach>
 </body>
 </html>
