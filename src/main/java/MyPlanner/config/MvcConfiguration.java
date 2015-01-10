@@ -60,8 +60,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     @Bean(name="oAuth")
     public OAuth2 oAuth(){
         // TODO: mock oauth
-//        OAuth2 oAuth = new OAuth2Impl(props());
-        OAuth2 oAuth = new OAuthMock();
+        OAuth2 oAuth = new OAuth2Impl(props());
+        //OAuth2 oAuth = new OAuthMock();
         return oAuth;
     }
 
