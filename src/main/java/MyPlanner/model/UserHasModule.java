@@ -69,6 +69,14 @@ public class UserHasModule {
             }
             return false;
         }
+
+        @Override
+        public String toString() {
+            return "UserHasModulePK{" +
+                    "module=" + module +
+                    ", user=" + user +
+                    '}';
+        }
     }
 
     @EmbeddedId

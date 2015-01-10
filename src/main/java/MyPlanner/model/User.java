@@ -59,4 +59,12 @@ public class User{
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", status=" + status +
+                '}';
+    }
 }

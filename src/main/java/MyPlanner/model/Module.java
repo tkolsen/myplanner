@@ -158,4 +158,19 @@ public class Module implements Serializable{
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Module{" +
+                "workflowState='" + workflowState + '\'' +
+                ", position=" + position +
+                ", name='" + name + '\'' +
+                ", itemsCount=" + itemsCount +
+                ", itemsUrl='" + itemsUrl + '\'' +
+                ", items=" + items +
+                ", completedAt='" + completedAt + '\'' +
+                ", moduleTimeEstimation=" + moduleTimeEstimation +
+                ", modulePk=" + modulePk +
+                '}';
+    }
 }
