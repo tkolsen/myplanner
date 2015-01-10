@@ -34,7 +34,7 @@ public class Initializer implements WebApplicationInitializer {
             public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
                 System.out.println("Session destroyed.");
                 // TODO: Add this back in before deployment
-                /*LoginInfo loginInfo = (LoginInfo)httpSessionEvent.getSession().getAttribute("loginInfo");
+                LoginInfo loginInfo = (LoginInfo)httpSessionEvent.getSession().getAttribute("loginInfo");
                 if(loginInfo != null) {
                     RestTemplate restTemplate = new RestTemplate();
                     String url = "https://canvas.instructure.com/login/oauth2/token";
@@ -44,7 +44,7 @@ public class Initializer implements WebApplicationInitializer {
                         HttpEntity requestEntity = new HttpEntity(headers);
                         restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, Object.class, new HashMap<String, String>());
                     }
-                }*/
+                }
             }
         });
 
