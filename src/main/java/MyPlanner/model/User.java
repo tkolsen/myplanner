@@ -16,7 +16,7 @@ public class User{
     @JsonProperty("id")
     private int id;
 
-    private boolean status;
+    private boolean status = true;
 
     public User(){
 
