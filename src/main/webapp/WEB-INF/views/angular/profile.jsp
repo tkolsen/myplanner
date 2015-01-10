@@ -15,11 +15,11 @@
 <div id="wrapper" data-ng-controller="CoursesCtrl">
     <header id="header" class="box clear-float">
         <div id="logo">
-            <a href="<c:url value="/user/profile"/>"><img src="/resources/logo9.png"></a>
+            <a href="<c:url value="../user/profile"/>"><img src="../resources/logo9.png"></a>
         </div>
         <div id="logged-user-details">
             <h3>Logget inn som:<br/> {{username}}</h3>
-            <p><a href="<c:url value="/oauth/logout"/>">Logg ut</a></p>
+            <p><a href="<c:url value="../oauth/logout"/>">Logg ut</a></p>
         </div>
     </header>
 
