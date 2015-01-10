@@ -14,13 +14,17 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
     var userHasModule = $http.get("../rest/userHasModule").success(function(response){
         return response;
     });
-    $q.all([courseList, username, modules, userHasModule]).then(function (arrayOfResult) {
+    var enrollments = $http.get("../rest/enrollments").success(function(response){
+        return response;
+    });
+    $q.all([courseList, username, modules, userHasModule, enrollments]).then(function (arrayOfResult) {
         $scope.courses = arrayOfResult[0].data;
         $scope.selectedCourse = $scope.courses[0];
         $scope.username = arrayOfResult[1].data.user.name;
         $scope.user = arrayOfResult[1].data.user;
         $scope.modules = arrayOfResult[2].data;
         $scope.userHasModule = arrayOfResult[3].data;
+
         $scope.courses.forEach(function(c){
             c.modules = new Array();
             $scope.modules.forEach(function(m){
@@ -30,6 +34,8 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
             });
         });
         compareDates();
+
+        $scope.enrollments = arrayOfResult[4].data;
     });
     var compareDates = function(){
         $scope.modules.forEach(function(m){
@@ -48,6 +54,7 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
     };
 
     $scope.moduleClicked = function(){
+        console.log('clicked');
     };
 
     $scope.checkDeadlines = function(onlyOldestDates){
@@ -122,9 +129,26 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         }
     }
 
+    $scope.hideOptions = function(){
+        $scope.show = true;
+        $scope.showTeacherOptions = true;
+    };
+
     $scope.show = true;
+    $scope.showTeacherOptions = true;
     $scope.showGenerator = function(){
         $scope.show = !$scope.show;
+        for(i = 0; i < $scope.enrollments.length; i++){
+            if($scope.enrollments[i].course_id === $scope.selectedCourse.id){
+                if($scope.enrollments[i].type === 'TeacherEnrollment'){
+                    console.log($scope.enrollments[i].type);
+                    $scope.showTeacherOptions = false;
+                    i = $scope.enrollments.length;
+                }else{
+                    $scope.showTeacherOptions = true;
+                }
+            }
+        }
     };
 
     $scope.submit = function(module){

@@ -1,9 +1,7 @@
 package MyPlanner.service;
 
 import MyPlanner.exceptions.NotAuthorizedException;
-import MyPlanner.model.CalendarEvent;
-import MyPlanner.model.Course;
-import MyPlanner.model.Module;
+import MyPlanner.model.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -14,4 +12,5 @@ public interface CanvasApi {
     public List<Module> getModules(HttpServletRequest request, int courseId) throws NotAuthorizedException;
     public List<CalendarEvent> getCalendarEvents(HttpServletRequest request, String startDate, String endDate) throws NotAuthorizedException;
     public ArrayList<Module> getModulesAsArrayList(HttpServletRequest request, Course course) throws NotAuthorizedException;
+    public List<Enrollment> getEnrollment(User user, String accessToken);
 }

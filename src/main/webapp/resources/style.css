@@ -8,15 +8,18 @@ body{
 }
 
 #logo {
-    font-family: Rockwell, serif;
-    font-size: 3em;
+    float: left;
+    width: 75%
 }
 
-#logo span {
-    font-size: 0.72em;
-    text-decoration: overline;
-    color: white;
-    text-shadow: 1px 1px 1px black;
+#logo img{
+    width: 35%;
+}
+
+#logged-user-details{
+    float: left;
+    width: 25%;
+    text-align: right;
 }
 
 #wrapper {
@@ -30,13 +33,13 @@ body{
 }
 
 #header {
-    text-align: center;
     border-bottom: 1px solid #909191;
-    padding: 20px;
+    padding: 15px;
     color: white;
     background-color: #4b5662;
+    overflow: hidden;
 }
-#header h1, #header h2, #header p, #header a{
+#header h3, #header p, #header a{
     color: white;
     text-shadow: 1px 1px 1px black;
 }
@@ -55,7 +58,7 @@ body{
     margin: 50px auto;
     text-align: center;
 }
-#extra h3{
+#extra h4{
     color: #aeafaf;
     text-shadow: 1px 1px white, -1px -1px #4b5662;
 }
@@ -119,6 +122,10 @@ body{
     padding: 5px;
 }
 
+#module-submit-button{
+    padding: 2px;
+}
+
 .clear-float {
     clear: both;
 }
@@ -152,7 +159,7 @@ body{
     margin: 5px 0px;
     float: right;
 }
-#schedule-generator #hours-pr-day-input{
+#hours-pr-day-input{
     width: 50px;
 }
 #schedule-generator form{
@@ -167,9 +174,26 @@ body{
     text-decoration: underline;
     cursor: hand;
 }
-#schedule-generator #schedule-submit-button{
+#schedule-submit-button{
     padding: 3px;
 }
+
+#deadline-submit-button{
+    padding: 3px;
+}
+
+#schedule-generator-input{
+    display: inline-block;
+    height: 120px;
+    vertical-align: top;
+}
+
+#deadline-generator-input{
+    display: inline-block;
+    height: 120px;
+    vertical-align: top;
+}
+
 #loading-text{
     display: inline-block;
     width: 100%;

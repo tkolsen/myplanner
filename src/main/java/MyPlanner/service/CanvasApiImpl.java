@@ -139,6 +139,15 @@ public class CanvasApiImpl implements CanvasApi{
         return Arrays.asList(moduleItems);
     }
 
+    public List<Enrollment> getEnrollment(User user, String accessToken){
+        HttpEntity<Enrollment[]> requestEntity = new HttpEntity<Enrollment[]>(setAuthorizationHeader(accessToken));
+        String url = baseUrl + "/api/v1/users/" + user.getId() + "/enrollments";
+        Map<String, String> params = new HashMap<String, String>();
+        ResponseEntity<Enrollment[]> resp = getRestTemplate().exchange(url, HttpMethod.GET, requestEntity, Enrollment[].class, params);
+        Enrollment[] enrollments = resp.getBody();
+        return Arrays.asList(enrollments);
+    }
+
     /**
      *
      * @return
