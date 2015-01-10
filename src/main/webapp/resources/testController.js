@@ -182,12 +182,16 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         console.log(module);
 
         if(module.completed_at != null){
+            module.finished = true;
             return 'Modul ferdig'
         }else if(todaysDate <= moduleEndDate){
+            module.finished = false;
             return 'Tid til frist: ' + days + ' dager, ' + hours + ' timer.'
         }else if(todaysDate > moduleEndDate){
+            module.finished = false;
             return 'Fristen gikk ut for ' + days + ' dager og ' + hours + ' timer siden.'
         }else{
+            module.finished = false;
             return 'Dato ikke satt.';
         }
 

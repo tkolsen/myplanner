@@ -204,3 +204,7 @@ body{
     width: 200px;
     height: 200px;
 }
+.padding p{
+    padding: 7px 5px;
+    margin-bottom: 5px;
+}

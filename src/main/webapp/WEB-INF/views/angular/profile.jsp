@@ -94,7 +94,7 @@
                         <span class="time">Estimert arbeidsmengde i timer: {{module.moduleTimeEstimation}}</span>
 
                         <div class="clear-float"></div>
-                        <form data-ng-submit="submit(module)">
+                        <form data-ng-submit="submit(module)" ng-hide="module.finished">
                             <label>
                                 Start: <input title="Anbefalt dato for når du bør begynne på modulen." ng-model="module.newStartDate" type="date"/>
                             </label>
@@ -108,6 +108,7 @@
                                 <span>{{testDateCalc(module.newEndDate, module)}}</span>
                             </span>
                         </form>
+                        <p ng-show="module.finished">Modulen er ferdig</p>
                     </div>
                     <span class="progressBackground">
                         <span class="progressbar" ng-style="{'width' : module.width}"
