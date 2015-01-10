@@ -105,7 +105,7 @@
                                 <input id="module-submit-button" type="submit" value="Lagre"/>
                             </label>
                             <span>
-                                <span ng-show="module.newEndDate">{{testDateCalc(module.newEndDate)}}</span>
+                                <span ng-show="module.newEndDate">{{testDateCalc(module.newEndDate, module)}}</span>
                                 <span ng-show="!module.newEndDate">Dato ikke satt</span>
                             </span>
                         </form>

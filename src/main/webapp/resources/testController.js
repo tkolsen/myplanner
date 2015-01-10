@@ -172,15 +172,17 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         });
     };
 
-    $scope.testDateCalc = function(moduleEndDate){
+    $scope.testDateCalc = function(moduleEndDate, module) {
         var todaysDate = new Date();
 
-        var delta = Math.abs(todaysDate - moduleEndDate)/1000;
-        var days = Math.floor(delta/86400);
+        var delta = Math.abs(todaysDate - moduleEndDate) / 1000;
+        var days = Math.floor(delta / 86400);
         delta -= days * 86400;
-        var hours = Math.floor(delta/3600) % 24;
+        var hours = Math.floor(delta / 3600) % 24;
 
-        if(todaysDate < moduleEndDate){
+        if(module.completed_at != null){
+            return 'Modul ferdig'
+        }else if(todaysDate < moduleEndDate){
             return 'Tid til frist: ' + days + ' dager, ' + hours + ' timer.'
         }else{
             return 'Fristen gikk ut for ' + days + ' dager og ' + hours + ' timer siden.'
