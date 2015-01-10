@@ -65,13 +65,14 @@
                     <br class="clear-float"/>
                 </form>
                 <%-- TODO add action on submit, load page with users --%>
-                <form id="deadline-generator-input" data-ng-submit="checkDeadlines(onlyOldestDates)" ng-hide="showTeacherOptions" action="<c:url value="/user/teacher"/>">
+                <form id="deadline-generator-input" ng-hide="showTeacherOptions" action="<c:url value="/user/teacher"/>" method="GET">
                     <h4>Hent elever bak sin fremdriftsplan:</h4>
                     <label for="oldest-dates">
                         Hent kun eldste uoppnådde frist:
                     </label>
-                    <input type="checkbox" data-ng-model="onlyOldestDates" id="oldest-dates" checked>
+                    <input name=onlyOldestDate"" type="checkbox" data-ng-model="onlyOldestDates" id="oldest-dates" checked>
                     <br class="clear-float"/>
+                    <input name="userHasModule" hidden="true" ng-model="userHasModule"/>
 
                     <input id="deadline-submit-button" type="submit" value="Sjekk Deadlines"/>
                     <br class="clear-float"/>

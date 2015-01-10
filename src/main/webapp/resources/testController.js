@@ -180,7 +180,7 @@ app.controller("CoursesCtrl", function ($scope, $http, $q) {
         delta -= days * 86400;
         var hours = Math.floor(delta / 3600) % 24;
         console.log(module);
-        var temp = module.completed_at;
+
         if(module.completed_at != null){
             return 'Modul ferdig'
         }else if(todaysDate <= moduleEndDate){
