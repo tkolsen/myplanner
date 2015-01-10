@@ -60,6 +60,8 @@ public class HomeController {
             result = deadlineCheck.ListOldestUnmetDeadlines(userHasModuleList, date);
         }else{
             result = deadlineCheck.ListAllUnmetDeadlines(userHasModuleList, date);
+            for(UserHasModule u : result)
+                System.out.println(u);
         }
         model.addObject("list", result);
 
