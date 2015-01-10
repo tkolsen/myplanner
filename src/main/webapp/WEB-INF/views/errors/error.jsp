@@ -4,6 +4,6 @@
     <title>Error</title>
 </head>
 <body>
-    <h1>Det har skjedd en tilfeldig feil.</h1>
+    <h1>Noe har gått galt!</h1>
 </body>
 </html>
