@@ -15,11 +15,11 @@
 <div id="wrapper" data-ng-controller="CoursesCtrl">
     <header id="header" class="box clear-float">
         <div id="logo">
-            <a href="<c:url value="../user/profile"/>"><img src="../resources/logo9.png"></a>
+            <a href="<c:url value="/user/profile"/>"><img src="../resources/logo9.png"></a>
         </div>
         <div id="logged-user-details">
             <h3>Logget inn som:<br/> {{username}}</h3>
-            <p><a href="<c:url value="../oauth/logout"/>">Logg ut</a></p>
+            <p><a href="<c:url value="/oauth/logout"/>">Logg ut</a></p>
         </div>
     </header>
 
@@ -65,7 +65,7 @@
                     <br class="clear-float"/>
                 </form>
                 <%-- TODO add action on submit, load page with users --%>
-                <form id="deadline-generator-input" data-ng-submit="checkDeadlines(onlyOldestDates)" ng-hide="showTeacherOptions">
+                <form id="deadline-generator-input" data-ng-submit="checkDeadlines(onlyOldestDates)" ng-hide="showTeacherOptions" action="<c:url value="/user/teacher"/>">
                     <h4>Hent elever bak sin fremdriftsplan:</h4>
                     <label for="oldest-dates">
                         Hent kun eldste uoppnådde frist:
@@ -105,7 +105,8 @@
                                 <input id="module-submit-button" type="submit" value="Lagre"/>
                             </label>
                             <span>
-                                <span>{{testDateCalc(module.newEndDate, module)}}</span>
+                                <span ng-show="module.newEndDate">{{testDateCalc(module.newEndDate)}}</span>
+                                <span ng-show="!module.newEndDate">Dato ikke satt</span>
                             </span>
                         </form>
                     </div>

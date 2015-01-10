@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +38,12 @@ public class HomeController {
         }else{
             throw new NotAuthorizedException();
         }
+    }
+
+    @RequestMapping("/teacher")
+    public ModelAndView teacherPage(HttpServletRequest request){
+        ModelAndView model = new ModelAndView("angular/teacher");
+        return model;
     }
 
     private boolean checkLogin(LoginInfo loginInfo){
