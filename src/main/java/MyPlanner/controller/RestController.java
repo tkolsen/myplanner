@@ -63,7 +63,7 @@ public class RestController {
     @RequestMapping(value = "/enrollments")
     public @ResponseBody List<Enrollment> getEnrollment(HttpServletRequest request) throws NotAuthorizedException {
         LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
-        
+
         List<Enrollment> enrollmentList = canvasApi.getEnrollment(loginInfo.getUser(), loginInfo.getAccessToken());
 
         return enrollmentList;
