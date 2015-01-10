@@ -49,7 +49,7 @@ public class HomeController {
 
         List<UserHasModule> userHasModuleList = userHasModuleDao.list();
 
-        boolean test = false; // TODO: koble denne til onlyOldestDate
+        boolean test = true; // TODO: koble denne til onlyOldestDate
         java.util.Date utilDate = new java.util.Date();
         Date date = new Date(utilDate.getTime());
 
