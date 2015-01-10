@@ -65,7 +65,7 @@
                     <br class="clear-float"/>
                 </form>
                 <%-- TODO add action on submit, load page with users --%>
-                <form id="deadline-generator-input" ng-hide="showTeacherOptions" action="<c:url value="/user/teacher"/>" method="GET">
+                <form id="deadline-generator-input" ng-hide="showTeacherOptions" action="<c:url value="/user/teacher"/>" method="post">
                     <h4>Hent elever bak sin fremdriftsplan:</h4>
                     <label for="oldest-dates">
                         Hent kun eldste uoppnådde frist:
