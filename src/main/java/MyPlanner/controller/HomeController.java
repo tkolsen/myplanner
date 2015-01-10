@@ -1,20 +1,19 @@
 package MyPlanner.controller;
 
+import MyPlanner.dao.UserHasModuleDao;
 import MyPlanner.exceptions.NotAuthorizedException;
-import MyPlanner.model.Course;
 import MyPlanner.model.LoginInfo;
 import MyPlanner.model.UserHasModule;
 import MyPlanner.service.CanvasApi;
 import MyPlanner.service.LoginInfoRepo;
+import MyPlanner.utils.DeadlineCheck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -24,6 +23,8 @@ public class HomeController {
     LoginInfoRepo loginInfoRepo;
     @Autowired
     CanvasApi canvasApi;
+    @Autowired
+    private UserHasModuleDao userHasModuleDao;
 
     @RequestMapping("/login")
     public ModelAndView loginPage(){
@@ -46,11 +47,20 @@ public class HomeController {
     public ModelAndView teacherPage(@RequestParam boolean onlyOldestDate){
         ModelAndView model = new ModelAndView("angular/teacher");
 
-        if(!onlyOldestDate){
-            System.out.println("");
+        List<UserHasModule> userHasModuleList = userHasModuleDao.list();
+        boolean test = false; // TODO: koble denne til onlyOldestDate
+        java.util.Date utilDate = new java.util.Date();
+        Date date = new Date(utilDate.getTime());
+
+        DeadlineCheck deadlineCheck = new DeadlineCheck();
+        List<UserHasModule> result;
+        if(test){
+            result = deadlineCheck.ListOldestUnmetDeadlines(userHasModuleList, date);
+        }else{
+            result = deadlineCheck.ListAllUnmetDeadlines(userHasModuleList, date);
         }
-        
-        model.addObject("oldestDate", onlyOldestDate);
+        model.addObject("list", result);
+
         return model;
     }
 
