@@ -12,7 +12,7 @@ body{
     width: 75%
 }
 
-#logo img{
+#header #logo a img{
     width: 35%;
 }
 
@@ -39,7 +39,7 @@ body{
     background-color: #4b5662;
     overflow: hidden;
 }
-#header h3, #header p, #header a{
+#header #logged-user-details h3, #header #logged-user-details p, #header #logged-user-details a{
     color: white;
     text-shadow: 1px 1px 1px black;
 }
