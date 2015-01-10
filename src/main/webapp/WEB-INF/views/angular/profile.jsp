@@ -72,7 +72,6 @@
                     </label>
                     <input name=onlyOldestDate"" type="checkbox" data-ng-model="onlyOldestDates" id="oldest-dates" checked>
                     <br class="clear-float"/>
-                    <input name="userHasModule" hidden="true" ng-model="userHasModule"/>
 
                     <input id="deadline-submit-button" type="submit" value="Sjekk Deadlines"/>
                     <br class="clear-float"/>

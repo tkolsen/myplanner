@@ -43,9 +43,8 @@ public class HomeController {
     }
 
     @RequestMapping("/teacher")
-    public ModelAndView teacherPage(@RequestParam List<UserHasModule> userHasModuleList, @RequestParam boolean onlyOldestDate){
+    public ModelAndView teacherPage(@RequestParam boolean onlyOldestDate){
         ModelAndView model = new ModelAndView("angular/teacher");
-        model.addObject("userHasModuleList", userHasModuleList);
         model.addObject("oldestDate", onlyOldestDate);
         return model;
     }
