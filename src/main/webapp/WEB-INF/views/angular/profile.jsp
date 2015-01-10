@@ -70,8 +70,8 @@
                     <label for="oldest-dates">
                         Hent kun eldste uoppnådde frist:
                     </label>
-                    <input name="onlyOldestDate" type="checkbox" id="oldest-dates" checked>
-                    <br class="clear-float"/>
+                    <%--<input name="onlyOldestDate" type="checkbox" id="oldest-dates" checked>
+                    <br class="clear-float"/>--%>
 
                     <input id="deadline-submit-button" type="submit" value="Sjekk Deadlines"/>
                     <br class="clear-float"/>
