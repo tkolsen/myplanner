@@ -48,6 +48,8 @@ public class HomeController {
         ModelAndView model = new ModelAndView("angular/teacher");
 
         List<UserHasModule> userHasModuleList = userHasModuleDao.list();
+        for(UserHasModule u : userHasModuleList)
+            System.out.println(u);
         boolean test = false; // TODO: koble denne til onlyOldestDate
         java.util.Date utilDate = new java.util.Date();
         Date date = new Date(utilDate.getTime());
