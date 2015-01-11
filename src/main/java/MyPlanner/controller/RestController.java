@@ -87,14 +87,14 @@ public class RestController {
             }
         }
         // TODO: Dirty fix for time estimation
-        List<Module> temp = moduleDao.list();
+        /*List<Module> temp = moduleDao.list();
         for(int i = 0; i < moduleList.size(); i++){
             for(Module m : temp){
                 if(moduleList.get(i).equals(m)){
                     moduleList.get(i).setModuleTimeEstimation(m.getModuleTimeEstimation());
                 }
             }
-        }
+        }*/
         for(Module m : moduleList){
             moduleDao.save(m);
         }
