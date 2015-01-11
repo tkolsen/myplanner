@@ -81,8 +81,9 @@ public class OAuthController {
 
     @RequestMapping("/logout")
     public ModelAndView logout(HttpServletRequest request){
-        request.getSession().removeAttribute("loginInfo");
         request.getSession().invalidate();
+        request.getSession().removeAttribute("loginInfo");
+
         return new ModelAndView("logout");
     }
 
