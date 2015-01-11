@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ModuleDao {
     public void save(Module module);
+    public List<Module> list();
 }

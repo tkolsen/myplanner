@@ -16,6 +16,9 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 import java.util.HashMap;
 
+/**
+ * Web.xml as java configuration
+ */
 public class Initializer implements WebApplicationInitializer {
 
     @Override

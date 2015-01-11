@@ -2,6 +2,10 @@ package MyPlanner.oauth;
 
 import org.springframework.core.env.Environment;
 
+/**
+ * Wrapper for mp.properties.
+ * Makes it easier to use the properties.
+ */
 public class CanvasProperties {
 
     private Environment env;

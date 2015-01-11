@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular-route.js"></script>
     <script src="<c:url value="/resources/app.js"/>"></script>
-    <script src="<c:url value="/resources/testController.js"/>"></script>
+    <script src="<c:url value="/resources/plannerCtrl.js"/>"></script>
 </head>
 <body>
 <div id="wrapper" data-ng-controller="CoursesCtrl">
@@ -122,8 +122,8 @@
 
     <!-- Main footer -->
     <section id="extra" class="box">
-        <h4>Beta developed by Tom K. Olsen, Dagfinn Reitan and Kim André Kjelsberg <br/> For Høgskolen i Sør-Trøndelag</h4>
-        <h4>MyPlanner logo developed by <a href="http://rareformnewmedia.com/">Rare Form New Media</a></h4>
+        <h4>Beta utviklet som et studentprosjekt i 3.klasse dataingeniør <br/> Ved Høgskolen i Sør-Trøndelag</h4>
+        <h4>MyPlanner logo lage av <a href="http://rareformnewmedia.com/">Rare Form New Media</a></h4>
     </section>
 </div>
 </body>

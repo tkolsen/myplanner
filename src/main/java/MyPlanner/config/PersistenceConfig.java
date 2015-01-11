@@ -13,6 +13,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/**
+ * Hibernate configuration class.
+ * Uses persistence-mysql.properties for some of the properties.
+ */
 @Configuration
 @EnableTransactionManagement
 @PropertySource("/WEB-INF/persistence-mysql.properties")

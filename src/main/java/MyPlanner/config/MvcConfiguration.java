@@ -18,6 +18,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.Properties;
 
+/**
+ * Configuration class
+ * All beans that spring need to create is made in this config file.
+ */
 @Configuration
 @ComponentScan(basePackages="MyPlanner")
 @PropertySource("/WEB-INF/mp.properties")
